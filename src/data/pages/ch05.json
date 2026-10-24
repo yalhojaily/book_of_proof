@@ -1,0 +1,120 @@
+{
+ "chapter": 5,
+ "sections": {
+  "5.1": {
+   "reading": [
+    {
+     "src": "book/ch05/5-1-reading-1.webp",
+     "w": 1020,
+     "h": 1609,
+     "page": 128
+    },
+    {
+     "src": "book/ch05/5-1-reading-2.webp",
+     "w": 1020,
+     "h": 1473,
+     "page": 129
+    },
+    {
+     "src": "book/ch05/5-1-reading-3.webp",
+     "w": 1020,
+     "h": 1513,
+     "page": 130
+    },
+    {
+     "src": "book/ch05/5-1-reading-4.webp",
+     "w": 1020,
+     "h": 385,
+     "page": 131
+    }
+   ],
+   "exercises": [],
+   "solutions": []
+  },
+  "5.2": {
+   "reading": [
+    {
+     "src": "book/ch05/5-2-reading-1.webp",
+     "w": 1020,
+     "h": 1128,
+     "page": 131
+    },
+    {
+     "src": "book/ch05/5-2-reading-2.webp",
+     "w": 1020,
+     "h": 1513,
+     "page": 132
+    },
+    {
+     "src": "book/ch05/5-2-reading-3.webp",
+     "w": 1020,
+     "h": 270,
+     "page": 133
+    }
+   ],
+   "exercises": [],
+   "solutions": []
+  },
+  "5.3": {
+   "reading": [
+    {
+     "src": "book/ch05/5-3-reading-1.webp",
+     "w": 1020,
+     "h": 1227,
+     "page": 133
+    },
+    {
+     "src": "book/ch05/5-3-reading-2.webp",
+     "w": 1020,
+     "h": 1513,
+     "page": 134
+    },
+    {
+     "src": "book/ch05/5-3-reading-3.webp",
+     "w": 1020,
+     "h": 1513,
+     "page": 135
+    }
+   ],
+   "exercises": [],
+   "solutions": []
+  },
+  "5.x": {
+   "reading": [],
+   "exercises": [
+    {
+     "src": "book/ch05/5-x-exercises-1.webp",
+     "w": 1020,
+     "h": 1485,
+     "page": 136
+    }
+   ],
+   "solutions": [
+    {
+     "src": "book/ch05/5-x-solutions-1.webp",
+     "w": 1020,
+     "h": 268,
+     "page": 317
+    },
+    {
+     "src": "book/ch05/5-x-solutions-2.webp",
+     "w": 1020,
+     "h": 1512,
+     "page": 318
+    },
+    {
+     "src": "book/ch05/5-x-solutions-3.webp",
+     "w": 1020,
+     "h": 1512,
+     "page": 319
+    },
+    {
+     "src": "book/ch05/5-x-solutions-4.webp",
+     "w": 1020,
+     "h": 1470,
+     "page": 320
+    }
+   ]
+  }
+ }
+}

@@ -146,11 +146,12 @@ export const parts: Part[] = [
         en: 'Contrapositive Proof',
         page: 128,
         blurb: 'حين يكون إثبات «إذا لم يكن Q فليس P» أسهل، والتطابق بين الأعداد.',
-        available: false,
+        available: true,
         sections: [
           s('5.1', 'برهان العكس النقيض', 'Contrapositive Proof', 128),
           s('5.2', 'التطابق في الأعداد الصحيحة', 'Congruence of Integers', 131),
           s('5.3', 'الكتابة الرياضية', 'Mathematical Writing', 133),
+          s('5.x', 'تمارين الفصل', 'Exercises for Chapter 5', 136),
         ],
       },
       {

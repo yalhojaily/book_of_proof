@@ -1,0 +1,149 @@
+---
+chapter: contrapositive-proof
+section: "5.2"
+summary: نقول إن a يطابق b بمقياس n إذا كان n يقسم a − b، أي إذا كان للعددين الباقي نفسه عند القسمة على n. تعريف بسيط يفتح باباً واسعاً للبراهين.
+goals:
+  - فهم تعريف التطابق بمقياس n واستعماله في البراهين
+  - الربط بين التطابق وتساوي البواقي
+  - برهان خصائص التطابق برهاناً مباشراً أو بالعكس النقيض
+terms:
+  - { ar: التطابق, en: congruence }
+  - { ar: بمقياس n, en: modulo n }
+  - { ar: الباقي, en: remainder }
+---
+import ModClock from '@/components/widgets/ModClock.tsx';
+import ProofBuilder from '@/components/widgets/ProofBuilder.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import { puzzlesMod, q5_2 } from '@/data/proofs-ch5';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+الساعة الآن 9. بعد 16 ساعة كم تكون؟ لا أحد يقول 25. نقول 1، لأننا على ساعة من 12 نعدّ بعد كل دورة من جديد. الرياضيون يكتبون هذا $25 \equiv 1 \pmod{12}$: العددان «متماثلان» حين لا نهتم إلا بالموضع على الساعة.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="131–133" minutes={12}>
+
+- **التعريف 5.1 (ص 131):** $a \equiv b \pmod n$ إذا كان $n \mid (a - b)$، ثم أمثلة سريعة.
+- **ثلاث قضايا (ص 132–133):** برهانان مباشران ($a^2 \equiv b^2$ و$ac \equiv bc$)، ثم برهان بالعكس النقيض: «إذا كان $12a \not\equiv 12b \pmod n$ فإن $n \nmid 12$». لاحظ أن كل برهان يبدأ بفكّ التعريف.
+
+| ستقرأ | المعنى |
+|---|---|
+| a is congruent to b modulo n | a يطابق b بمقياس n |
+| a ≡ b (mod n) | التطابق |
+| a ≢ b (mod n) | عدم التطابق |
+
+</ReadingGuide>
+
+<BookPages section="5.2" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية وأمثلة محلولة">
+
+### التعريف
+
+<Definition num="5.1" title="التطابق بمقياس n">
+
+ليكن $a, b \in \mathbb{Z}$ و$n \in \mathbb{N}$. نقول إن $a$ **يطابق** $b$ بمقياس $n$، ونكتب $a \equiv b \pmod n$، إذا كان $n \mid (a - b)$.
+
+</Definition>
+
+أمثلة: $9 \equiv 1 \pmod 4$ لأن $4 \mid 8$. و$6 \equiv 10 \pmod 2$ لأن $2 \mid -4$. أما $14 \not\equiv 8 \pmod 4$ فلأن $4 \nmid 6$.
+
+### الساعة
+
+غيّر $n$ و$a$ و$b$، ولاحظ: يقع العددان على الموضع نفسه **بالضبط** حين يقسم $n$ فرقهما.
+
+<ModClock client:visible />
+
+<Note title="التطابق وتساوي البواقي">
+
+$a \equiv b \pmod n$ إذا وفقط إذا كان لـ $a$ و$b$ الباقي نفسه عند القسمة على $n$. هذا ما تراه في الساعة. (برهانه هو التمرين 32، ويستعمل خوارزمية القسمة من الفصل 4.) في البراهين استعمل التعريف بالقسمة، لا البواقي، إلا إذا برهنت هذه الحقيقة أولاً.
+
+</Note>
+
+### كيف تبرهن عبارة فيها تطابق
+
+دائماً الخطوات نفسها:
+
+1. حوّل الفرض إلى قسمة ثم إلى معادلة: $a \equiv b \pmod n$ تعني $a - b = nk$.
+2. اكتب ما يقتضيه المطلوب: تريد أن تصل إلى $n \mid (\text{شيء})$.
+3. سدّ الفجوة بالجبر، غالباً بالتحليل إلى عوامل.
+
+<Example title="من الكتاب (ص 132)">
+
+**القضية.** إذا كان $a \equiv b \pmod n$، فإن $a^2 \equiv b^2 \pmod n$.
+
+**البرهان.** افترض أن $a \equiv b \pmod n$. إذن $n \mid (a - b)$، فـ $a - b = nc$ لعدد صحيح $c$. بضرب الطرفين في $a + b$:
+
+$$
+a^2 - b^2 = nc(a + b).
+$$
+
+وبما أن $c(a + b)$ عدد صحيح، فإن $n \mid (a^2 - b^2)$، أي $a^2 \equiv b^2 \pmod n$. $\blacksquare$
+
+</Example>
+
+<Pitfall title="التطابق ليس تساوياً">
+
+لا يمكنك أن «تقسم» طرفي التطابق كما في المعادلات: $2 \cdot 3 \equiv 2 \cdot 1 \pmod 4$ صحيحة، لكن $3 \not\equiv 1 \pmod 4$. أما الجمع والطرح والضرب فتعمل (التمارين 19–24 تبرهن ذلك).
+
+</Pitfall>
+
+### تدرّب: رتّب البرهان
+
+<ProofBuilder client:visible puzzles={puzzlesMod} />
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة">
+
+<QuickCheck client:visible questions={q5_2} />
+
+</Stage>
+
+<Stage n={5} id="practice" title="التطبيق" sub="تمارين الكتاب لهذا الفصل في صفحة واحدة">
+
+في [صفحة تمارين الفصل](../5-x/)، التمارين **18 إلى 24** و**27، 30، 32** على التطابق.
+
+<Exercise num="1">
+
+برهن: إذا كان $a \equiv b \pmod n$ و$b \equiv c \pmod n$، فإن $a \equiv c \pmod n$.
+
+<Reveal kind="hint">
+
+اجمع المعادلتين $a - b = nk$ و$b - c = nm$.
+
+</Reveal>
+
+<Reveal>
+
+**البرهان.** افترض أن $a \equiv b \pmod n$ و$b \equiv c \pmod n$. إذن $a - b = nk$ و$b - c = nm$ لعددين صحيحين $k, m$. بجمع المعادلتين: $a - c = n(k + m)$، و$k + m$ عدد صحيح، فـ $n \mid (a - c)$، أي $a \equiv c \pmod n$. $\blacksquare$
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- $a \equiv b \pmod n$ تعني $n \mid (a - b)$، أي $a - b = nk$.
+- يتطابق العددان بالضبط حين يكون لهما الباقي نفسه.
+- البرهان: فكّ التعريف إلى معادلة، ثم الجبر، ثم أعد التركيب.
+- الجمع والضرب يحفظان التطابق، أما القسمة فلا.
+
+</Takeaways>
+
+في القسم التالي: كيف تكتب البرهان بحيث يُقرأ بسهولة.
+
+</Stage>
