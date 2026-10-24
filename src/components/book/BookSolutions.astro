@@ -1,0 +1,28 @@
+---
+import BookPages from './BookPages.astro';
+import { sectionPages } from './pages';
+interface Props { section: string }
+const { section } = Astro.props;
+const has = sectionPages(section).solutions.length > 0;
+---
+{has ? (
+  <details class="sol">
+    <summary>
+      <span class="chev" aria-hidden="true">‹</span>
+      حاولتَ أولاً؟ اعرض حلول الكتاب
+      <small>للتمارين الفردية فقط، من آخر الكتاب</small>
+    </summary>
+    <BookPages section={section} kind="solutions" />
+  </details>
+) : (
+  <p class="muted">لا توجد حلول لهذا القسم في الكتاب.</p>
+)}
+<style>
+  .sol { border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-elev); margin: 1em 0; }
+  .sol summary { cursor: pointer; list-style: none; padding: 14px 18px; font-family: var(--font-ui); font-weight: 700; color: var(--green); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .sol summary::-webkit-details-marker { display: none; }
+  .sol summary small { color: var(--ink-3); font-weight: 400; }
+  .chev { transition: transform 0.2s; font-size: 20px; line-height: 1; }
+  .sol[open] .chev { transform: rotate(-90deg); }
+  .sol :global(.book) { margin: 0 10px 12px; }
+</style>

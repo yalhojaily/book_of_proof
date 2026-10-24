@@ -13,9 +13,13 @@ terms:
   - { ar: منفصلتان, en: disjoint }
 exercises: تمارين القسم 1.5 في الكتاب (ص 19–20).
 ---
+
 import SetOps from '@/components/widgets/SetOps.tsx';
 import QuickCheck from '@/components/widgets/QuickCheck.tsx';
 import { q1_5 } from '@/data/quiz-ch1';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
 
 <Intuition>
 
@@ -27,7 +31,30 @@ import { q1_5 } from '@/data/quiz-ch1';
 
 </Intuition>
 
-## التعريفات
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="18–19" minutes={5}>
+
+- **Definition 1.5:** الاتحاد والتقاطع والفرق بصيغة رمز بناء المجموعة. لاحظ أن «or» شاملة.
+- **Example 1.8:** حسابات مباشرة، والبنود 12–15 فيها فترات، فانتبه للأطراف.
+- **Example 1.9:** تقاطع منحنى $y = x^2$ مع مستقيم، كمثال على عمليات المجموعات في المستوى.
+
+| ستقرأ | المعنى |
+|---|---|
+| union, intersection, difference | الاتحاد، التقاطع، الفرق |
+| in general $X - Y \neq Y - X$ | في العموم الفرق ليس إبدالياً |
+
+</ReadingGuide>
+
+<BookPages section="1.5" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية وأمثلة محلولة">
+
+### التعريفات
 
 <Definition num="1.5" title="الاتحاد والتقاطع والفرق">
 
@@ -93,9 +120,23 @@ $$
 
 </Note>
 
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
 <QuickCheck client:visible questions={q1_5} />
 
-## تمارين
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="1.5" count={10} core={[1, 3, 5, 7, 9]} />
+
+<BookPages section="1.5" kind="exercises" />
+
+### تمارين إضافية بحلول كاملة
+
+تمارين من الموقع، مع تلميحات وحلول مفصّلة، للتدرّب قبل تمارين الكتاب أو بعدها.
 
 <Exercise num="1">
 
@@ -138,3 +179,31 @@ $A$ الأعداد الزوجية و$B$ مضاعفات 3. المشترك: $\{\ld
 </Reveal>
 
 </Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="1.5" />
+
+<Note>
+
+التمارين الزوجية بلا حلول في الكتاب عمداً، لتتدرّب على الحكم على صحة حلّك بنفسك. إن شككت في حلّ، علّمه ↻ للمراجعة.
+
+</Note>
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- الاتحاد = «أو»، والتقاطع = «و»، والفرق = «وليس».
+- $A - B \neq B - A$ في العموم.
+- انتبه لأطراف الفترات عند حساب هذه العمليات.
+
+</Takeaways>
+
+في القسم التالي: المتممة، أي «كل ما سوى المجموعة».
+
+</Stage>

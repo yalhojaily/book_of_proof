@@ -1,0 +1,24 @@
+---
+// One stage of the learning path. The lesson page builds the stepper from these.
+interface Props { n: number; id: string; title: string; sub?: string }
+const { n, id, title, sub } = Astro.props;
+---
+<section class="stage" id={id} data-stage-title={title} data-stage-n={n}>
+  <header class="stage-head">
+    <span class="stage-n">{n}</span>
+    <div>
+      <h2 class="stage-title">{title}</h2>
+      {sub && <p class="stage-sub">{sub}</p>}
+    </div>
+  </header>
+  <div class="stage-body"><slot /></div>
+</section>
+<style>
+  .stage { padding-top: 12px; margin-top: 40px; scroll-margin-top: 80px; }
+  .stage:first-child { margin-top: 18px; }
+  .stage-head { display: flex; gap: 14px; align-items: center; padding: 14px 0 10px; border-bottom: 2px solid var(--line); margin-bottom: 6px; font-family: var(--font-ui); }
+  .stage-n { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--hue); color: var(--bg-elev); font: 700 18px/1 var(--font-ui); }
+  .stage-title { margin: 0; font-size: 25px; }
+  .stage-sub { margin: 0; color: var(--ink-3); font-size: 15px; line-height: 1.5; }
+  .stage-body :global(h3:first-child) { margin-top: 0.8em; }
+</style>

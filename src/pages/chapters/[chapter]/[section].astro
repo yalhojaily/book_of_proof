@@ -15,6 +15,11 @@ import Note from '@/components/pedagogy/Note.astro';
 import Reveal from '@/components/pedagogy/Reveal.astro';
 import Steps from '@/components/pedagogy/Steps.astro';
 import BookRef from '@/components/pedagogy/BookRef.astro';
+import Stage from '@/components/pedagogy/Stage.astro';
+import ReadingGuide from '@/components/pedagogy/ReadingGuide.astro';
+import Takeaways from '@/components/pedagogy/Takeaways.astro';
+import BookPages from '@/components/book/BookPages.astro';
+import BookSolutions from '@/components/book/BookSolutions.astro';
 
 export async function getStaticPaths() {
   const lessons = await getCollection('lessons');
@@ -33,9 +38,11 @@ const all = await getCollection('lessons', (l) => l.data.chapter === ch.slug);
 const ready = new Set(all.map((l) => l.data.section));
 const prev = ch.sections.slice(0, secIdx).reverse().find((s) => ready.has(s.id));
 const next = ch.sections.slice(secIdx + 1).find((s) => ready.has(s.id));
-const { Content, headings } = await render(lesson);
-const toc = headings.filter((h) => h.depth === 2);
-const components = { Intuition, Definition, Fact, Example, Exercise, Pitfall, Note, Reveal, Steps, BookRef };
+const { Content } = await render(lesson);
+// The learning path: every <Stage n={..} id=".." title=".."> in the lesson source.
+const stages = [...(lesson.body ?? '').matchAll(/<Stage\s+n=\{(\d+)\}\s+id="([^"]+)"\s+title="([^"]+)"/g)].map((m) => ({ n: m[1], id: m[2], title: m[3] }));
+const components = { Intuition, Definition, Fact, Example, Exercise, Pitfall, Note, Reveal, Steps, BookRef, Stage, ReadingGuide, Takeaways, BookPages, BookSolutions };
+const pdfAt = (bookPage: number) => `${url('book/book-of-proof.pdf')}#page=${bookPage + 12}`;
 ---
 <Base title={`${sec.id} ${plain(sec.ar)}`} description={lesson.data.summary}>
   <div class={`container lesson-grid hue-${ch.part.hue}`}>
@@ -79,15 +86,17 @@ const components = { Intuition, Definition, Fact, Example, Exercise, Pitfall, No
         <p class="summary" set:html={inlineMath(lesson.data.summary)} />
       </header>
 
+      {stages.length > 0 && (
+        <nav class="path-bar" aria-label="مسار القسم">
+          {stages.map((st) => (
+            <a href={`#${st.id}`} data-stage-link={st.id}><span class="pb-n">{st.n}</span><span class="pb-t">{st.title}</span></a>
+          ))}
+        </nav>
+      )}
+
       <div class="prose">
         <Content components={components} />
       </div>
-
-      {lesson.data.exercises && (
-        <div class="card book-ex">
-          <b>تمارين الكتاب:</b> {lesson.data.exercises}
-        </div>
-      )}
 
       <div class="finish">
         <button class="btn done-btn" type="button" data-progress-toggle={sec.id}><span data-label>علّم القسم كمنجز</span></button>
@@ -106,10 +115,21 @@ const components = { Intuition, Definition, Fact, Example, Exercise, Pitfall, No
     <!-- Side panel (left side in RTL) -->
     <aside class="side">
       <div class="side-inner">
+        {stages.length > 0 && (
+          <div class="card side-card path">
+            <h3>مسار القسم</h3>
+            <ol>
+              {stages.map((st) => (
+                <li><a href={`#${st.id}`} data-stage-link={st.id}><span class="pn-n">{st.n}</span>{st.title}</a></li>
+              ))}
+            </ol>
+          </div>
+        )}
         <div class="card side-card">
           <h3>في الكتاب</h3>
           <p class="pg">صفحة <b class="ltr">{sec.page}</b></p>
           <p class="muted small">القسم <span class="ltr">{sec.id}</span> · <span class="en">{sec.en}</span></p>
+          <a class="pdf-link" href={pdfAt(sec.page)} target="_blank" rel="noopener">افتح الكتاب على هذه الصفحة ↗</a>
         </div>
         {lesson.data.goals.length > 0 && (
           <div class="card side-card">
@@ -127,12 +147,6 @@ const components = { Intuition, Definition, Fact, Example, Exercise, Pitfall, No
             </dl>
           </div>
         )}
-        {toc.length > 1 && (
-          <div class="card side-card toc">
-            <h3>في هذه الصفحة</h3>
-            <ul>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ul>
-          </div>
-        )}
       </div>
     </aside>
   </div>
@@ -141,6 +155,24 @@ const components = { Intuition, Definition, Fact, Example, Exercise, Pitfall, No
     // On small screens start with the chapter navigation collapsed so the lesson comes first.
     if (window.matchMedia('(max-width: 860px)').matches) {
       document.querySelector('.chap-nav-inner')?.removeAttribute('open');
+    }
+    // Highlight the stage currently on screen in both path navigations.
+    const stageEls = [...document.querySelectorAll<HTMLElement>('section.stage')];
+    const links = [...document.querySelectorAll<HTMLAnchorElement>('[data-stage-link]')];
+    const setActive = (id: string) => {
+      links.forEach((a) => a.classList.toggle('active', a.dataset.stageLink === id));
+      const bar = document.querySelector('.path-bar a.active') as HTMLElement | null;
+      bar?.scrollIntoView({ block: 'nearest', inline: 'center' });
+    };
+    if (stageEls.length) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          const vis = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+          if (vis[0]) setActive((vis[0].target as HTMLElement).id);
+        },
+        { rootMargin: '-90px 0px -65% 0px' }
+      );
+      stageEls.forEach((el) => io.observe(el));
     }
   </script>
 </Base>
@@ -192,7 +224,6 @@ const components = { Intuition, Definition, Fact, Example, Exercise, Pitfall, No
   .prose :global(th) { background: var(--bg-sunk); }
   .prose :global(blockquote) { margin: 1em 0; padding: 0.2em 1em; border-inline-start: 3px solid var(--line-strong); color: var(--ink-2); }
 
-  .book-ex { padding: 14px 18px; margin: 28px 0 0; font-size: 15.5px; color: var(--ink-2); }
   .finish { display: flex; justify-content: center; margin: 28px 0; }
   .done-btn { padding: 9px 22px; font-size: 15.5px; font-weight: 600; }
   .done-btn[aria-pressed='true'] { background: var(--green); border-color: var(--green); color: #fff; }
@@ -216,7 +247,18 @@ const components = { Intuition, Definition, Fact, Example, Exercise, Pitfall, No
   .terms div:last-child { border: 0; }
   .terms dt { font-weight: 600; }
   .terms dd { margin: 0; font-size: 13px; text-align: left; }
-  .toc a { text-decoration: none; color: var(--ink-2); }
-  .toc a:hover { color: var(--hue); }
-  @media (max-width: 1180px) { .side { position: static; padding-top: 32px; } .side-inner { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); } .toc { display: none; } }
+  .pdf-link { display: inline-block; margin-top: 6px; font-size: 13.5px; color: var(--hue); text-decoration: none; }
+  .path ol { list-style: none; margin: 0; padding: 0; }
+  .path a { display: flex; align-items: center; gap: 9px; padding: 4px 6px; border-radius: 9px; text-decoration: none; color: var(--ink-2); }
+  .path a:hover { background: var(--bg-sunk); }
+  .path a.active { background: var(--hue-soft); color: var(--ink); font-weight: 600; }
+  .pn-n { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--hue); color: var(--hue); font-size: 12px; font-weight: 700; flex: none; }
+  .path a.active .pn-n { background: var(--hue); color: var(--bg-elev); }
+  .path-bar { display: none; position: sticky; top: 64px; z-index: 10; margin: 0 -16px; padding: 8px 16px; gap: 6px; overflow-x: auto; scrollbar-width: none;
+    background: color-mix(in srgb, var(--bg) 97%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .path-bar::-webkit-scrollbar { display: none; }
+  .path-bar a { flex: none; display: flex; align-items: center; gap: 6px; padding: 4px 11px 4px 9px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg-elev); text-decoration: none; font-size: 13.5px; color: var(--ink-2); white-space: nowrap; }
+  .path-bar a.active { border-color: var(--hue); color: var(--ink); background: var(--hue-soft); }
+  .pb-n { font-weight: 700; color: var(--hue); }
+  @media (max-width: 1180px) { .side { position: static; padding-top: 32px; } .side-inner { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); } .path { display: none; } .path-bar { display: flex; } }
 </style>

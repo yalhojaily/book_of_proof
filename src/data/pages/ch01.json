@@ -1,0 +1,411 @@
+{
+ "chapter": 1,
+ "sections": {
+  "1.1": {
+   "reading": [
+    {
+     "src": "book/ch01/1-1-reading-1.webp",
+     "w": 1020,
+     "h": 1658,
+     "page": 3
+    },
+    {
+     "src": "book/ch01/1-1-reading-2.webp",
+     "w": 1020,
+     "h": 1467,
+     "page": 4
+    },
+    {
+     "src": "book/ch01/1-1-reading-3.webp",
+     "w": 1020,
+     "h": 1510,
+     "page": 5
+    },
+    {
+     "src": "book/ch01/1-1-reading-4.webp",
+     "w": 1020,
+     "h": 1501,
+     "page": 6
+    },
+    {
+     "src": "book/ch01/1-1-reading-5.webp",
+     "w": 1020,
+     "h": 793,
+     "page": 7
+    }
+   ],
+   "exercises": [
+    {
+     "src": "book/ch01/1-1-exercises-1.webp",
+     "w": 1020,
+     "h": 729,
+     "page": 7
+    },
+    {
+     "src": "book/ch01/1-1-exercises-2.webp",
+     "w": 1020,
+     "h": 665,
+     "page": 8
+    }
+   ],
+   "solutions": [
+    {
+     "src": "book/ch01/1-1-solutions-1.webp",
+     "w": 1020,
+     "h": 1110,
+     "page": 292
+    },
+    {
+     "src": "book/ch01/1-1-solutions-2.webp",
+     "w": 1020,
+     "h": 342,
+     "page": 293
+    }
+   ]
+  },
+  "1.2": {
+   "reading": [
+    {
+     "src": "book/ch01/1-2-reading-1.webp",
+     "w": 1020,
+     "h": 820,
+     "page": 8
+    },
+    {
+     "src": "book/ch01/1-2-reading-2.webp",
+     "w": 1020,
+     "h": 1497,
+     "page": 9
+    },
+    {
+     "src": "book/ch01/1-2-reading-3.webp",
+     "w": 1020,
+     "h": 1513,
+     "page": 10
+    },
+    {
+     "src": "book/ch01/1-2-reading-4.webp",
+     "w": 1020,
+     "h": 756,
+     "page": 11
+    }
+   ],
+   "exercises": [
+    {
+     "src": "book/ch01/1-2-exercises-1.webp",
+     "w": 1020,
+     "h": 701,
+     "page": 11
+    }
+   ],
+   "solutions": [
+    {
+     "src": "book/ch01/1-2-solutions-1.webp",
+     "w": 1020,
+     "h": 1119,
+     "page": 293
+    },
+    {
+     "src": "book/ch01/1-2-solutions-2.webp",
+     "w": 1020,
+     "h": 312,
+     "page": 294
+    }
+   ]
+  },
+  "1.3": {
+   "reading": [
+    {
+     "src": "book/ch01/1-3-reading-1.webp",
+     "w": 1020,
+     "h": 1506,
+     "page": 12
+    },
+    {
+     "src": "book/ch01/1-3-reading-2.webp",
+     "w": 1020,
+     "h": 1483,
+     "page": 13
+    },
+    {
+     "src": "book/ch01/1-3-reading-3.webp",
+     "w": 1020,
+     "h": 1513,
+     "page": 14
+    },
+    {
+     "src": "book/ch01/1-3-reading-4.webp",
+     "w": 1020,
+     "h": 237,
+     "page": 15
+    }
+   ],
+   "exercises": [
+    {
+     "src": "book/ch01/1-3-exercises-1.webp",
+     "w": 1020,
+     "h": 583,
+     "page": 15
+    }
+   ],
+   "solutions": [
+    {
+     "src": "book/ch01/1-3-solutions-1.webp",
+     "w": 1020,
+     "h": 627,
+     "page": 294
+    }
+   ]
+  },
+  "1.4": {
+   "reading": [
+    {
+     "src": "book/ch01/1-4-reading-1.webp",
+     "w": 1020,
+     "h": 685,
+     "page": 15
+    },
+    {
+     "src": "book/ch01/1-4-reading-2.webp",
+     "w": 1020,
+     "h": 1488,
+     "page": 16
+    },
+    {
+     "src": "book/ch01/1-4-reading-3.webp",
+     "w": 1020,
+     "h": 880,
+     "page": 17
+    }
+   ],
+   "exercises": [
+    {
+     "src": "book/ch01/1-4-exercises-1.webp",
+     "w": 1020,
+     "h": 577,
+     "page": 17
+    }
+   ],
+   "solutions": [
+    {
+     "src": "book/ch01/1-4-solutions-1.webp",
+     "w": 1020,
+     "h": 573,
+     "page": 294
+    },
+    {
+     "src": "book/ch01/1-4-solutions-2.webp",
+     "w": 1020,
+     "h": 183,
+     "page": 295
+    }
+   ]
+  },
+  "1.5": {
+   "reading": [
+    {
+     "src": "book/ch01/1-5-reading-1.webp",
+     "w": 1020,
+     "h": 1498,
+     "page": 18
+    },
+    {
+     "src": "book/ch01/1-5-reading-2.webp",
+     "w": 1020,
+     "h": 764,
+     "page": 19
+    }
+   ],
+   "exercises": [
+    {
+     "src": "book/ch01/1-5-exercises-1.webp",
+     "w": 1020,
+     "h": 738,
+     "page": 19
+    },
+    {
+     "src": "book/ch01/1-5-exercises-2.webp",
+     "w": 1020,
+     "h": 543,
+     "page": 20
+    }
+   ],
+   "solutions": [
+    {
+     "src": "book/ch01/1-5-solutions-1.webp",
+     "w": 1020,
+     "h": 1302,
+     "page": 295
+    },
+    {
+     "src": "book/ch01/1-5-solutions-2.webp",
+     "w": 1020,
+     "h": 125,
+     "page": 296
+    }
+   ]
+  },
+  "1.6": {
+   "reading": [
+    {
+     "src": "book/ch01/1-6-reading-1.webp",
+     "w": 1020,
+     "h": 962,
+     "page": 20
+    },
+    {
+     "src": "book/ch01/1-6-reading-2.webp",
+     "w": 1020,
+     "h": 792,
+     "page": 21
+    }
+   ],
+   "exercises": [
+    {
+     "src": "book/ch01/1-6-exercises-1.webp",
+     "w": 1020,
+     "h": 673,
+     "page": 21
+    }
+   ],
+   "solutions": [
+    {
+     "src": "book/ch01/1-6-solutions-1.webp",
+     "w": 1020,
+     "h": 886,
+     "page": 296
+    }
+   ]
+  },
+  "1.7": {
+   "reading": [
+    {
+     "src": "book/ch01/1-7-reading-1.webp",
+     "w": 1020,
+     "h": 1466,
+     "page": 22
+    },
+    {
+     "src": "book/ch01/1-7-reading-2.webp",
+     "w": 1020,
+     "h": 1476,
+     "page": 23
+    },
+    {
+     "src": "book/ch01/1-7-reading-3.webp",
+     "w": 1020,
+     "h": 558,
+     "page": 24
+    }
+   ],
+   "exercises": [
+    {
+     "src": "book/ch01/1-7-exercises-1.webp",
+     "w": 1020,
+     "h": 900,
+     "page": 24
+    }
+   ],
+   "solutions": [
+    {
+     "src": "book/ch01/1-7-solutions-1.webp",
+     "w": 1020,
+     "h": 501,
+     "page": 296
+    },
+    {
+     "src": "book/ch01/1-7-solutions-2.webp",
+     "w": 1020,
+     "h": 687,
+     "page": 297
+    }
+   ]
+  },
+  "1.8": {
+   "reading": [
+    {
+     "src": "book/ch01/1-8-reading-1.webp",
+     "w": 1020,
+     "h": 1514,
+     "page": 25
+    },
+    {
+     "src": "book/ch01/1-8-reading-2.webp",
+     "w": 1020,
+     "h": 1511,
+     "page": 26
+    },
+    {
+     "src": "book/ch01/1-8-reading-3.webp",
+     "w": 1020,
+     "h": 1513,
+     "page": 27
+    },
+    {
+     "src": "book/ch01/1-8-reading-4.webp",
+     "w": 1020,
+     "h": 1482,
+     "page": 28
+    },
+    {
+     "src": "book/ch01/1-8-reading-5.webp",
+     "w": 1020,
+     "h": 40,
+     "page": 29
+    }
+   ],
+   "exercises": [
+    {
+     "src": "book/ch01/1-8-exercises-1.webp",
+     "w": 1020,
+     "h": 1381,
+     "page": 29
+    }
+   ],
+   "solutions": [
+    {
+     "src": "book/ch01/1-8-solutions-1.webp",
+     "w": 1020,
+     "h": 541,
+     "page": 297
+    }
+   ]
+  },
+  "1.9": {
+   "reading": [
+    {
+     "src": "book/ch01/1-9-reading-1.webp",
+     "w": 1020,
+     "h": 1457,
+     "page": 30
+    },
+    {
+     "src": "book/ch01/1-9-reading-2.webp",
+     "w": 1020,
+     "h": 1513,
+     "page": 31
+    }
+   ],
+   "exercises": [],
+   "solutions": []
+  },
+  "1.10": {
+   "reading": [
+    {
+     "src": "book/ch01/1-10-reading-1.webp",
+     "w": 1020,
+     "h": 1497,
+     "page": 32
+    },
+    {
+     "src": "book/ch01/1-10-reading-2.webp",
+     "w": 1020,
+     "h": 517,
+     "page": 33
+    }
+   ],
+   "exercises": [],
+   "solutions": []
+  }
+ }
+}

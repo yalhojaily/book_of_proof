@@ -10,9 +10,13 @@ terms:
   - { ar: مجموعة القوى, en: power set }
 exercises: تمارين القسم 1.4 في الكتاب (ص 17–18).
 ---
+
 import PowerSet from '@/components/widgets/PowerSet.tsx';
 import QuickCheck from '@/components/widgets/QuickCheck.tsx';
 import { q1_4 } from '@/data/quiz-ch1';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
 
 <Intuition>
 
@@ -20,7 +24,32 @@ import { q1_4 } from '@/data/quiz-ch1';
 
 </Intuition>
 
-## التعريف
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="15–17" minutes={5}>
+
+قسم قصير: صفحتان تقريباً.
+
+- **Definition 1.4:** لاحظ الحرف المزخرف $\mathscr{P}$ للتمييز عن أي حرف عادي.
+- **Fact 1.4:** هو Fact 1.3 من القسم السابق بصيغة جديدة.
+- **Example 1.7 (ص 16):** أمثلة على طبقات الأقواس، مثل $\mathscr{P}(\mathscr{P}(\{1\}))$. اكتبها بيدك قبل أن تقرأ الحل.
+- **مجموعة القوى لمجموعة غير منتهية:** نهاية القسم تذكر $\mathscr{P}(\mathbb{N})$.
+
+| ستقرأ | المعنى |
+|---|---|
+| power set | مجموعة القوى |
+
+</ReadingGuide>
+
+<BookPages section="1.4" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية وأمثلة محلولة">
+
+### التعريف
 
 <Definition num="1.4" title="مجموعة القوى">
 
@@ -94,9 +123,23 @@ $$
 
 </Example>
 
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
 <QuickCheck client:visible questions={q1_4} />
 
-## تمارين
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="1.4" count={20} core={[1, 3, 5, 7, 11, 13, 15, 17]} />
+
+<BookPages section="1.4" kind="exercises" />
+
+### تمارين إضافية بحلول كاملة
+
+تمارين من الموقع، مع تلميحات وحلول مفصّلة، للتدرّب قبل تمارين الكتاب أو بعدها.
 
 <Exercise num="1">
 
@@ -145,3 +188,31 @@ $|\mathscr{P}(\{a,b\})| = 4$ و$|\mathscr{P}(\{c\})| = 2$، وبقاعدة ال�
 </Reveal>
 
 </Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="1.4" />
+
+<Note>
+
+التمارين الزوجية بلا حلول في الكتاب عمداً، لتتدرّب على الحكم على صحة حلّك بنفسك. إن شككت في حلّ، علّمه ↻ للمراجعة.
+
+</Note>
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- $\mathscr{P}(A)$ مجموعة كل المجموعات الجزئية من $A$.
+- $X \in \mathscr{P}(A)$ تعني $X \subseteq A$.
+- $|\mathscr{P}(A)| = 2^{|A|}$، و$\mathscr{P}(\varnothing) = \{\varnothing\}$.
+
+</Takeaways>
+
+في القسم التالي: ثلاث عمليات تصنع مجموعة جديدة من مجموعتين.
+
+</Stage>

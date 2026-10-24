@@ -14,10 +14,14 @@ terms:
   - { ar: صحيح بانتفاء الموضوع, en: vacuously true }
 exercises: تمارين القسم 1.3 في الكتاب (ص 14–15).
 ---
+
 import SubsetChecker from '@/components/widgets/SubsetChecker.tsx';
 import SubsetTree from '@/components/widgets/SubsetTree.tsx';
 import QuickCheck from '@/components/widgets/QuickCheck.tsx';
 import { q1_3 } from '@/data/quiz-ch1';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
 
 <Intuition>
 
@@ -25,7 +29,33 @@ import { q1_3 } from '@/data/quiz-ch1';
 
 </Intuition>
 
-## التعريف
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="12–15" minutes={10}>
+
+- **Definition 1.3:** اقرأ الجملة الأخيرة فيه بعناية: متى تكون $A \not\subseteq B$. منها يأتي Fact 1.2.
+- **Example 1.5 (ص 12):** قائمة عبارات صحيحة. لا تتجاوزها: توقف عند كل واحدة واسأل نفسك لماذا هي صحيحة.
+- **Fact 1.2 وشرحه:** لماذا $\varnothing \subseteq B$ دائماً.
+- **عدّ المجموعات الجزئية (ص 13):** المؤلف يبني الفكرة بشجرة تشبه أداة الموقع، ثم Fact 1.3.
+- **Example 1.6 (ص 14):** الخلط بين $\in$ و$\subseteq$، وهو أكثر خطأ شائع في هذا الفصل.
+
+| ستقرأ | المعنى |
+|---|---|
+| subset | مجموعة جزئية |
+| vacuously true | صحيحة بانتفاء الموضوع |
+| list all subsets | اسرد كل المجموعات الجزئية |
+
+</ReadingGuide>
+
+<BookPages section="1.3" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية وأمثلة محلولة">
+
+### التعريف
 
 <Definition num="1.3" title="المجموعة الجزئية">
 
@@ -37,7 +67,7 @@ import { q1_3 } from '@/data/quiz-ch1';
 
 <SubsetChecker client:visible />
 
-## ∈ أم ⊆؟
+### ∈ أم ⊆؟
 
 هذا أكثر ما يخلط بينه المبتدئون، فخذ وقتك:
 
@@ -72,7 +102,7 @@ import { q1_3 } from '@/data/quiz-ch1';
 
 </Example>
 
-## المجموعة الخالية جزء من كل شيء
+### المجموعة الخالية جزء من كل شيء
 
 <Fact num="1.2">
 
@@ -82,7 +112,7 @@ import { q1_3 } from '@/data/quiz-ch1';
 
 لماذا $\varnothing \subseteq B$؟ ارجع إلى التعريف: لكي تكون العبارة **خاطئة** نحتاج عنصراً في $\varnothing$ ليس في $B$. لكن $\varnothing$ لا تحتوي أي عنصر، فلا يمكن أن نجد مثل هذا العنصر. العبارة إذن صحيحة **بانتفاء الموضوع**، كقولك «كل الفيلة في غرفتي وردية» حين لا يكون في غرفتك أي فيل.
 
-## كم مجموعة جزئية؟
+### كم مجموعة جزئية؟
 
 اكتب كل المجموعات الجزئية من $\{a, b, c\}$:
 
@@ -100,9 +130,23 @@ $$
 
 </Fact>
 
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
 <QuickCheck client:visible questions={q1_3} />
 
-## تمارين
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="1.3" count={16} core={[1, 3, 5, 7, 9, 11, 13, 15]} />
+
+<BookPages section="1.3" kind="exercises" />
+
+### تمارين إضافية بحلول كاملة
+
+تمارين من الموقع، مع تلميحات وحلول مفصّلة، للتدرّب قبل تمارين الكتاب أو بعدها.
 
 <Exercise num="1">
 
@@ -153,3 +197,32 @@ $$
 </Reveal>
 
 </Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="1.3" />
+
+<Note>
+
+التمارين الزوجية بلا حلول في الكتاب عمداً، لتتدرّب على الحكم على صحة حلّك بنفسك. إن شككت في حلّ، علّمه ↻ للمراجعة.
+
+</Note>
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- $A \subseteq B$ تعني أن كل عنصر في $A$ موجود في $B$، ونفيها يكفيه عنصر واحد.
+- $\in$ تقارن عنصراً بمجموعة، و$\subseteq$ تقارن مجموعة بمجموعة.
+- $\varnothing \subseteq B$ و$B \subseteq B$ لكل مجموعة $B$.
+- لمجموعة من $n$ عنصراً $2^n$ مجموعة جزئية.
+
+</Takeaways>
+
+في القسم التالي نجمع كل المجموعات الجزئية في مجموعة واحدة.
+
+</Stage>

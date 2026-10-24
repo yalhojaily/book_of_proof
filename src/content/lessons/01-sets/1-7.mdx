@@ -11,8 +11,12 @@ terms:
   - { ar: قانون التوزيع, en: distributive law }
 exercises: تمارين القسم 1.7 في الكتاب (ص 24–25).
 ---
+
 import VennLab from '@/components/widgets/VennLab.tsx';
 import VennChallenge from '@/components/widgets/VennChallenge.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
 
 <Intuition>
 
@@ -20,7 +24,31 @@ import VennChallenge from '@/components/widgets/VennChallenge.tsx';
 
 </Intuition>
 
-## كيف نظلّل تعبيراً
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="22–24" minutes={10}>
+
+- **Figure 1.7 و1.8:** كيف تُرسم المجموعتان والثلاث، وما تمثله كل منطقة.
+- **Figure 1.9 و1.10 (ص 23):** خطوات رسم $(A \cup B) \cap C$ ثم $A \cup (B \cap C)$، والنتيجة أنهما مختلفتان. هذا هو «مثال 1» في مختبر الموقع.
+- **الخلاصة في آخر القسم:** متى تكون الأقواس ضرورية ومتى لا تكون.
+- **تنبيه المؤلف:** مخططات فن أداة للفهم، لا جزء من البرهان.
+
+| ستقرأ | المعنى |
+|---|---|
+| Venn diagram | مخطط فن |
+| shade | ظلّل |
+
+</ReadingGuide>
+
+<BookPages section="1.7" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية وأمثلة محلولة">
+
+### كيف نظلّل تعبيراً
 
 اتبع بنية التعبير من الداخل إلى الخارج، كما تحسب تعبيراً حسابياً. خذ $(A \cup B) \cap \overline{C}$:
 
@@ -32,7 +60,7 @@ import VennChallenge from '@/components/widgets/VennChallenge.tsx';
 
 </Steps>
 
-## هل التعبيران متساويان؟
+### هل التعبيران متساويان؟
 
 إذا رسمت تعبيرين ووجدت المناطق نفسها مظللة في الحالتين، فهذا دليل قوي على تساويهما. وإن اختلفت منطقة واحدة، فقد وجدت مثالاً مضاداً.
 
@@ -48,9 +76,23 @@ import VennChallenge from '@/components/widgets/VennChallenge.tsx';
 
 </Pitfall>
 
-## تدرّب
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
 
 <VennChallenge client:visible />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="1.7" count={14} core={[1, 3, 5, 7, 9, 11]} />
+
+<BookPages section="1.7" kind="exercises" />
+
+### تمارين إضافية بحلول كاملة
+
+تمارين من الموقع، مع تلميحات وحلول مفصّلة، للتدرّب قبل تمارين الكتاب أو بعدها.
 
 <Exercise num="1">
 
@@ -81,3 +123,31 @@ $(A - (B \cup C)) \cup (B - (A \cup C)) \cup (C - (A \cup B))$. تحقق منه 
 </Reveal>
 
 </Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="1.7" />
+
+<Note>
+
+التمارين الزوجية بلا حلول في الكتاب عمداً، لتتدرّب على الحكم على صحة حلّك بنفسك. إن شككت في حلّ، علّمه ↻ للمراجعة.
+
+</Note>
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- ثلاث دوائر تقسم $U$ إلى 8 مناطق، وكل تعبير اختيار لبعضها.
+- إذا اختلف المخططان في منطقة واحدة فالتعبيران مختلفان.
+- المخطط يساعد على الاكتشاف، والبرهان يأتي في الفصل 8.
+
+</Takeaways>
+
+في القسم التالي: الاتحاد والتقاطع لعدد كبير، بل لانهائي، من المجموعات.
+
+</Stage>

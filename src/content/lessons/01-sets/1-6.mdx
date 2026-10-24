@@ -12,9 +12,13 @@ terms:
   - { ar: قانونا دي مورغان, en: De Morgan's laws }
 exercises: تمارين القسم 1.6 في الكتاب (ص 21–22).
 ---
+
 import SetOps from '@/components/widgets/SetOps.tsx';
 import QuickCheck from '@/components/widgets/QuickCheck.tsx';
 import { q1_6 } from '@/data/quiz-ch1';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
 
 <Intuition>
 
@@ -22,7 +26,30 @@ import { q1_6 } from '@/data/quiz-ch1';
 
 </Intuition>
 
-## التعريف
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="20–21" minutes={5}>
+
+- **Definition 1.6:** المتممة بالنسبة إلى مجموعة شاملة $U$، وتُكتب بخط فوق المجموعة.
+- **Example 1.10:** متممة مجموعة الأعداد الأولية. قارنها بمثال الموقع عن تغيّر المتممة بتغيّر $U$.
+- **Example 1.11:** متممة منحنى في المستوى.
+
+| ستقرأ | المعنى |
+|---|---|
+| universal set | المجموعة الشاملة |
+| complement | المتممة |
+
+</ReadingGuide>
+
+<BookPages section="1.6" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية وأمثلة محلولة">
+
+### التعريف
 
 في كل مسألة نختار مجموعة شاملة $U$ تحتوي كل ما نتحدث عنه، فتكون كل مجموعة نتعامل معها مجموعة جزئية من $U$.
 
@@ -51,7 +78,7 @@ $$
 
 </Example>
 
-## المتممة مع الاتحاد والتقاطع
+### المتممة مع الاتحاد والتقاطع
 
 هنا المجموعة الشاملة $U = \{1, 2, \ldots, 10\}$. قارن الناتج في حالة $\overline{A \cup B}$ بما تتوقعه لـ $\overline{A} \cap \overline{B}$:
 
@@ -75,9 +102,23 @@ $$
 
 </Note>
 
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
 <QuickCheck client:visible questions={q1_6} />
 
-## تمارين
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="1.6" count={6} core={[1, 3, 5]} />
+
+<BookPages section="1.6" kind="exercises" />
+
+### تمارين إضافية بحلول كاملة
+
+تمارين من الموقع، مع تلميحات وحلول مفصّلة، للتدرّب قبل تمارين الكتاب أو بعدها.
 
 <Exercise num="1">
 
@@ -102,3 +143,31 @@ $\overline{A} = (-\infty, 0) \cup (1, \infty)$. لاحظ أن الأقواس ا�
 </Reveal>
 
 </Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="1.6" />
+
+<Note>
+
+التمارين الزوجية بلا حلول في الكتاب عمداً، لتتدرّب على الحكم على صحة حلّك بنفسك. إن شككت في حلّ، علّمه ↻ للمراجعة.
+
+</Note>
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- المتممة $\overline{A} = U - A$ تعتمد على اختيار $U$.
+- قانونا دي مورغان: $\overline{A \cup B} = \overline{A} \cap \overline{B}$ و$\overline{A \cap B} = \overline{A} \cup \overline{B}$.
+- $A - B = A \cap \overline{B}$.
+
+</Takeaways>
+
+في القسم التالي نرسم كل هذه العمليات.
+
+</Stage>

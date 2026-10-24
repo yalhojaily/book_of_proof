@@ -1,0 +1,23 @@
+---
+// Arabic guide that sits above the book pages: what to focus on and the English terms you will meet.
+interface Props { pages: string; minutes?: number }
+const { pages, minutes } = Astro.props;
+const mins = (n: number) => (n <= 10 ? `${n} دقائق` : `${n} دقيقة`);
+---
+<aside class="rg">
+  <div class="rg-head">
+    <span class="rg-icon" aria-hidden="true">📖</span>
+    <b>دليل القراءة</b>
+    <span class="rg-meta">الكتاب، ص <span class="ltr">{pages}</span>{minutes && <> · نحو {mins(minutes)}</>}</span>
+  </div>
+  <div class="rg-body"><slot /></div>
+</aside>
+<style>
+  .rg { margin: 1.2em 0 1.4em; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-elev); overflow: hidden; border-inline-start: 4px solid var(--hue); }
+  .rg-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 10px 16px; background: var(--hue-soft); font-family: var(--font-ui); }
+  .rg-head b { color: var(--hue); }
+  .rg-meta { margin-inline-start: auto; font-size: 13.5px; color: var(--ink-2); }
+  .rg-body { padding: 10px 18px 4px; font-size: 17px; }
+  .rg-body :global(ul), .rg-body :global(ol) { margin: 0.3em 0 0.8em; }
+  .rg-body :global(table) { font-size: 15px; }
+</style>

@@ -12,9 +12,13 @@ terms:
   - { ar: عائلة مجموعات, en: family of sets }
 exercises: تمارين القسم 1.8 في الكتاب (ص 28–29).
 ---
+
 import IndexedSets from '@/components/widgets/IndexedSets.tsx';
 import QuickCheck from '@/components/widgets/QuickCheck.tsx';
 import { q1_8 } from '@/data/quiz-ch1';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
 
 <Intuition>
 
@@ -22,7 +26,31 @@ import { q1_8 } from '@/data/quiz-ch1';
 
 </Intuition>
 
-## عدد منتهٍ من المجموعات
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="25–29" minutes={15}>
+
+- **Definition 1.7:** $\bigcup_{i=1}^{n}$ و$\bigcap_{i=1}^{n}$ لعدد منتهٍ من المجموعات، ثم Example 1.12.
+- **Example 1.13 (ص 26):** عائلة لانهائية من المجموعات. قارنها بأداة الموقع.
+- **Definition 1.8:** الصورة العامة بمجموعة أدلة $I$.
+- **Example 1.14 و1.15 (ص 27–28):** مجموعات في المستوى مفهرسة بأعداد حقيقية، مع رسومات. هذه أصعب أمثلة الفصل، فخذ وقتك.
+
+| ستقرأ | المعنى |
+|---|---|
+| indexed set, index | مجموعة مفهرسة، دليل |
+| index set | مجموعة الأدلة |
+
+</ReadingGuide>
+
+<BookPages section="1.8" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية وأمثلة محلولة">
+
+### عدد منتهٍ من المجموعات
 
 <Definition num="1.7">
 
@@ -52,7 +80,7 @@ $$
 
 </Example>
 
-## عدد لانهائي من المجموعات
+### عدد لانهائي من المجموعات
 
 نكتب $\bigcup_{i=1}^{\infty} A_i$ للاتحاد على كل الأعداد الطبيعية. التعريف هو نفسه بالضبط: عنصر في **واحدة على الأقل**، أو في **كلها**. لكن النتائج قد تفاجئك. جرّب الأمثلة، وحرّك $N$ إلى 12 وتخيّل أنك تكمل إلى ما لا نهاية:
 
@@ -82,7 +110,7 @@ $$
 
 </Example>
 
-## مجموعة أدلة عامة
+### مجموعة أدلة عامة
 
 لا يلزم أن تكون الأدلة $1, 2, 3, \ldots$. أي مجموعة غير خالية $I$ تصلح، ونكتب:
 
@@ -99,9 +127,23 @@ $$
 
 مثال: إذا كان $I = \mathbb{R}$ و$A_\alpha = \{\alpha\}$ لكل عدد حقيقي $\alpha$، فإن $\bigcup_{\alpha \in \mathbb{R}} A_\alpha = \mathbb{R}$. هنا لا يمكن ترقيم المجموعات بـ $1, 2, 3, \ldots$ أصلاً (ستعرف لماذا في الفصل 14).
 
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
 <QuickCheck client:visible questions={q1_8} />
 
-## تمارين
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="1.8" count={14} core={[1, 3, 5, 7, 9, 11]} />
+
+<BookPages section="1.8" kind="exercises" />
+
+### تمارين إضافية بحلول كاملة
+
+تمارين من الموقع، مع تلميحات وحلول مفصّلة، للتدرّب قبل تمارين الكتاب أو بعدها.
 
 <Exercise num="1">
 
@@ -132,3 +174,31 @@ $\varnothing$. لأي عدد حقيقي $x$ يوجد عدد طبيعي $n \ge x$
 </Reveal>
 
 </Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="1.8" />
+
+<Note>
+
+التمارين الزوجية بلا حلول في الكتاب عمداً، لتتدرّب على الحكم على صحة حلّك بنفسك. إن شككت في حلّ، علّمه ↻ للمراجعة.
+
+</Note>
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- $\bigcup$ تعني «في واحدة على الأقل»، و$\bigcap$ تعني «في كلها».
+- التقاطع اللانهائي قد يكون خالياً مع أن كل تقاطع منتهٍ غير خالٍ.
+- الأدلة قد تأتي من أي مجموعة $I$، لا من $\mathbb{N}$ فقط.
+
+</Takeaways>
+
+في القسم التالي: الأرض التي نقف عليها، أي ما نقبله عن الأعداد دون برهان.
+
+</Stage>

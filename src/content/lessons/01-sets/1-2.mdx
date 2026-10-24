@@ -14,9 +14,13 @@ terms:
   - { ar: المستوى الديكارتي, en: Cartesian plane }
 exercises: تمارين القسم 1.2 في الكتاب (ص 10–11).
 ---
+
 import Cartesian from '@/components/widgets/Cartesian.tsx';
 import QuickCheck from '@/components/widgets/QuickCheck.tsx';
 import { q1_2 } from '@/data/quiz-ch1';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
 
 <Intuition>
 
@@ -24,7 +28,33 @@ import { q1_2 } from '@/data/quiz-ch1';
 
 </Intuition>
 
-## الزوج المرتب
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="8–11" minutes={10}>
+
+- **Definition 1.1 و1.2:** الزوج المرتب ثم الضرب الديكارتي. لاحظ أن المؤلف يستخدم الأقواس الدائرية للزوج.
+- **Example 1.3 (ص 9):** وجوه حجر النرد. الجدول الذي يرسمه هو ما تراه في أداة الموقع.
+- **رسومات المستوى (ص 9–10):** كيف يرسم $A \times B$ حين تكون $A$ و$B$ فترات أو مجموعات أعداد. هذه الرسومات مطلوبة في تمارين القسم.
+- **Example 1.4:** رمي العملة عدة مرات، وكيف يمثّل $S^n$ كل النتائج الممكنة.
+
+| ستقرأ | المعنى |
+|---|---|
+| ordered pair / triple | زوج مرتب / ثلاثي مرتب |
+| coordinate | إحداثي |
+| Cartesian product | الضرب الديكارتي |
+| the plane $\mathbb{R}^2$ | المستوى |
+
+</ReadingGuide>
+
+<BookPages section="1.2" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية وأمثلة محلولة">
+
+### الزوج المرتب
 
 المجموعة لا تهتم بالترتيب، لكننا كثيراً ما نحتاجه: النقطة $(2, 5)$ في المستوى غير النقطة $(5, 2)$. لذلك نعرّف شيئاً جديداً:
 
@@ -42,7 +72,7 @@ import { q1_2 } from '@/data/quiz-ch1';
 
 </Pitfall>
 
-## الضرب الديكارتي
+### الضرب الديكارتي
 
 <Definition num="1.2" title="الضرب الديكارتي">
 
@@ -87,7 +117,7 @@ $$
 
 </Example>
 
-## أكثر من مجموعتين، والمستوى
+### أكثر من مجموعتين، والمستوى
 
 يمتد التعريف بسهولة: $A \times B \times C = \{(a, b, c) : a \in A, b \in B, c \in C\}$ مجموعة **ثلاثيات مرتبة**، وعددها $|A| \cdot |B| \cdot |C|$.
 
@@ -107,9 +137,23 @@ $$
 
 </Example>
 
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
 <QuickCheck client:visible questions={q1_2} />
 
-## تمارين
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="1.2" count={20} core={[1, 3, 5, 7, 9, 11, 13, 17]} />
+
+<BookPages section="1.2" kind="exercises" />
+
+### تمارين إضافية بحلول كاملة
+
+تمارين من الموقع، مع تلميحات وحلول مفصّلة، للتدرّب قبل تمارين الكتاب أو بعدها.
 
 <Exercise num="1">
 
@@ -152,3 +196,32 @@ $2^8 = 256$. كل عنصر قائمة من ثمانية أصفار وآحاد، 
 </Reveal>
 
 </Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="1.2" />
+
+<Note>
+
+التمارين الزوجية بلا حلول في الكتاب عمداً، لتتدرّب على الحكم على صحة حلّك بنفسك. إن شككت في حلّ، علّمه ↻ للمراجعة.
+
+</Note>
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- $(a, b) \neq (b, a)$ عادةً، أما $\{a, b\} = \{b, a\}$ دائماً.
+- $A \times B$ كل الأزواج الممكنة، وعددها $|A| \cdot |B|$.
+- $A \times \varnothing = \varnothing$.
+- $\mathbb{R}^2$ هو المستوى، وعناصره نقاط.
+
+</Takeaways>
+
+في القسم التالي: متى تكون مجموعة جزءاً من أخرى؟
+
+</Stage>
