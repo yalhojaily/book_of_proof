@@ -1,12 +1,18 @@
 import { useState } from 'react';
 import { Shell, Tex } from './Shell';
 
-/** Renders a string where $...$ segments are TeX. */
+/** Renders a string where $...$ segments are TeX and **…** is bold. */
 export function Rich({ text }: { text: string }) {
   const parts = text.split(/(\$[^$]+\$)/g);
   return (
     <>
-      {parts.map((p, i) => (p.startsWith('$') && p.endsWith('$') ? <Tex key={i}>{p.slice(1, -1)}</Tex> : <span key={i}>{p}</span>))}
+      {parts.map((p, i) =>
+        p.startsWith('$') && p.endsWith('$') ? (
+          <Tex key={i}>{p.slice(1, -1)}</Tex>
+        ) : (
+          <span key={i}>{p.split(/(\*\*[^*]+\*\*)/g).map((q, j) => (q.startsWith('**') && q.endsWith('**') && q.length > 4 ? <b key={j}>{q.slice(2, -2)}</b> : q))}</span>
+        )
+      )}
     </>
   );
 }

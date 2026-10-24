@@ -1,0 +1,125 @@
+---
+chapter: proofs-involving-sets
+section: "8.3"
+summary: 'لتبرهن $A = B$ برهن $A \subseteq B$ و$B \subseteq A$. وأحياناً تكفي سلسلة من المساواة بالتعريفات.'
+goals:
+  - برهان تساوي مجموعتين بالاحتواءين
+  - برهان قوانين دي مورغان والتوزيع للمجموعات
+  - استعمال سلسلة المساواة حين تناسب
+terms:
+  - { ar: تساوي المجموعات, en: set equality }
+  - { ar: قوانين دي مورغان, en: DeMorgan's laws }
+  - { ar: قوانين التوزيع, en: distributive laws }
+---
+import MembershipTable from '@/components/widgets/MembershipTable.tsx';
+import ProofBuilder from '@/components/widgets/ProofBuilder.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import { identities8, puzzles83, q8_3 } from '@/data/proofs-ch8';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+قائمتا ضيوف لحفلين. كيف تتأكد أنهما متطابقتان؟ تتحقق أن كل اسم في الأولى موجود في الثانية، **ثم** أن كل اسم في الثانية موجود في الأولى. فحص اتجاه واحد لا يكفي: قد تكون الثانية أطول.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="162–165" minutes={20}>
+
+- **الإطار (ص 162):** احتواءان.
+- **المثال 8.10 (ص 162–163):** مضاعفات 35 = مضاعفات 5 ∩ مضاعفات 7.
+- **المثال 8.11 (ص 163):** إذا كان $A \times C = B \times C$ و$C \neq \varnothing$ فإن $A = B$. لاحظ لماذا احتجنا عنصراً من $C$.
+- **المثالان 8.12 و8.13 (ص 163–164):** $A \times (B \cap C) = (A \times B) \cap (A \times C)$ بطريقتين: احتواءان، ثم سلسلة مساواة.
+- **القوانين (ص 165):** دي مورغان والتوزيع. ستبرهنها في التمارين.
+
+</ReadingGuide>
+
+<BookPages section="8.3" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية وأمثلة محلولة">
+
+<Definition title="برهان $A = B$">
+
+**البرهان.** [برهن $A \subseteq B$.] [برهن $B \subseteq A$.] بما أن $A \subseteq B$ و$B \subseteq A$، فإن $A = B$. $\blacksquare$
+
+</Definition>
+
+### قبل أن تبرهن: هل هي صحيحة؟
+
+جدول الانتماء يمر على الأماكن الثمانية الممكنة للعنصر. إن اتفق الطرفان في كل صف، فالمساواة صحيحة، والبرهان بالاحتواءين سيمشي على الحالات نفسها.
+
+<MembershipTable client:visible presets={identities8.filter((p) => p.rel !== 'sub')} />
+
+جرّب أن تكتب بنفسك $(A \cap B)'$ و$A' \cup B'$، أو $A \cap (B \cup C)$ و$(A \cap B) \cup (A \cap C)$.
+
+### سلسلة المساواة
+
+أحياناً تكتب المجموعة الأولى بالصيغة الوصفية، وتحوّل الشرط المنطقي خطوة خطوة (بقوانين المنطق من الفصل 2) حتى تصل إلى الثانية:
+
+$$
+\overline{A \cup B} = \{x : \sim(x \in A \vee x \in B)\} = \{x : x \notin A \wedge x \notin B\} = \overline{A} \cap \overline{B}.
+$$
+
+كل خطوة مبرّرة بتعريف أو قانون منطقي (هنا دي مورغان للعبارات). الطريقة قصيرة، لكن احذر: كل مساواة يجب أن تكون صحيحة بوضوح.
+
+<Pitfall title="أخطاء شائعة">
+
+- **احتواء واحد فقط:** لا يكفي لإثبات المساواة.
+- **مخطط فن بدل البرهان:** المخطط يقنع ويرشد، لكن الكتاب يطلب برهاناً بالعناصر.
+- **نسيان شرط مثل $C \neq \varnothing$:** إذا ورد في القضية فهو مستعمل في البرهان. اسأل أين.
+
+</Pitfall>
+
+### تدرّب: رتّب البرهان
+
+<ProofBuilder client:visible puzzles={puzzles83} />
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة">
+
+<QuickCheck client:visible questions={q8_3} />
+
+</Stage>
+
+<Stage n={5} id="practice" title="التطبيق" sub="تمارين الكتاب لهذا الفصل في صفحة واحدة">
+
+في [صفحة تمارين الفصل](../8-x/): المساواة **2، 8–18، 20، 26–28، 30**، و«إذا وفقط إذا» مع المجموعات **21، 22، 29**.
+
+<Exercise num="1">
+
+برهن: $A \cap (A \cup B) = A$.
+
+<Reveal>
+
+**البرهان.** أولاً $A \cap (A \cup B) \subseteq A$: إذا كان $x \in A \cap (A \cup B)$ فإن $x \in A$ بتعريف التقاطع.
+
+ثانياً $A \subseteq A \cap (A \cup B)$: إذا كان $x \in A$ فإن $x \in A \cup B$ بتعريف الاتحاد، فـ $x \in A$ و$x \in A \cup B$، أي $x \in A \cap (A \cup B)$.
+
+إذن المجموعتان متساويتان. $\blacksquare$
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- $A = B$: احتواءان.
+- سلسلة المساواة بديل قصير حين يمكن تحويل الشرط منطقياً.
+- قوانين دي مورغان والتوزيع للمجموعات تقابل قوانين المنطق.
+
+</Takeaways>
+
+في القسم التالي: مثال جميل وصعب، الأعداد التامة.
+
+</Stage>

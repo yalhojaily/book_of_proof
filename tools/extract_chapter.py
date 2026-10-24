@@ -41,6 +41,9 @@ CHAPTERS = {
     4: dict(body=(125, 139), solutions=(327, 329)),
     5: dict(body=(140, 148), solutions=(329, 333)),
     6: dict(body=(149, 156), solutions=(333, 335)),
+    7: dict(body=(159, 168), solutions=(335, 340)),
+    8: dict(body=(169, 183), solutions=(340, 344)),
+    9: dict(body=(184, 191), solutions=(344, 346)),
 }
 
 
@@ -123,7 +126,7 @@ def main(chap: int):
         for pg in range(b0, b1 + 1):
             for y0, _y1, text in lines_on_page(pg):
                 text = text.strip()
-                m = re.match(rf"^{chap}\.(\d+) [A-Z][A-Za-z’' ,\-]+$", text)
+                m = re.match(rf"^{chap}\.(\d+) [A-Z][^.]*$", text)
                 if m and y0 > BODY_TOP - 40:
                     raw.append(((f"{chap}.{m.group(1)}", "reading"), pg, y0))
                 m = re.match(rf"^Exercises for Section {chap}\.(\d+)$", text)

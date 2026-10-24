@@ -1,0 +1,132 @@
+---
+chapter: proofs-involving-sets
+section: "8.2"
+summary: '$A \subseteq B$ تعني «إذا $a \in A$ فإن $a \in B$». فنفترض عنصراً عاماً $a \in A$، ونتتبعه بالتعريفات حتى نصل إلى $a \in B$.'
+goals:
+  - 'برهان $A \subseteq B$ بالطريقة المباشرة (مطاردة العنصر)'
+  - معرفة متى يناسب العكس النقيض
+  - فك تعريفات العمليات على المجموعات داخل البرهان
+terms:
+  - { ar: مجموعة جزئية, en: subset }
+  - { ar: مطاردة العنصر, en: element chasing }
+---
+import ProofBuilder from '@/components/widgets/ProofBuilder.tsx';
+import MembershipTable from '@/components/widgets/MembershipTable.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import { puzzles82, identities8, q8_2 } from '@/data/proofs-ch8';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+لتثبت أن «كل طلاب الهندسة في الجامعة مسجلون في مكتبتها»، لا يمكنك أن تفحص الطلاب واحداً واحداً إلى الأبد. بدلاً من ذلك تقول: «خذ أي طالب هندسة، ولنسمه س. بما أنه طالب هندسة فهو يحمل بطاقة جامعية، وكل حامل بطاقة مسجل في المكتبة، إذن س مسجل». حجة عن «أي» طالب تشمل الجميع.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="159–162" minutes={20}>
+
+- **الطريقتان (ص 159):** المباشرة والعكس النقيض، جنباً إلى جنب.
+- **أمثلة 8.5–8.7 (ص 160):** مجموعات معرّفة بالقسمة والتطابق. لاحظ أن كل برهان يبدأ بـ«Suppose $a \in$ …» وينتهي بـ«so it follows that … ⊆ …».
+- **حقائق بديهية (ص 161):** $A \cap B \subseteq A$ وأمثالها، لا تحتاج برهاناً إلا إذا طُلب.
+- **مجموعات القوة (ص 161–162):** المثالان 8.8 و8.9. هنا العناصر نفسها مجموعات: $X \in \mathcal{P}(A)$ تعني $X \subseteq A$.
+
+| ستقرأ | المعنى |
+|---|---|
+| Suppose a ∈ A … Therefore a ∈ B | افترض a ∈ A … إذن a ∈ B |
+| It follows that A ⊆ B | ومنه A ⊆ B |
+
+</ReadingGuide>
+
+<BookPages section="8.2" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية وأمثلة محلولة">
+
+### الإطار
+
+<Definition title="برهان $A \subseteq B$">
+
+**مباشر.** افترض $a \in A$. $\;\vdots\;$ إذن $a \in B$. فـ $A \subseteq B$. $\blacksquare$
+
+**عكس نقيض.** افترض $a \notin B$. $\;\vdots\;$ إذن $a \notin A$. فـ $A \subseteq B$. $\blacksquare$
+
+</Definition>
+
+المباشر هو الأكثر استعمالاً بكثير. السر في الوسط: **فكّ** الانتماء إلى $A$ بتعريفه (قسمة، تقاطع، جداء…)، ثم **أعد تركيب** الانتماء إلى $B$ بتعريفه.
+
+<Example title="المثال 8.6 مختصراً">
+
+$\{x \in \mathbb{Z} : 2 \mid x\} \cap \{x \in \mathbb{Z} : 9 \mid x\} \subseteq \{x \in \mathbb{Z} : 6 \mid x\}$.
+
+افترض أن $a$ في التقاطع ← $2 \mid a$ و$9 \mid a$ (تعريف التقاطع) ← $a = 9d$ و$a$ زوجي، فـ $d$ زوجي، $d = 2e$ ← $a = 18e = 6(3e)$ ← $6 \mid a$ ← $a$ في المجموعة الثالثة.
+
+</Example>
+
+### الاحتواء في جدول
+
+لمجموعات مكتوبة بالعمليات فقط (مثل $A \cap B \subseteq A \cup C$)، طارد العنصر في كل أماكنه الممكنة: الاحتواء صحيح إذا لم يوجد صف فيه $x$ في الأيسر وليس في الأيمن.
+
+<MembershipTable client:visible presets={identities8.filter((p) => p.rel === 'sub')} title="هل الاحتواء صحيح؟" />
+
+<Note>
+
+الجدول أداة تحقق، والبرهان المكتوب يبقى «افترض $x \in$ … إذن $x \in$ …». الجدول يخبرك هل تستحق المحاولة، ويرشدك إلى الحالات.
+
+</Note>
+
+<Pitfall title="أخطاء شائعة">
+
+- **البرهان بمثال:** «$36$ في الأولى وفي الثانية» لا يبرهن الاحتواء.
+- **الخلط بين $\in$ و$\subseteq$:** عناصر $\mathcal{P}(A)$ مجموعات جزئية من $A$، فـ $X \in \mathcal{P}(A)$ تعني $X \subseteq A$ لا $X \in A$.
+- **البدء من المجموعة الخطأ:** برهان $A \subseteq B$ يبدأ بعنصر من $A$.
+
+</Pitfall>
+
+### تدرّب: رتّب البرهان
+
+<ProofBuilder client:visible puzzles={puzzles82} />
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة">
+
+<QuickCheck client:visible questions={q8_2} />
+
+</Stage>
+
+<Stage n={5} id="practice" title="التطبيق" sub="تمارين الكتاب لهذا الفصل في صفحة واحدة">
+
+في [صفحة تمارين الفصل](../8-x/): الاحتواءات **1، 3، 4، 6، 7، 19، 25**.
+
+<Exercise num="1">
+
+برهن: إذا كانت $A$ و$B$ مجموعتين، فإن $A - B \subseteq A \cup B$.
+
+<Reveal>
+
+**البرهان.** افترض أن $x \in A - B$. إذن $x \in A$ و$x \notin B$. وبما أن $x \in A$، فإن $x \in A \cup B$ بتعريف الاتحاد. إذن $A - B \subseteq A \cup B$. $\blacksquare$
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- $A \subseteq B$: افترض $a \in A$، واستنتج $a \in B$.
+- فكّ التعريف عند البداية، وأعد التركيب عند النهاية.
+- عنصر عام لا مثال؛ و$\in$ ليست $\subseteq$.
+
+</Takeaways>
+
+في القسم التالي: تساوي مجموعتين.
+
+</Stage>

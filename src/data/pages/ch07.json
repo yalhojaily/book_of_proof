@@ -1,0 +1,144 @@
+{
+ "chapter": 7,
+ "sections": {
+  "7.1": {
+   "reading": [
+    {
+     "src": "book/ch07/7-1-reading-1.webp",
+     "w": 1020,
+     "h": 1658,
+     "page": 147
+    },
+    {
+     "src": "book/ch07/7-1-reading-2.webp",
+     "w": 1020,
+     "h": 1508,
+     "page": 148
+    },
+    {
+     "src": "book/ch07/7-1-reading-3.webp",
+     "w": 1020,
+     "h": 346,
+     "page": 149
+    }
+   ],
+   "exercises": [],
+   "solutions": []
+  },
+  "7.2": {
+   "reading": [
+    {
+     "src": "book/ch07/7-2-reading-1.webp",
+     "w": 1020,
+     "h": 1163,
+     "page": 149
+    },
+    {
+     "src": "book/ch07/7-2-reading-2.webp",
+     "w": 1020,
+     "h": 1242,
+     "page": 150
+    }
+   ],
+   "exercises": [],
+   "solutions": []
+  },
+  "7.3": {
+   "reading": [
+    {
+     "src": "book/ch07/7-3-reading-1.webp",
+     "w": 1020,
+     "h": 270,
+     "page": 150
+    },
+    {
+     "src": "book/ch07/7-3-reading-2.webp",
+     "w": 1020,
+     "h": 1513,
+     "page": 151
+    },
+    {
+     "src": "book/ch07/7-3-reading-3.webp",
+     "w": 1020,
+     "h": 1513,
+     "page": 152
+    },
+    {
+     "src": "book/ch07/7-3-reading-4.webp",
+     "w": 1020,
+     "h": 1513,
+     "page": 153
+    }
+   ],
+   "exercises": [],
+   "solutions": []
+  },
+  "7.4": {
+   "reading": [
+    {
+     "src": "book/ch07/7-4-reading-1.webp",
+     "w": 1020,
+     "h": 1506,
+     "page": 154
+    },
+    {
+     "src": "book/ch07/7-4-reading-2.webp",
+     "w": 1020,
+     "h": 280,
+     "page": 155
+    }
+   ],
+   "exercises": [],
+   "solutions": []
+  },
+  "7.x": {
+   "reading": [],
+   "exercises": [
+    {
+     "src": "book/ch07/7-x-exercises-1.webp",
+     "w": 1020,
+     "h": 1195,
+     "page": 155
+    },
+    {
+     "src": "book/ch07/7-x-exercises-2.webp",
+     "w": 1020,
+     "h": 719,
+     "page": 156
+    }
+   ],
+   "solutions": [
+    {
+     "src": "book/ch07/7-x-solutions-1.webp",
+     "w": 1020,
+     "h": 375,
+     "page": 323
+    },
+    {
+     "src": "book/ch07/7-x-solutions-2.webp",
+     "w": 1020,
+     "h": 1512,
+     "page": 324
+    },
+    {
+     "src": "book/ch07/7-x-solutions-3.webp",
+     "w": 1020,
+     "h": 1475,
+     "page": 325
+    },
+    {
+     "src": "book/ch07/7-x-solutions-4.webp",
+     "w": 1020,
+     "h": 1486,
+     "page": 326
+    },
+    {
+     "src": "book/ch07/7-x-solutions-5.webp",
+     "w": 1020,
+     "h": 1451,
+     "page": 327
+    }
+   ]
+  }
+ }
+}

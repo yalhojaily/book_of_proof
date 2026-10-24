@@ -1,0 +1,110 @@
+---
+chapter: proofs-involving-sets
+section: "8.1"
+summary: 'لتبرهن أن عنصراً $a$ ينتمي إلى $\{x \in S : P(x)\}$: تحقق أن $a \in S$، ثم أن $P(a)$ صادقة. هذا كل شيء.'
+goals:
+  - مراجعة الصيغة الوصفية للمجموعات
+  - برهان أن عنصراً معيّناً ينتمي إلى مجموعة أو لا ينتمي
+  - 'التعامل مع مجموعات على الصورة $\{f(x) : x \in S\}$'
+terms:
+  - { ar: الصيغة الوصفية, en: set-builder notation }
+  - { ar: ينتمي إلى, en: is an element of }
+---
+import MembershipTester from '@/components/widgets/MembershipTester.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import { q8_1 } from '@/data/proofs-ch8';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+النادي يقبل «كل طالب في الجامعة معدله فوق 4». هل يُقبل خالد؟ تسأل سؤالين فقط: هل هو طالب في الجامعة؟ وهل معدله فوق 4؟ إذا كان الجواب نعم مرتين، فهو عضو. المجموعة المعرّفة بشرط تعمل بالطريقة نفسها.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="157–159" minutes={10}>
+
+- **مقدمة الفصل (ص 157):** ملخص تعريفات الفصل الأول ($\times$، $\cup$، $\cap$، $-$، المتممة، مجموعة القوة). احتفظ بها مرجعاً لكل الفصل.
+- **الطريقة (ص 158):** المربعان «How to show $a \in \{x : P(x)\}$» و«How to show $a \in \{x \in S : P(x)\}$».
+- **أمثلة 8.1–8.4 (ص 158–159):** لاحظ المثال 8.3: يبرهن أن الزوج $(4n + 3, 9n - 2)$ ينتمي إلى $B$ **لكل** $n$، لا لقيمة واحدة.
+
+| ستقرأ | المعنى |
+|---|---|
+| set-builder notation | الصيغة الوصفية |
+| Verify that a ∈ S | تحقق أن a ∈ S |
+
+</ReadingGuide>
+
+<BookPages section="8.1" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أداة تفاعلية">
+
+<Definition title="كيف تبرهن الانتماء">
+
+**لتبرهن** $a \in \{x : P(x)\}$: برهن أن $P(a)$ صادقة.
+
+**لتبرهن** $a \in \{x \in S : P(x)\}$: (1) تحقق أن $a \in S$. (2) برهن أن $P(a)$ صادقة.
+
+</Definition>
+
+<MembershipTester client:visible />
+
+جرّب في $B$ الزوج $(6, 10)$: الشرط الأول ينجح والثاني يفشل. وفي $D$ اكتب $-1, 2, 3$: الحجم 3 لكن الشرط الأول يفشل. وفي $C$ جرّب 0 و$-1$ و5.
+
+### مجموعات على الصورة $\{f(x) : x \in S\}$
+
+$C = \{3x^3 + 2 : x \in \mathbb{Z}\}$ تعني «كل القيم $3x^3 + 2$ حين يمر $x$ على الأعداد الصحيحة». لتبرهن $c \in C$ يجب أن **تجد** $x \in \mathbb{Z}$ يحقق $3x^3 + 2 = c$. فهذا برهان وجود صغير.
+
+<Example title="المثال 8.3: انتماء لكل n">
+
+لكل $n \in \mathbb{Z}$، الزوج $(4n + 3, 9n - 2) \in B = \{(x, y) \in \mathbb{Z} \times \mathbb{Z} : x \equiv y \pmod 5\}$.
+
+**البرهان.** الزوج من $\mathbb{Z} \times \mathbb{Z}$. والفرق $(4n + 3) - (9n - 2) = -5n + 5 = 5(1 - n)$، فـ $4n + 3 \equiv 9n - 2 \pmod 5$. $\blacksquare$
+
+</Example>
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة">
+
+<QuickCheck client:visible questions={q8_1} />
+
+</Stage>
+
+<Stage n={5} id="practice" title="التطبيق" sub="تمارين الكتاب لهذا الفصل في صفحة واحدة">
+
+هذا القسم أساس لبقية الفصل، وتمارينه داخل تمارين الفصل في [صفحة تمارين الفصل](../8-x/).
+
+<Exercise num="1">
+
+ليكن $E = \{(x, y) \in \mathbb{Z} \times \mathbb{Z} : x + y \text{ even}\}$. برهن أن $(3n + 1, n + 5) \in E$ لكل $n \in \mathbb{Z}$.
+
+<Reveal>
+
+**البرهان.** الزوج من $\mathbb{Z} \times \mathbb{Z}$ لأن $3n + 1$ و$n + 5$ صحيحان. ومجموعهما $4n + 6 = 2(2n + 3)$ زوجي. إذن الزوج ينتمي إلى $E$. $\blacksquare$
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- الانتماء إلى $\{x \in S : P(x)\}$: الانتماء إلى $S$، ثم $P(a)$.
+- الانتماء إلى $\{f(x) : x \in S\}$: جد $x \in S$ بحيث $f(x) = a$.
+- عدم الانتماء: بيّن أن شرطاً واحداً على الأقل يفشل.
+
+</Takeaways>
+
+في القسم التالي: برهان أن مجموعة جزء من أخرى.
+
+</Stage>

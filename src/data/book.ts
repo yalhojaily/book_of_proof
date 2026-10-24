@@ -187,12 +187,13 @@ export const parts: Part[] = [
         en: 'Proving Non-Conditional Statements',
         page: 147,
         blurb: 'براهين «إذا وفقط إذا»، والعبارات المتكافئة، وبراهين الوجود والوحدانية.',
-        available: false,
+        available: true,
         sections: [
           s('7.1', 'برهان «إذا وفقط إذا»', 'If-and-Only-If Proof', 147),
           s('7.2', 'العبارات المتكافئة', 'Equivalent Statements', 149),
           s('7.3', 'براهين الوجود والوحدانية', 'Existence Proofs; Existence and Uniqueness Proofs', 150),
           s('7.4', 'البراهين البنائية وغير البنائية', 'Constructive Versus Non-Constructive Proofs', 154),
+          s('7.x', 'تمارين الفصل', 'Exercises for Chapter 7', 155),
         ],
       },
       {
@@ -202,12 +203,13 @@ export const parts: Part[] = [
         en: 'Proofs Involving Sets',
         page: 157,
         blurb: 'كيف تبرهن $a \\in A$، و$A \\subseteq B$، و$A = B$.',
-        available: false,
+        available: true,
         sections: [
           s('8.1', 'كيف تبرهن $a \\in A$', 'How to Prove a ∈ A', 157),
           s('8.2', 'كيف تبرهن $A \\subseteq B$', 'How to Prove A ⊆ B', 159),
           s('8.3', 'كيف تبرهن $A = B$', 'How to Prove A = B', 162),
           s('8.4', 'أمثلة: الأعداد التامة', 'Examples: Perfect Numbers', 165),
+          s('8.x', 'تمارين الفصل', 'Exercises for Chapter 8', 171),
         ],
       },
       {
@@ -217,11 +219,12 @@ export const parts: Part[] = [
         en: 'Disproof',
         page: 172,
         blurb: 'المثال المضاد، ودحض عبارات الوجود، والدحض بالتناقض.',
-        available: false,
+        available: true,
         sections: [
           s('9.1', 'الأمثلة المضادة', 'Counterexamples', 174),
           s('9.2', 'دحض عبارات الوجود', 'Disproving Existence Statements', 176),
           s('9.3', 'الدحض بالتناقض', 'Disproof by Contradiction', 178),
+          s('9.x', 'تمارين الفصل', 'Exercises for Chapter 9', 178),
         ],
       },
       {
