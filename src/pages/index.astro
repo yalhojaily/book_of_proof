@@ -1,0 +1,118 @@
+---
+import Base from '@/layouts/Base.astro';
+import Progress from '@/components/ui/Progress.astro';
+import { parts } from '@/data/book';
+import { chapterUrl } from '@/lib/url';
+import { inlineMath } from '@/lib/inline-math';
+---
+<Base title="الرئيسية">
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <p class="eyebrow">موقع مصاحب لكتاب <span class="en">Book of Proof</span> · ريتشارد هاموك</p>
+        <h1>تعلّم كيف يفكّر علماء الرياضيات<br /><span class="accent">وكيف يبرهنون</span></h1>
+        <p class="lede">
+          شرح عربي لكل قسم من الكتاب، مع رسوم تفاعلية تغيّر فيها وترى أثر التغيير مباشرة،
+          وأمثلة محلولة خطوة بخطوة، وتمارين بتلميحات متدرّجة.
+        </p>
+        <div class="legend">
+          <span><i class="dot" style="--c: var(--blue)"></i>حدس</span>
+          <span><i class="dot" style="--c: var(--violet)"></i>تعريف</span>
+          <span><i class="dot" style="--c: var(--amber)"></i>تجربة تفاعلية</span>
+          <span><i class="dot" style="--c: var(--green)"></i>مثال محلول</span>
+          <span><i class="dot" style="--c: var(--red)"></i>تمرين</span>
+        </div>
+      </div>
+      <figure class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 260 200">
+          <circle cx="100" cy="100" r="68" fill="var(--set-a-fill)" stroke="var(--set-a)" stroke-width="2" />
+          <circle cx="160" cy="100" r="68" fill="var(--set-b-fill)" stroke="var(--set-b)" stroke-width="2" />
+          <clipPath id="heroA"><circle cx="100" cy="100" r="68" /></clipPath>
+          <circle cx="160" cy="100" r="68" fill="var(--shade-fill)" clip-path="url(#heroA)" />
+          <text x="70" y="104" class="svg-ink" font-size="26" font-style="italic">A</text>
+          <text x="176" y="104" class="svg-ink" font-size="26" font-style="italic">B</text>
+          <text x="118" y="106" class="svg-ink" font-size="15">A∩B</text>
+        </svg>
+      </figure>
+    </div>
+  </section>
+
+  <div class="container parts">
+    {parts.map((part) => (
+      <section class={`part hue-${part.hue}`} id={`part-${part.num}`}>
+        <header class="part-head">
+          <span class="roman">{part.roman}</span>
+          <div>
+            <p class="part-label">الجزء {part.num} <span class="en">· {part.en}</span></p>
+            <h2>{part.ar}</h2>
+            <p class="part-blurb">{part.blurb}</p>
+          </div>
+        </header>
+        <div class="card-grid">
+          {part.chapters.map((ch) => (
+            <a
+              class:list={['card', 'chapter-card', { soon: !ch.available }]}
+              href={chapterUrl(ch.slug)}
+              data-progress-chapter={ch.sections.map((s) => s.id).join(',')}
+            >
+              <div class="cc-top">
+                <span class="cc-num">{ch.num}</span>
+                {ch.available ? <span class="badge ready">متاح</span> : <span class="badge">قريباً</span>}
+              </div>
+              <h3>{ch.ar}</h3>
+              <p class="en cc-en">{ch.en}</p>
+              <p class="cc-blurb" set:html={inlineMath(ch.blurb)} />
+              <div class="cc-meta">
+                <span>{ch.sections.length} أقسام · ص {ch.page}</span>
+                {ch.available && <span class="count ltr" data-progress-count>0 / {ch.sections.length}</span>}
+              </div>
+              {ch.available && <div class="bar"><span></span></div>}
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+  <Progress />
+</Base>
+
+<style>
+  .hero { border-bottom: 1px solid var(--line); background:
+      radial-gradient(800px 300px at 85% -10%, var(--blue-soft), transparent 70%),
+      radial-gradient(600px 260px at 0% 110%, var(--amber-soft), transparent 70%); }
+  .hero-inner { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: center; padding-top: 56px; padding-bottom: 48px; }
+  .eyebrow { color: var(--ink-3); font-size: 14px; margin-bottom: 10px; }
+  h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.25; margin-bottom: 16px; }
+  .accent { color: var(--blue); }
+  .lede { font-family: var(--font-read); font-size: 19px; color: var(--ink-2); max-width: 36em; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 14px; color: var(--ink-2); margin-top: 18px; }
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 3px; background: var(--c); margin-inline-end: 6px; vertical-align: 0; }
+  .hero-art svg { width: 100%; max-width: 340px; display: block; margin-inline-start: auto; }
+  @media (max-width: 760px) { .hero-inner { grid-template-columns: 1fr; padding-top: 32px; } .hero-art { display: none; } }
+
+  .parts { padding-top: 24px; }
+  .part { padding: 36px 0 12px; }
+  .part-head { display: flex; gap: 18px; align-items: flex-start; margin-bottom: 20px; }
+  .roman { flex: none; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 16px;
+    background: var(--hue-soft); color: var(--hue); font: 700 22px/1 Georgia, 'Times New Roman', serif; }
+  .part-label { margin: 0; color: var(--hue); font-weight: 600; font-size: 14px; }
+  .part-head h2 { font-size: 26px; margin: 2px 0 4px; }
+  .part-blurb { color: var(--ink-2); margin: 0; }
+
+  .chapter-card { position: relative; display: flex; flex-direction: column; padding: 18px 18px 16px; text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s; overflow: hidden; }
+  .chapter-card::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--hue); opacity: 0.85; }
+  .chapter-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); border-color: var(--line-strong); }
+  .chapter-card.soon::before { opacity: 0.25; }
+  .cc-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .cc-num { font: 700 30px/1 Georgia, serif; color: var(--hue); }
+  .soon .cc-num { opacity: 0.55; }
+  .badge { font-size: 12px; padding: 2px 10px; border-radius: 999px; background: var(--bg-sunk); color: var(--ink-3); font-weight: 600; }
+  .badge.ready { background: var(--hue-soft); color: var(--hue); }
+  .chapter-card h3 { font-size: 20px; margin: 0; }
+  .cc-en { margin: 0 0 8px; font-size: 13px; }
+  .cc-blurb { color: var(--ink-2); font-size: 15px; line-height: 1.65; flex: 1; }
+  .cc-meta { display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-3); }
+  .bar { height: 5px; border-radius: 99px; background: var(--bg-sunk); margin-top: 10px; overflow: hidden; }
+  .bar span { display: block; height: 100%; width: var(--pct, 0%); background: var(--hue); border-radius: inherit; transition: width 0.3s; }
+</style>

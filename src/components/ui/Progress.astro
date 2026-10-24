@@ -1,0 +1,45 @@
+---
+// Client-side progress tracking (stored per browser). Elements opt in with:
+//   data-progress-section="1.1"          → gets .is-done when the section is complete
+//   data-progress-chapter="1.1,1.2,..."  → gets --pct and a text count in [data-progress-count]
+//   data-progress-toggle="1.1"           → a button that marks/unmarks a section
+---
+<script>
+  const KEY = 'bop-progress-v1';
+  const read = (): Set<string> => {
+    try { return new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch { return new Set(); }
+  };
+  const write = (s: Set<string>) => {
+    try { localStorage.setItem(KEY, JSON.stringify([...s])); } catch {}
+  };
+  const paint = () => {
+    const done = read();
+    document.querySelectorAll<HTMLElement>('[data-progress-section]').forEach((el) => {
+      el.classList.toggle('is-done', done.has(el.dataset.progressSection!));
+    });
+    document.querySelectorAll<HTMLElement>('[data-progress-chapter]').forEach((el) => {
+      const ids = el.dataset.progressChapter!.split(',');
+      const n = ids.filter((i) => done.has(i)).length;
+      el.style.setProperty('--pct', `${(100 * n) / ids.length}%`);
+      const c = el.querySelector('[data-progress-count]');
+      if (c) c.textContent = `${n} / ${ids.length}`;
+      el.classList.toggle('has-progress', n > 0);
+    });
+    document.querySelectorAll<HTMLButtonElement>('[data-progress-toggle]').forEach((b) => {
+      const on = done.has(b.dataset.progressToggle!);
+      b.setAttribute('aria-pressed', String(on));
+      const label = b.querySelector('[data-label]');
+      if (label) label.textContent = on ? 'أنهيتَ هذا القسم ✓' : 'علّم القسم كمنجز';
+    });
+  };
+  document.querySelectorAll<HTMLButtonElement>('[data-progress-toggle]').forEach((b) =>
+    b.addEventListener('click', () => {
+      const s = read();
+      const id = b.dataset.progressToggle!;
+      s.has(id) ? s.delete(id) : s.add(id);
+      write(s);
+      paint();
+    })
+  );
+  paint();
+</script>

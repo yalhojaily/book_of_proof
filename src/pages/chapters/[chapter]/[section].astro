@@ -1,0 +1,222 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import Progress from '@/components/ui/Progress.astro';
+import { allChapters, plain } from '@/data/book';
+import { url, lessonUrl, chapterUrl } from '@/lib/url';
+import { inlineMath } from '@/lib/inline-math';
+import Intuition from '@/components/pedagogy/Intuition.astro';
+import Definition from '@/components/pedagogy/Definition.astro';
+import Fact from '@/components/pedagogy/Fact.astro';
+import Example from '@/components/pedagogy/Example.astro';
+import Exercise from '@/components/pedagogy/Exercise.astro';
+import Pitfall from '@/components/pedagogy/Pitfall.astro';
+import Note from '@/components/pedagogy/Note.astro';
+import Reveal from '@/components/pedagogy/Reveal.astro';
+import Steps from '@/components/pedagogy/Steps.astro';
+import BookRef from '@/components/pedagogy/BookRef.astro';
+
+export async function getStaticPaths() {
+  const lessons = await getCollection('lessons');
+  return lessons.map((lesson) => {
+    const ch = allChapters.find((c) => c.slug === lesson.data.chapter)!;
+    const sec = ch.sections.find((s) => s.id === lesson.data.section)!;
+    return { params: { chapter: ch.slug, section: sec.slug }, props: { lesson } };
+  });
+}
+
+const { lesson } = Astro.props;
+const ch = allChapters.find((c) => c.slug === lesson.data.chapter)!;
+const secIdx = ch.sections.findIndex((s) => s.id === lesson.data.section);
+const sec = ch.sections[secIdx];
+const all = await getCollection('lessons', (l) => l.data.chapter === ch.slug);
+const ready = new Set(all.map((l) => l.data.section));
+const prev = ch.sections.slice(0, secIdx).reverse().find((s) => ready.has(s.id));
+const next = ch.sections.slice(secIdx + 1).find((s) => ready.has(s.id));
+const { Content, headings } = await render(lesson);
+const toc = headings.filter((h) => h.depth === 2);
+const components = { Intuition, Definition, Fact, Example, Exercise, Pitfall, Note, Reveal, Steps, BookRef };
+---
+<Base title={`${sec.id} ${plain(sec.ar)}`} description={lesson.data.summary}>
+  <div class={`container lesson-grid hue-${ch.part.hue}`}>
+    <!-- Chapter navigation (right side in RTL) -->
+    <aside class="chap-nav">
+      <details class="chap-nav-inner" open>
+        <summary>
+          <span class="cn-num">{ch.num}</span>
+          <span><small>الفصل {ch.num}</small>{ch.ar}</span>
+        </summary>
+        <ol>
+          {ch.sections.map((s) => {
+            const here = s.id === sec.id;
+            return (
+              <li>
+                {ready.has(s.id) ? (
+                  <a href={lessonUrl(ch.slug, s.slug)} class:list={{ here }} aria-current={here ? 'page' : undefined} data-progress-section={s.id}>
+                    <span class="id ltr">{s.id}</span><span class="t" set:html={inlineMath(s.ar)} /><span class="ok" aria-hidden="true">✓</span>
+                  </a>
+                ) : (
+                  <span class="disabled"><span class="id ltr">{s.id}</span><span class="t" set:html={inlineMath(s.ar)} /></span>
+                )}
+              </li>
+            );
+          })}
+        </ol>
+        <a class="back" href={chapterUrl(ch.slug)}>بطاقات الفصل ‹</a>
+      </details>
+    </aside>
+
+    <!-- Lesson -->
+    <article class="lesson">
+      <nav class="crumbs" aria-label="مسار التصفح">
+        <a href={url()}>الفهرس</a><span>‹</span>
+        <a href={chapterUrl(ch.slug)}>الفصل {ch.num}: {ch.ar}</a>
+      </nav>
+      <header class="lesson-head">
+        <span class="sec-id ltr">{sec.id}</span>
+        <h1 set:html={inlineMath(sec.ar)} />
+        <p class="en">{sec.en}</p>
+        <p class="summary" set:html={inlineMath(lesson.data.summary)} />
+      </header>
+
+      <div class="prose">
+        <Content components={components} />
+      </div>
+
+      {lesson.data.exercises && (
+        <div class="card book-ex">
+          <b>تمارين الكتاب:</b> {lesson.data.exercises}
+        </div>
+      )}
+
+      <div class="finish">
+        <button class="btn done-btn" type="button" data-progress-toggle={sec.id}><span data-label>علّم القسم كمنجز</span></button>
+      </div>
+
+      <nav class="pn">
+        {prev ? (
+          <a class="card" href={lessonUrl(ch.slug, prev.slug)}><small>القسم السابق</small><span class="ltr">{prev.id}</span> <Fragment set:html={inlineMath(prev.ar)} /></a>
+        ) : <span></span>}
+        {next ? (
+          <a class="card next" href={lessonUrl(ch.slug, next.slug)}><small>القسم التالي</small><span class="ltr">{next.id}</span> <Fragment set:html={inlineMath(next.ar)} /></a>
+        ) : <span></span>}
+      </nav>
+    </article>
+
+    <!-- Side panel (left side in RTL) -->
+    <aside class="side">
+      <div class="side-inner">
+        <div class="card side-card">
+          <h3>في الكتاب</h3>
+          <p class="pg">صفحة <b class="ltr">{sec.page}</b></p>
+          <p class="muted small">القسم <span class="ltr">{sec.id}</span> · <span class="en">{sec.en}</span></p>
+        </div>
+        {lesson.data.goals.length > 0 && (
+          <div class="card side-card">
+            <h3>بعد هذا القسم ستستطيع</h3>
+            <ul>{lesson.data.goals.map((g) => <li set:html={inlineMath(g)} />)}</ul>
+          </div>
+        )}
+        {lesson.data.terms.length > 0 && (
+          <div class="card side-card">
+            <h3>المصطلحات</h3>
+            <dl class="terms">
+              {lesson.data.terms.map((t) => (
+                <div><dt>{t.ar}</dt><dd class="en">{t.en}</dd></div>
+              ))}
+            </dl>
+          </div>
+        )}
+        {toc.length > 1 && (
+          <div class="card side-card toc">
+            <h3>في هذه الصفحة</h3>
+            <ul>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ul>
+          </div>
+        )}
+      </div>
+    </aside>
+  </div>
+  <Progress />
+  <script>
+    // On small screens start with the chapter navigation collapsed so the lesson comes first.
+    if (window.matchMedia('(max-width: 860px)').matches) {
+      document.querySelector('.chap-nav-inner')?.removeAttribute('open');
+    }
+  </script>
+</Base>
+
+<style>
+  .lesson-grid { display: grid; grid-template-columns: 250px minmax(0, 1fr) 260px; gap: 36px; align-items: start; padding-top: 8px; }
+  @media (max-width: 1180px) { .lesson-grid { grid-template-columns: 230px minmax(0, 1fr); } .side { grid-column: 2; grid-row: 2; } }
+  @media (max-width: 860px) { .lesson-grid { grid-template-columns: minmax(0, 1fr); gap: 0; } .side { grid-column: 1; grid-row: auto; } }
+
+  /* Chapter nav */
+  .chap-nav { position: sticky; top: 80px; padding-top: 24px; }
+  .chap-nav-inner summary { list-style: none; display: flex; gap: 12px; align-items: center; cursor: pointer; padding: 6px 4px 12px; border-bottom: 1px solid var(--line); margin-bottom: 8px; font-weight: 700; }
+  .chap-nav-inner summary::-webkit-details-marker { display: none; }
+  .chap-nav-inner summary small { display: block; font-weight: 500; color: var(--ink-3); font-size: 12px; }
+  .cn-num { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--hue-soft); color: var(--hue); font: 700 20px/1 Georgia, serif; }
+  .chap-nav ol { list-style: none; margin: 0; padding: 0; }
+  .chap-nav li a, .chap-nav li .disabled { display: flex; align-items: center; gap: 10px; padding: 6px 10px; border-radius: 10px; text-decoration: none; font-size: 14.5px; line-height: 1.45; color: var(--ink-2); }
+  .chap-nav li a:hover { background: var(--bg-sunk); color: var(--ink); }
+  .chap-nav li a.here { background: var(--hue-soft); color: var(--ink); font-weight: 600; }
+  .chap-nav .id { flex: none; font-size: 12.5px; font-weight: 700; color: var(--hue); min-width: 30px; }
+  .chap-nav .t { flex: 1; }
+  .chap-nav .ok { color: transparent; font-size: 12px; }
+  .chap-nav .is-done .ok { color: var(--green); }
+  .chap-nav .disabled { opacity: 0.45; }
+  .back { display: inline-block; margin-top: 12px; font-size: 14px; color: var(--ink-3); text-decoration: none; padding: 0 10px; }
+  @media (max-width: 860px) {
+    .chap-nav { position: static; padding-top: 12px; }
+    .chap-nav-inner { border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-elev); padding: 6px 10px; }
+    .chap-nav-inner:not([open]) summary { border-bottom: 0; margin-bottom: 0; padding-bottom: 6px; }
+  }
+
+  /* Lesson */
+  .crumbs { display: flex; gap: 8px; flex-wrap: wrap; font-size: 14px; color: var(--ink-3); padding: 24px 0 4px; }
+  .crumbs a { color: var(--ink-2); text-decoration: none; }
+  .lesson-head { padding: 10px 0 18px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
+  .sec-id { display: inline-block; font-weight: 700; color: var(--hue); background: var(--hue-soft); border-radius: 10px; padding: 2px 12px; font-size: 15px; }
+  .lesson-head h1 { font-size: clamp(28px, 4.2vw, 38px); margin: 10px 0 0; }
+  .lesson-head .en { margin: 0 0 10px; }
+  .summary { font-family: var(--font-read); font-size: 19px; color: var(--ink-2); margin: 0; }
+
+  .prose { font-family: var(--font-read); font-size: 18.5px; line-height: 1.95; }
+  .prose :global(h2) { font-family: var(--font-ui); font-size: 24px; margin: 1.8em 0 0.6em; padding-top: 0.4em; scroll-margin-top: 90px; }
+  .prose :global(h3) { font-family: var(--font-ui); font-size: 19px; margin: 1.4em 0 0.5em; }
+  .prose :global(ul), .prose :global(ol) { padding-inline-start: 1.4em; }
+  .prose :global(li) { margin: 0.25em 0; }
+  .prose :global(strong) { font-family: var(--font-ui); font-weight: 700; }
+  .prose :global(table) { border-collapse: collapse; width: 100%; font-family: var(--font-ui); font-size: 15.5px; margin: 1em 0; display: block; overflow-x: auto; }
+  .prose :global(th), .prose :global(td) { border: 1px solid var(--line); padding: 7px 12px; text-align: start; }
+  .prose :global(th) { background: var(--bg-sunk); }
+  .prose :global(blockquote) { margin: 1em 0; padding: 0.2em 1em; border-inline-start: 3px solid var(--line-strong); color: var(--ink-2); }
+
+  .book-ex { padding: 14px 18px; margin: 28px 0 0; font-size: 15.5px; color: var(--ink-2); }
+  .finish { display: flex; justify-content: center; margin: 28px 0; }
+  .done-btn { padding: 9px 22px; font-size: 15.5px; font-weight: 600; }
+  .done-btn[aria-pressed='true'] { background: var(--green); border-color: var(--green); color: #fff; }
+  .pn { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .pn a { padding: 14px 18px; text-decoration: none; font-weight: 600; font-size: 15.5px; }
+  .pn a:hover { border-color: var(--hue); }
+  .pn small { display: block; color: var(--ink-3); font-weight: 400; font-size: 13px; }
+  .pn .next { text-align: left; }
+
+  /* Side panel */
+  .side { position: sticky; top: 80px; padding-top: 24px; }
+  .side-inner { display: flex; flex-direction: column; gap: 14px; }
+  .side-card { padding: 14px 16px; font-size: 14.5px; }
+  .side-card h3 { font-size: 14px; color: var(--ink-3); margin-bottom: 6px; font-weight: 600; }
+  .side-card ul { margin: 0; padding-inline-start: 1.1em; line-height: 1.7; }
+  .pg { margin: 0; font-size: 18px; }
+  .pg b { color: var(--hue); font-size: 22px; }
+  .small { font-size: 13px; margin: 0; }
+  .terms { margin: 0; }
+  .terms div { display: flex; justify-content: space-between; gap: 10px; padding: 4px 0; border-bottom: 1px dashed var(--line); }
+  .terms div:last-child { border: 0; }
+  .terms dt { font-weight: 600; }
+  .terms dd { margin: 0; font-size: 13px; text-align: left; }
+  .toc a { text-decoration: none; color: var(--ink-2); }
+  .toc a:hover { color: var(--hue); }
+  @media (max-width: 1180px) { .side { position: static; padding-top: 32px; } .side-inner { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); } .toc { display: none; } }
+</style>

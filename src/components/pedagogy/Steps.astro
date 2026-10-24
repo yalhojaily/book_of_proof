@@ -1,0 +1,11 @@
+---
+// A numbered list of proof/solution steps. Use <li> children in MDX via a regular ordered list.
+---
+<div class="steps"><slot /></div>
+<style>
+  .steps :global(ol) { counter-reset: st; list-style: none; padding: 0; margin: 0.5em 0 1em; }
+  .steps :global(ol > li) { counter-increment: st; position: relative; padding: 6px 44px 6px 0; margin: 0; border-inline-start: 2px solid var(--line); margin-inline-start: 14px; }
+  .steps :global(ol > li::before) { content: counter(st); position: absolute; inset-inline-start: -15px; top: 7px; width: 28px; height: 28px; border-radius: 50%;
+    background: var(--bg-elev); border: 2px solid var(--green); color: var(--green); font: 700 13px/24px var(--font-ui); text-align: center; }
+  .steps :global(ol > li:last-child) { border-color: transparent; }
+</style>

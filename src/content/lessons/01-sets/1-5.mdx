@@ -1,0 +1,140 @@
+---
+chapter: sets
+section: "1.5"
+summary: ثلاث طرق لصنع مجموعة جديدة من مجموعتين، تقابل الكلمات «أو» و«و» و«إلا».
+goals:
+  - حساب $A \cup B$ و$A \cap B$ و$A - B$ لمجموعات معطاة
+  - ربط كل عملية بكلمة منطقية (أو، و، ليس)
+  - ملاحظة أن الفرق ليس إبدالياً
+terms:
+  - { ar: الاتحاد, en: union }
+  - { ar: التقاطع, en: intersection }
+  - { ar: الفرق, en: difference }
+  - { ar: منفصلتان, en: disjoint }
+exercises: تمارين القسم 1.5 في الكتاب (ص 19–20).
+---
+import SetOps from '@/components/widgets/SetOps.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import { q1_5 } from '@/data/quiz-ch1';
+
+<Intuition>
+
+لديك قائمتان: من يتحدث العربية في الفريق، ومن يتحدث الإنجليزية.
+
+- من يتحدث **إحدى** اللغتين على الأقل؟ هذا **الاتحاد**.
+- من يتحدث **اللغتين معاً**؟ هذا **التقاطع**.
+- من يتحدث العربية **فقط**، دون الإنجليزية؟ هذا **الفرق**.
+
+</Intuition>
+
+## التعريفات
+
+<Definition num="1.5" title="الاتحاد والتقاطع والفرق">
+
+لتكن $A$ و$B$ مجموعتين.
+
+$$
+\begin{aligned}
+A \cup B &= \{x : x \in A \ \text{or}\ x \in B\} \\
+A \cap B &= \{x : x \in A \ \text{and}\ x \in B\} \\
+A - B &= \{x : x \in A \ \text{and}\ x \notin B\}
+\end{aligned}
+$$
+
+</Definition>
+
+كلمة «أو» في الرياضيات **شاملة**: $x \in A \cup B$ إذا كان في $A$، أو في $B$، أو فيهما معاً. ويكتب بعض المؤلفين الفرق $A \setminus B$ بدلاً من $A - B$.
+
+اضغط على الأعداد لتغيّر $A$ و$B$، ثم بدّل بين العمليات:
+
+<SetOps client:visible />
+
+<Example title="حساب مباشر">
+
+لتكن $A = \{a, b, c, d, e\}$ و$B = \{d, e, f\}$ و$C = \{1, 2, 3\}$. احسب $A \cup B$ و$A \cap B$ و$A - B$ و$B - A$ و$A \cap C$.
+
+<Reveal>
+
+- $A \cup B = \{a, b, c, d, e, f\}$: نجمع كل ما في القائمتين، دون تكرار.
+- $A \cap B = \{d, e\}$: المشترك فقط.
+- $A - B = \{a, b, c\}$: نحذف من $A$ العنصرين $d$ و$e$.
+- $B - A = \{f\}$: مختلف تماماً عن $A - B$.
+- $A \cap C = \varnothing$: لا شيء مشترك. نقول إن $A$ و$C$ **منفصلتان**.
+
+</Reveal>
+
+</Example>
+
+<Example title="مع الفترات">
+
+لتكن $A = [0, 3]$ و$B = (2, 5)$. احسب $A \cup B$ و$A \cap B$ و$A - B$.
+
+<Reveal kind="hint">
+
+ارسم الفترتين على خط أعداد واحد، فوق بعضهما.
+
+</Reveal>
+
+<Reveal>
+
+- $A \cup B = [0, 5)$
+- $A \cap B = (2, 3]$: العدد 2 ليس في $B$ فيخرج، والعدد 3 في الاثنتين فيبقى.
+- $A - B = [0, 2]$: العدد 2 يبقى لأنه **ليس** في $B$.
+
+انتبه دائماً إلى الأطراف: هل الطرف داخل أم خارج؟
+
+</Reveal>
+
+</Example>
+
+<Note>
+
+تعمل هذه العمليات على أي مجموعات، حتى غير المنتهية والهندسية. مثلاً، إذا كانت $A$ منحنى $y = x^2$ و$B$ المستقيم $y = x + 2$ في $\mathbb{R}^2$، فإن $A \cap B$ هي نقاط تقاطعهما: $\{(-1, 1), (2, 4)\}$.
+
+</Note>
+
+<QuickCheck client:visible questions={q1_5} />
+
+## تمارين
+
+<Exercise num="1">
+
+لتكن $A = \{1, 2, 3, 4\}$ و$B = \{3, 4, 5\}$. احسب $(A - B) \cup (B - A)$. ماذا تلاحظ عن علاقته بـ $A \cup B$ و$A \cap B$؟
+
+<Reveal>
+
+$A - B = \{1, 2\}$ و$B - A = \{5\}$، والاتحاد $\{1, 2, 5\}$. وهو يساوي $(A \cup B) - (A \cap B) = \{1,2,3,4,5\} - \{3,4\}$: العناصر التي في إحدى المجموعتين دون الأخرى. يُسمّى هذا **الفرق التماثلي**.
+
+</Reveal>
+
+</Exercise>
+
+<Exercise num="2">
+
+لتكن $A = \{2n : n \in \mathbb{Z}\}$ و$B = \{3n : n \in \mathbb{Z}\}$. صِف $A \cap B$.
+
+<Reveal kind="hint">
+
+اسرد بعض عناصر كل منهما، وابحث عن المشترك.
+
+</Reveal>
+
+<Reveal>
+
+$A$ الأعداد الزوجية و$B$ مضاعفات 3. المشترك: $\{\ldots, -12, -6, 0, 6, 12, \ldots\}$، أي $A \cap B = \{6n : n \in \mathbb{Z}\}$. (برهان ذلك يحتاج أدوات من الفصل 8.)
+
+</Reveal>
+
+</Exercise>
+
+<Exercise num="3">
+
+صحيحة أم خاطئة؟ إذا كان $A \cup B = A \cap B$ فإن $A = B$.
+
+<Reveal>
+
+صحيحة. خذ $x \in A$. إذن $x \in A \cup B = A \cap B$، فـ $x \in B$. أي $A \subseteq B$، وبالطريقة نفسها $B \subseteq A$، فـ $A = B$.
+
+</Reveal>
+
+</Exercise>

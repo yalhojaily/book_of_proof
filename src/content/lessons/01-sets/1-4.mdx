@@ -1,0 +1,147 @@
+---
+chapter: sets
+section: "1.4"
+summary: مجموعة كل المجموعات الجزئية. كيف نكتبها، ولماذا يتضاعف عدد عناصرها مع كل عنصر جديد، والتفريق بينها وبين عناصرها.
+goals:
+  - كتابة مجموعة القوى لمجموعة صغيرة بالسرد
+  - استخدام القاعدة $|\mathscr{P}(A)| = 2^{|A|}$
+  - فهم أن $X \in \mathscr{P}(A)$ و$X \subseteq A$ تعنيان الشيء نفسه
+terms:
+  - { ar: مجموعة القوى, en: power set }
+exercises: تمارين القسم 1.4 في الكتاب (ص 17–18).
+---
+import PowerSet from '@/components/widgets/PowerSet.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import { q1_4 } from '@/data/quiz-ch1';
+
+<Intuition>
+
+في القسم السابق كتبنا كل المجموعات الجزئية من $\{a, b, c\}$ في قائمة. الآن نضع هذه القائمة نفسها في **صندوق** واحد. هذا الصندوق مجموعة جديدة، عناصرها مجموعات.
+
+</Intuition>
+
+## التعريف
+
+<Definition num="1.4" title="مجموعة القوى">
+
+**مجموعة القوى** للمجموعة $A$، ونرمز لها $\mathscr{P}(A)$، هي مجموعة كل المجموعات الجزئية من $A$:
+
+$$
+\mathscr{P}(A) = \{X : X \subseteq A\}.
+$$
+
+</Definition>
+
+إذن الجملتان $X \in \mathscr{P}(A)$ و$X \subseteq A$ **تعنيان الشيء نفسه**. هذا ليس تكراراً، بل أداة: كثيراً ما ستحوّل سؤالاً عن الانتماء إلى $\mathscr{P}(A)$ إلى سؤال عن الاحتواء في $A$.
+
+$$
+\mathscr{P}(\{a, b\}) = \{\varnothing, \{a\}, \{b\}, \{a, b\}\}
+$$
+
+<PowerSet client:visible />
+
+<Fact num="1.4">
+
+إذا كانت $A$ منتهية فإن $|\mathscr{P}(A)| = 2^{|A|}$.
+
+</Fact>
+
+هذا هو Fact 1.3 من القسم السابق بصياغة جديدة، ومنه جاء الاسم: «القوى» إشارة إلى الأس في $2^{|A|}$.
+
+<Pitfall title="انتبه للطبقات">
+
+عناصر $\mathscr{P}(A)$ مجموعات، وليست عناصر $A$. إذا كانت $A = \{1, 2\}$:
+
+- $\{1\} \in \mathscr{P}(A)$ صحيحة.
+- $1 \in \mathscr{P}(A)$ خاطئة، فالعدد 1 ليس مجموعة جزئية.
+- $\{\{1\}\} \subseteq \mathscr{P}(A)$ صحيحة، لأن عنصرها الوحيد $\{1\}$ ينتمي إلى $\mathscr{P}(A)$.
+
+</Pitfall>
+
+<Example title="المجموعة الخالية وطبقاتها">
+
+احسب $\mathscr{P}(\varnothing)$ ثم $\mathscr{P}(\mathscr{P}(\varnothing))$.
+
+<Reveal kind="step" label="الخطوة الأولى">
+
+المجموعة الجزئية الوحيدة من $\varnothing$ هي $\varnothing$ نفسها، إذن $\mathscr{P}(\varnothing) = \{\varnothing\}$. هذه مجموعة **غير خالية**: فيها عنصر واحد، وهذا يتفق مع $2^0 = 1$.
+
+</Reveal>
+
+<Reveal kind="step" label="الخطوة الثانية">
+
+$\{\varnothing\}$ لها عنصر واحد، فلها $2^1 = 2$ مجموعتان جزئيتان: $\varnothing$ و$\{\varnothing\}$. إذن
+
+$$
+\mathscr{P}(\mathscr{P}(\varnothing)) = \{\varnothing, \{\varnothing\}\}.
+$$
+
+</Reveal>
+
+</Example>
+
+<Example title="مجموعة قوى لمجموعة غير منتهية">
+
+صِف $\mathscr{P}(\mathbb{N})$ بالكلمات، وأعطِ ثلاثة من عناصرها.
+
+<Reveal>
+
+هي مجموعة **كل** المجموعات الجزئية من الأعداد الطبيعية، المنتهي منها وغير المنتهي. من عناصرها: $\varnothing$، و$\{1, 5, 9\}$، و$\{2, 4, 6, \ldots\}$، و$\mathbb{N}$ نفسها.
+
+سترى في الفصل 14 أن $\mathscr{P}(\mathbb{N})$ «أكبر» من $\mathbb{N}$ بمعنى دقيق، مع أن كلتيهما غير منتهية.
+
+</Reveal>
+
+</Example>
+
+<QuickCheck client:visible questions={q1_4} />
+
+## تمارين
+
+<Exercise num="1">
+
+اكتب $\mathscr{P}(\{1, \{2\}\})$ بالسرد.
+
+<Reveal>
+
+العنصران هما $1$ و$\{2\}$، إذن:
+
+$$
+\mathscr{P}(\{1, \{2\}\}) = \{\varnothing, \{1\}, \{\{2\}\}, \{1, \{2\}\}\}.
+$$
+
+انتبه إلى $\{\{2\}\}$: هي مجموعة جزئية عنصرها الوحيد $\{2\}$.
+
+</Reveal>
+
+</Exercise>
+
+<Exercise num="2">
+
+احسب $|\mathscr{P}(\{a, b\}) \times \mathscr{P}(\{c\})|$.
+
+<Reveal>
+
+$|\mathscr{P}(\{a,b\})| = 4$ و$|\mathscr{P}(\{c\})| = 2$، وبقاعدة الضرب الديكارتي الجواب $4 \cdot 2 = 8$.
+
+</Reveal>
+
+</Exercise>
+
+<Exercise num="3">
+
+هل $\mathscr{P}(A) \subseteq \mathscr{P}(B)$ كلما كانت $A \subseteq B$؟
+
+<Reveal kind="hint">
+
+خذ أي عنصر $X \in \mathscr{P}(A)$. ماذا يعني ذلك عن $X$ و$A$؟ ثم عن $X$ و$B$؟
+
+</Reveal>
+
+<Reveal>
+
+نعم. إذا كان $X \in \mathscr{P}(A)$ فإن $X \subseteq A$، وبما أن $A \subseteq B$ فكل عنصر في $X$ موجود في $B$، أي $X \subseteq B$، أي $X \in \mathscr{P}(B)$. وفي الأداة أعلاه تراها مباشرة: كل مجموعة تضيء تحتها مجموعة قواها كاملة.
+
+</Reveal>
+
+</Exercise>

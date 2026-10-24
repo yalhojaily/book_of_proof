@@ -1,0 +1,9 @@
+---
+interface Props { page: number | string; label?: string }
+const { page, label } = Astro.props;
+---
+<span class="bookref" title="رقم الصفحة في الكتاب"><span aria-hidden="true">📖</span> {label ?? 'الكتاب'} ص <span class="ltr">{page}</span></span>
+<style>
+  .bookref { display: inline-flex; align-items: center; gap: 4px; font-family: var(--font-ui); font-size: 13px; font-weight: 600; color: var(--ink-2);
+    background: var(--bg-sunk); border: 1px solid var(--line); border-radius: 999px; padding: 0 10px; white-space: nowrap; vertical-align: 1px; }
+</style>

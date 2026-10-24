@@ -1,0 +1,116 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import Progress from '@/components/ui/Progress.astro';
+import { allChapters, plain } from '@/data/book';
+import { url, lessonUrl } from '@/lib/url';
+import { inlineMath } from '@/lib/inline-math';
+
+export function getStaticPaths() {
+  return allChapters.map((c) => ({ params: { chapter: c.slug } }));
+}
+
+const ch = allChapters.find((c) => c.slug === Astro.params.chapter)!;
+const lessons = await getCollection('lessons', (l) => l.data.chapter === ch.slug);
+const summaries = new Map(lessons.map((l) => [l.data.section, l.data.summary]));
+const idx = allChapters.findIndex((c) => c.slug === ch.slug);
+const prev = allChapters[idx - 1];
+const next = allChapters[idx + 1];
+---
+<Base title={`الفصل ${ch.num}: ${ch.ar}`} description={plain(ch.blurb)}>
+  <div class={`container hue-${ch.part.hue}`}>
+    <nav class="crumbs" aria-label="مسار التصفح">
+      <a href={url()}>الفهرس</a><span>‹</span>
+      <a href={url(`#part-${ch.part.num}`)}>الجزء {ch.part.num}: {ch.part.ar}</a>
+    </nav>
+
+    <header class="ch-head" data-progress-chapter={ch.sections.map((s) => s.id).join(',')}>
+      <span class="big-num">{ch.num}</span>
+      <div class="ch-text">
+        <h1>{ch.ar} <span class="en">{ch.en}</span></h1>
+        <p set:html={inlineMath(ch.blurb)} />
+        <div class="ch-meta">
+          <span>يبدأ في الكتاب من صفحة {ch.page}</span>
+          {ch.available && <span>تقدّمك: <b class="ltr" data-progress-count>0 / {ch.sections.length}</b></span>}
+        </div>
+        {ch.available && <div class="bar"><span></span></div>}
+      </div>
+    </header>
+
+    {!ch.available && (
+      <div class="card notice">
+        <b>هذا الفصل قيد الإعداد.</b> القائمة أدناه تطابق أقسام الكتاب وصفحاتها، فيمكنك استخدامها دليلاً للقراءة إلى أن تُضاف الشروح التفاعلية.
+      </div>
+    )}
+
+    <ol class="card-grid sections">
+      {ch.sections.map((s) => {
+        const ready = ch.available && summaries.has(s.id);
+        const inner = (
+          <>
+            <div class="sc-top">
+              <span class="sc-id ltr">{s.id}</span>
+              <span class="check" aria-hidden="true">✓</span>
+            </div>
+            <h2 set:html={inlineMath(s.ar)} />
+            <p class="en sc-en">{s.en}</p>
+            {ready && <p class="sc-sum" set:html={inlineMath(summaries.get(s.id)!)} />}
+            <p class="sc-page">ص {s.page} في الكتاب</p>
+          </>
+        );
+        return (
+          <li>
+            {ready ? (
+              <a class="card section-card" href={lessonUrl(ch.slug, s.slug)} data-progress-section={s.id}>{inner}</a>
+            ) : (
+              <div class="card section-card soon">{inner}</div>
+            )}
+          </li>
+        );
+      })}
+    </ol>
+
+    <nav class="ch-nav">
+      {prev ? <a class="card" href={url(`chapters/${prev.slug}/`)}><small>الفصل السابق</small>{prev.num}. {prev.ar}</a> : <span></span>}
+      {next ? <a class="card next" href={url(`chapters/${next.slug}/`)}><small>الفصل التالي</small>{next.num}. {next.ar}</a> : <span></span>}
+    </nav>
+  </div>
+  <Progress />
+</Base>
+
+<style>
+  .crumbs { display: flex; gap: 8px; flex-wrap: wrap; font-size: 14px; color: var(--ink-3); padding: 20px 0 8px; }
+  .crumbs a { color: var(--ink-2); text-decoration: none; }
+  .crumbs a:hover { text-decoration: underline; }
+  .ch-head { display: flex; gap: 22px; align-items: flex-start; padding: 12px 0 28px; }
+  .big-num { flex: none; font: 700 84px/0.9 Georgia, serif; color: var(--hue); }
+  .ch-text { flex: 1; min-width: 0; }
+  .ch-head h1 { font-size: clamp(28px, 4.5vw, 40px); margin-bottom: 6px; }
+  .ch-head h1 .en { font-size: 0.5em; margin-inline-start: 8px; }
+  .ch-head p { color: var(--ink-2); font-size: 17px; margin-bottom: 8px; }
+  .ch-meta { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 14px; color: var(--ink-3); }
+  .bar { height: 6px; border-radius: 99px; background: var(--bg-sunk); margin-top: 10px; overflow: hidden; max-width: 420px; }
+  .bar span { display: block; height: 100%; width: var(--pct, 0%); background: var(--hue); border-radius: inherit; transition: width 0.3s; }
+  @media (max-width: 560px) { .big-num { font-size: 56px; } .ch-head { gap: 14px; } }
+  .notice { padding: 14px 18px; margin-bottom: 20px; color: var(--ink-2); border-inline-start: 4px solid var(--amber); }
+
+  .sections { list-style: none; padding: 0; margin: 0; }
+  .sections li { display: flex; }
+  .section-card { flex: 1; display: flex; flex-direction: column; padding: 16px 18px; text-decoration: none; transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s; position: relative; }
+  a.section-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); border-color: var(--hue); }
+  .section-card.soon { opacity: 0.6; box-shadow: none; background: transparent; border-style: dashed; }
+  .sc-top { display: flex; justify-content: space-between; align-items: center; }
+  .sc-id { font-weight: 700; color: var(--hue); background: var(--hue-soft); border-radius: 8px; padding: 1px 9px; font-size: 14px; }
+  .check { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--line-strong); color: transparent; font-size: 13px; }
+  .is-done .check { background: var(--green); border-color: var(--green); color: #fff; }
+  .section-card h2 { font-size: 18px; margin: 10px 0 0; }
+  .sc-en { font-size: 13px; margin: 0 0 6px; }
+  .sc-sum { color: var(--ink-2); font-size: 14.5px; line-height: 1.65; flex: 1; margin-bottom: 8px; }
+  .sc-page { font-size: 13px; color: var(--ink-3); margin: auto 0 0; }
+
+  .ch-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 36px; }
+  .ch-nav a { padding: 14px 18px; text-decoration: none; font-weight: 600; }
+  .ch-nav a:hover { border-color: var(--line-strong); }
+  .ch-nav small { display: block; color: var(--ink-3); font-weight: 400; font-size: 13px; }
+  .ch-nav .next { text-align: left; }
+</style>

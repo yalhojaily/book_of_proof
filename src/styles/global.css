@@ -1,0 +1,396 @@
+@import '@fontsource/ibm-plex-sans-arabic/400.css';
+@import '@fontsource/ibm-plex-sans-arabic/500.css';
+@import '@fontsource/ibm-plex-sans-arabic/600.css';
+@import '@fontsource/ibm-plex-sans-arabic/700.css';
+@import '@fontsource/noto-naskh-arabic/400.css';
+@import '@fontsource/noto-naskh-arabic/600.css';
+@import 'katex/dist/katex.min.css';
+
+/* ───────────── Design tokens ───────────── */
+:root {
+  color-scheme: light;
+  --bg: #f7f5f0;
+  --bg-elev: #ffffff;
+  --bg-sunk: #efece5;
+  --ink: #1d1f24;
+  --ink-2: #4a4e57;
+  --ink-3: #7b808a;
+  --line: #e2ded5;
+  --line-strong: #cfc9bd;
+  --shadow: 0 1px 2px rgb(30 25 15 / 0.05), 0 4px 16px rgb(30 25 15 / 0.05);
+  --shadow-lift: 0 2px 4px rgb(30 25 15 / 0.06), 0 12px 32px rgb(30 25 15 / 0.09);
+
+  /* Part hues */
+  --blue: #2f5fd0;
+  --blue-soft: #e6edfc;
+  --green: #1e8a5a;
+  --green-soft: #e1f3ea;
+  --amber: #b86e00;
+  --amber-soft: #fbefd9;
+  --violet: #7346c9;
+  --violet-soft: #eee6fb;
+  --red: #c8372d;
+  --red-soft: #fbe5e2;
+
+  /* Set colours used by every diagram */
+  --set-a: #2f5fd0;
+  --set-a-fill: rgb(47 95 208 / 0.18);
+  --set-b: #d0562f;
+  --set-b-fill: rgb(208 86 47 / 0.18);
+  --set-c: #1e8a5a;
+  --set-c-fill: rgb(30 138 90 / 0.18);
+  --shade: #f2b705;
+  --shade-fill: rgb(242 183 5 / 0.55);
+
+  --radius: 14px;
+  --radius-sm: 9px;
+  --font-ui: 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --font-read: 'Noto Naskh Arabic', 'IBM Plex Sans Arabic', serif;
+  --maxw: 1240px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --bg: #12141a;
+    --bg-elev: #1a1d25;
+    --bg-sunk: #0d0f13;
+    --ink: #e8e9ec;
+    --ink-2: #b3b7c0;
+    --ink-3: #828793;
+    --line: #2a2e38;
+    --line-strong: #3a3f4b;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 16px rgb(0 0 0 / 0.25);
+    --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.35), 0 12px 32px rgb(0 0 0 / 0.4);
+    --blue: #7ea2ff;
+    --blue-soft: #1c2643;
+    --green: #4fc690;
+    --green-soft: #15302a;
+    --amber: #f0aa45;
+    --amber-soft: #352816;
+    --violet: #b394ff;
+    --violet-soft: #2a2142;
+    --red: #ff7b70;
+    --red-soft: #3a1d1b;
+    --set-a: #7ea2ff;
+    --set-a-fill: rgb(126 162 255 / 0.2);
+    --set-b: #ff9a72;
+    --set-b-fill: rgb(255 154 114 / 0.2);
+    --set-c: #4fc690;
+    --set-c-fill: rgb(79 198 144 / 0.2);
+    --shade: #f5c542;
+    --shade-fill: rgb(245 197 66 / 0.62);
+  }
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #12141a;
+  --bg-elev: #1a1d25;
+  --bg-sunk: #0d0f13;
+  --ink: #e8e9ec;
+  --ink-2: #b3b7c0;
+  --ink-3: #828793;
+  --line: #2a2e38;
+  --line-strong: #3a3f4b;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 16px rgb(0 0 0 / 0.25);
+  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.35), 0 12px 32px rgb(0 0 0 / 0.4);
+  --blue: #7ea2ff;
+  --blue-soft: #1c2643;
+  --green: #4fc690;
+  --green-soft: #15302a;
+  --amber: #f0aa45;
+  --amber-soft: #352816;
+  --violet: #b394ff;
+  --violet-soft: #2a2142;
+  --red: #ff7b70;
+  --red-soft: #3a1d1b;
+  --set-a: #7ea2ff;
+  --set-a-fill: rgb(126 162 255 / 0.2);
+  --set-b: #ff9a72;
+  --set-b-fill: rgb(255 154 114 / 0.2);
+  --set-c: #4fc690;
+  --set-c-fill: rgb(79 198 144 / 0.2);
+  --shade: #f5c542;
+  --shade-fill: rgb(245 197 66 / 0.62);
+}
+
+/* ───────────── Base ───────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 17px;
+  line-height: 1.75;
+  transition: background-color 0.2s, color 0.2s;
+}
+a {
+  color: inherit;
+}
+img,
+svg {
+  max-width: 100%;
+}
+button {
+  font: inherit;
+  color: inherit;
+}
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.35;
+  margin: 0 0 0.5em;
+  font-weight: 700;
+}
+p {
+  margin: 0 0 1em;
+}
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  background: var(--bg-sunk);
+  padding: 0.1em 0.35em;
+  border-radius: 5px;
+}
+.container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+.en {
+  font-family: 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  direction: ltr;
+  unicode-bidi: isolate;
+  color: var(--ink-3);
+  font-weight: 500;
+}
+
+/* Math is always left-to-right, isolated from the Arabic text around it */
+.katex {
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-size: 1.08em;
+  white-space: nowrap; /* never split inline math across lines inside RTL text */
+}
+.katex-display {
+  direction: ltr;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25em 0;
+}
+.ltr {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Part hue helpers */
+.hue-blue {
+  --hue: var(--blue);
+  --hue-soft: var(--blue-soft);
+}
+.hue-green {
+  --hue: var(--green);
+  --hue-soft: var(--green-soft);
+}
+.hue-amber {
+  --hue: var(--amber);
+  --hue-soft: var(--amber-soft);
+}
+.hue-violet {
+  --hue: var(--violet);
+  --hue-soft: var(--violet-soft);
+}
+
+/* ───────────── Cards ───────────── */
+.card {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.card-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+}
+
+/* ───────────── Widget shell (shared by all interactive components) ───────────── */
+.widget {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: 1.75em 0;
+  overflow: hidden;
+  font-family: var(--font-ui);
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+.widget-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-sunk);
+}
+.widget-head .tag {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--hue, var(--blue));
+  background: var(--hue-soft, var(--blue-soft));
+  padding: 2px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.widget-head h4 {
+  margin: 0;
+  font-size: 15.5px;
+}
+.widget-body {
+  padding: 16px;
+}
+.widget-foot {
+  padding: 10px 16px;
+  border-top: 1px dashed var(--line);
+  color: var(--ink-2);
+  font-size: 14px;
+  background: var(--bg-sunk);
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.btn {
+  border: 1px solid var(--line-strong);
+  background: var(--bg-elev);
+  border-radius: 999px;
+  padding: 5px 13px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.5;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.btn:hover {
+  border-color: var(--ink-3);
+}
+.btn[aria-pressed='true'],
+.btn.active {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+.btn:focus-visible,
+.chip:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 9px;
+  border-radius: 9px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-elev);
+  cursor: pointer;
+  font-weight: 600;
+  direction: ltr;
+  transition: all 0.15s;
+}
+.chip.in-a {
+  background: var(--set-a-fill);
+  border-color: var(--set-a);
+  color: var(--set-a);
+}
+.chip.in-b {
+  background: var(--set-b-fill);
+  border-color: var(--set-b);
+  color: var(--set-b);
+}
+.chip.in-ab {
+  background: linear-gradient(135deg, var(--set-a-fill) 50%, var(--set-b-fill) 50%);
+  border-color: var(--ink-3);
+}
+.chip.hit {
+  background: var(--shade-fill);
+  border-color: var(--shade);
+  color: var(--ink);
+}
+.muted {
+  color: var(--ink-3);
+}
+.result-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--line);
+}
+.result-row:last-child {
+  border-bottom: 0;
+}
+.pill-ok,
+.pill-bad {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 1px 10px;
+  border-radius: 999px;
+}
+.pill-ok {
+  background: var(--green-soft);
+  color: var(--green);
+}
+.pill-bad {
+  background: var(--red-soft);
+  color: var(--red);
+}
+input[type='range'] {
+  accent-color: var(--blue);
+  width: 140px;
+}
+input[type='text'],
+select {
+  font: inherit;
+  background: var(--bg-elev);
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+  border-radius: 9px;
+  padding: 5px 10px;
+}
+svg text {
+  font-family: var(--font-ui);
+}
+.svg-ink {
+  fill: var(--ink);
+}
+.svg-ink-2 {
+  fill: var(--ink-2);
+}
+.svg-line {
+  stroke: var(--line-strong);
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

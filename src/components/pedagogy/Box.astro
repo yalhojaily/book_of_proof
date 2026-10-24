@@ -1,0 +1,52 @@
+---
+// Shared callout box. kind decides colour + label.
+interface Props {
+  kind: 'intuition' | 'definition' | 'fact' | 'example' | 'exercise' | 'pitfall' | 'note';
+  title?: string;
+  num?: string;
+}
+const { kind, title, num } = Astro.props;
+const labels: Record<Props['kind'], string> = {
+  intuition: 'الحدس',
+  definition: 'تعريف',
+  fact: 'حقيقة',
+  example: 'مثال محلول',
+  exercise: 'تمرين',
+  pitfall: 'انتبه',
+  note: 'ملاحظة',
+};
+const icons: Record<Props['kind'], string> = {
+  intuition: '◐',
+  definition: '≝',
+  fact: '★',
+  example: '✎',
+  exercise: '?',
+  pitfall: '!',
+  note: 'i',
+};
+---
+<aside class={`box box-${kind}`}>
+  <div class="box-head">
+    <span class="icon" aria-hidden="true">{icons[kind]}</span>
+    <span class="label">{labels[kind]}{num && <span class="ltr"> {num}</span>}</span>
+    {title && <span class="title">{title}</span>}
+  </div>
+  <div class="box-body"><slot /></div>
+</aside>
+<style>
+  .box { --c: var(--blue); --soft: var(--blue-soft); margin: 1.6em 0; border-radius: var(--radius); border: 1px solid var(--line);
+    background: var(--bg-elev); border-inline-start: 4px solid var(--c); overflow: hidden; }
+  .box-intuition { --c: var(--blue); --soft: var(--blue-soft); }
+  .box-definition, .box-fact { --c: var(--violet); --soft: var(--violet-soft); }
+  .box-example { --c: var(--green); --soft: var(--green-soft); }
+  .box-exercise { --c: var(--red); --soft: var(--red-soft); }
+  .box-pitfall { --c: var(--amber); --soft: var(--amber-soft); }
+  .box-note { --c: var(--ink-3); --soft: var(--bg-sunk); }
+  .box-head { display: flex; align-items: center; gap: 10px; padding: 9px 16px; background: var(--soft); font-family: var(--font-ui); flex-wrap: wrap; }
+  .icon { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; background: var(--c); color: var(--bg-elev); font-weight: 700; font-size: 14px; line-height: 1; }
+  .label { font-weight: 700; color: var(--c); font-size: 15px; }
+  .title { font-weight: 600; font-size: 15px; color: var(--ink); }
+  .box-body { padding: 14px 18px 4px; }
+  .box-body :global(p:last-child) { margin-bottom: 10px; }
+  .box-definition .box-body, .box-fact .box-body { font-size: 1.04em; }
+</style>

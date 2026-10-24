@@ -1,0 +1,134 @@
+---
+chapter: sets
+section: "1.8"
+summary: حين يكون لديك عدد كبير، أو لانهائي، من المجموعات. كيف نرقّمها بدليل، ونأخذ اتحادها وتقاطعها كلها مرة واحدة.
+goals:
+  - قراءة وكتابة $\bigcup$ و$\bigcap$ لعائلة مفهرسة
+  - حساب الاتحاد والتقاطع لعائلة لانهائية من الفترات
+  - فهم معنى مجموعة الأدلة $I$
+terms:
+  - { ar: مجموعة مفهرسة, en: indexed set }
+  - { ar: مجموعة الأدلة, en: index set }
+  - { ar: عائلة مجموعات, en: family of sets }
+exercises: تمارين القسم 1.8 في الكتاب (ص 28–29).
+---
+import IndexedSets from '@/components/widgets/IndexedSets.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import { q1_8 } from '@/data/quiz-ch1';
+
+<Intuition>
+
+إذا كان لديك ثلاث مجموعات سمّيتها $A$ و$B$ و$C$. لكن ماذا لو كانت مئة؟ أو واحدة لكل عدد طبيعي؟ نفعل ما يفعله المبرمج: نضعها في «مصفوفة» ونرقّمها، $A_1, A_2, A_3, \ldots$. والرقم الصغير أسفل الحرف هو **الدليل**.
+
+</Intuition>
+
+## عدد منتهٍ من المجموعات
+
+<Definition num="1.7">
+
+لتكن $A_1, A_2, \ldots, A_n$ مجموعات. نعرّف:
+
+$$
+\bigcup_{i=1}^{n} A_i = A_1 \cup A_2 \cup \cdots \cup A_n = \{x : x \in A_i \text{ for at least one } i\},
+$$
+
+$$
+\bigcap_{i=1}^{n} A_i = A_1 \cap A_2 \cap \cdots \cap A_n = \{x : x \in A_i \text{ for every } i\}.
+$$
+
+</Definition>
+
+الرمز $\bigcup$ يفعل للاتحاد ما يفعله $\sum$ للجمع. والفكرة المهمة: الاتحاد يحتاج أن يكون العنصر في مجموعة **واحدة على الأقل**، والتقاطع يحتاج أن يكون في **كل** المجموعات.
+
+<Example title="ثلاث مجموعات">
+
+لتكن $A_1 = \{0, 2, 5\}$ و$A_2 = \{1, 2, 5\}$ و$A_3 = \{2, 5, 7\}$. احسب $\bigcup_{i=1}^{3} A_i$ و$\bigcap_{i=1}^{3} A_i$.
+
+<Reveal>
+
+الاتحاد $\{0, 1, 2, 5, 7\}$، والتقاطع $\{2, 5\}$ لأنهما العنصران الوحيدان الموجودان في الثلاث.
+
+</Reveal>
+
+</Example>
+
+## عدد لانهائي من المجموعات
+
+نكتب $\bigcup_{i=1}^{\infty} A_i$ للاتحاد على كل الأعداد الطبيعية. التعريف هو نفسه بالضبط: عنصر في **واحدة على الأقل**، أو في **كلها**. لكن النتائج قد تفاجئك. جرّب الأمثلة، وحرّك $N$ إلى 12 وتخيّل أنك تكمل إلى ما لا نهاية:
+
+<IndexedSets client:visible />
+
+<Example title="لماذا التقاطع {0} بالضبط؟">
+
+لتكن $A_n = [0, \frac{1}{n}]$. برهن أن $\bigcap_{n=1}^{\infty} A_n = \{0\}$.
+
+<Reveal kind="step" label="1. لماذا 0 في التقاطع؟">
+
+لكل $n$ لدينا $0 \le 0 \le \frac{1}{n}$، إذن $0 \in A_n$ لكل $n$، وبالتالي 0 في التقاطع.
+
+</Reveal>
+
+<Reveal kind="step" label="2. لماذا لا يوجد عنصر آخر؟">
+
+خذ أي $x \neq 0$. إذا كان $x < 0$ فهو ليس في $A_1$. وإذا كان $x > 0$ فاختر $n$ كبيراً بحيث $\frac{1}{n} < x$ (مثلاً أي $n > \frac{1}{x}$). حينها $x \notin A_n$، إذن $x$ ليس في التقاطع.
+
+</Reveal>
+
+<Reveal kind="step" label="3. الخلاصة">
+
+العنصر الوحيد في التقاطع هو 0. لاحظ أن كل تقاطع **منتهٍ** يساوي $[0, \frac{1}{N}]$ ويحتوي أعداداً موجبة كثيرة، ولا يصبح $\{0\}$ إلا مع اللانهاية.
+
+</Reveal>
+
+</Example>
+
+## مجموعة أدلة عامة
+
+لا يلزم أن تكون الأدلة $1, 2, 3, \ldots$. أي مجموعة غير خالية $I$ تصلح، ونكتب:
+
+<Definition num="1.8">
+
+إذا كانت $A_\alpha$ مجموعة لكل $\alpha$ في مجموعة أدلة $I \neq \varnothing$، فإن
+
+$$
+\bigcup_{\alpha \in I} A_\alpha = \{x : x \in A_\alpha \text{ for some } \alpha \in I\}, \qquad
+\bigcap_{\alpha \in I} A_\alpha = \{x : x \in A_\alpha \text{ for every } \alpha \in I\}.
+$$
+
+</Definition>
+
+مثال: إذا كان $I = \mathbb{R}$ و$A_\alpha = \{\alpha\}$ لكل عدد حقيقي $\alpha$، فإن $\bigcup_{\alpha \in \mathbb{R}} A_\alpha = \mathbb{R}$. هنا لا يمكن ترقيم المجموعات بـ $1, 2, 3, \ldots$ أصلاً (ستعرف لماذا في الفصل 14).
+
+<QuickCheck client:visible questions={q1_8} />
+
+## تمارين
+
+<Exercise num="1">
+
+لتكن $A_n = \{-n, \ldots, -1, 0, 1, \ldots, n\}$ لكل $n \in \mathbb{N}$. احسب $\bigcup_{n=1}^{\infty} A_n$ و$\bigcap_{n=1}^{\infty} A_n$.
+
+<Reveal>
+
+كل عدد صحيح $k$ يقع في $A_{|k|}$ (أو في $A_1$ إذا كان $k = 0$)، إذن الاتحاد $\mathbb{Z}$. والتقاطع أصغر المجموعات، لأنها متداخلة: $A_1 = \{-1, 0, 1\}$.
+
+</Reveal>
+
+</Exercise>
+
+<Exercise num="2">
+
+لتكن $A_n = (n, \infty)$ لكل $n \in \mathbb{N}$. احسب $\bigcap_{n=1}^{\infty} A_n$.
+
+<Reveal kind="hint">
+
+هل يوجد عدد حقيقي أكبر من كل الأعداد الطبيعية؟
+
+</Reveal>
+
+<Reveal>
+
+$\varnothing$. لأي عدد حقيقي $x$ يوجد عدد طبيعي $n \ge x$، فيكون $x \notin A_n$. ومرة أخرى: كل تقاطع منتهٍ غير خالٍ، لكن التقاطع اللانهائي خالٍ.
+
+</Reveal>
+
+</Exercise>

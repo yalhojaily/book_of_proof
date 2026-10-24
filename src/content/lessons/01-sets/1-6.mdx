@@ -1,0 +1,104 @@
+---
+chapter: sets
+section: "1.6"
+summary: «كل شيء آخر». المجموعة الشاملة، ومتممة مجموعة داخلها، وقانونا دي مورغان.
+goals:
+  - حساب متممة مجموعة بالنسبة إلى مجموعة شاملة معطاة
+  - إدراك أن المتممة تعتمد على اختيار المجموعة الشاملة
+  - التحقق من قانوني دي مورغان على أمثلة
+terms:
+  - { ar: المجموعة الشاملة, en: universal set }
+  - { ar: المتممة, en: complement }
+  - { ar: قانونا دي مورغان, en: De Morgan's laws }
+exercises: تمارين القسم 1.6 في الكتاب (ص 21–22).
+---
+import SetOps from '@/components/widgets/SetOps.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import { q1_6 } from '@/data/quiz-ch1';
+
+<Intuition>
+
+إذا قلت «كل من ليس في الفريق»، فالسؤال الطبيعي: **من أين؟** من الشركة؟ من المدينة؟ من العالم؟ الجواب يتغير حسب «الكل» الذي تقصده. في الرياضيات نسمّي هذا الكل **المجموعة الشاملة** $U$.
+
+</Intuition>
+
+## التعريف
+
+في كل مسألة نختار مجموعة شاملة $U$ تحتوي كل ما نتحدث عنه، فتكون كل مجموعة نتعامل معها مجموعة جزئية من $U$.
+
+<Definition num="1.6" title="المتممة">
+
+لتكن $A \subseteq U$. **متممة** $A$ هي
+
+$$
+\overline{A} = U - A = \{x \in U : x \notin A\}.
+$$
+
+</Definition>
+
+<Example title="المتممة تعتمد على U">
+
+لتكن $P$ مجموعة الأعداد الأولية. ما $\overline{P}$ إذا كانت $U = \mathbb{N}$؟ وإذا كانت $U = \mathbb{Z}$؟
+
+<Reveal>
+
+- في $U = \mathbb{N}$: $\overline{P} = \{1, 4, 6, 8, 9, 10, \ldots\}$، أي العدد 1 والأعداد المؤلفة.
+- في $U = \mathbb{Z}$: يُضاف أيضاً الصفر وكل الأعداد السالبة.
+
+المجموعة $P$ نفسها لم تتغير، لكن متممتها تغيرت. لذلك لا معنى لـ $\overline{A}$ قبل أن نحدد $U$.
+
+</Reveal>
+
+</Example>
+
+## المتممة مع الاتحاد والتقاطع
+
+هنا المجموعة الشاملة $U = \{1, 2, \ldots, 10\}$. قارن الناتج في حالة $\overline{A \cup B}$ بما تتوقعه لـ $\overline{A} \cap \overline{B}$:
+
+<SetOps client:visible ops={['compA', 'compB', 'compUnion', 'inter']} title="المتممة داخل U = {1, …, 10}" />
+
+ما ليس في $A$ **ولا** في $B$ هو بالضبط ما ليس في $A$ **وليس** في $B$. هذا هو:
+
+<Fact title="قانونا دي مورغان">
+
+$$
+\overline{A \cup B} = \overline{A} \cap \overline{B}, \qquad \overline{A \cap B} = \overline{A} \cup \overline{B}.
+$$
+
+</Fact>
+
+بالكلمات: المتممة **تقلب** الاتحاد إلى تقاطع والتقاطع إلى اتحاد. ستلتقي بالقاعدة نفسها في المنطق (الفصل 2) عند نفي «و» و«أو»، وسترى في القسم التالي كيف تتحقق منهما بالرسم، وفي الفصل 8 كيف تبرهنهما.
+
+<Note>
+
+بعض العلاقات المفيدة، وكلها تتضح بالرسم: $\overline{\overline{A}} = A$، و$A \cup \overline{A} = U$، و$A \cap \overline{A} = \varnothing$، و$A - B = A \cap \overline{B}$.
+
+</Note>
+
+<QuickCheck client:visible questions={q1_6} />
+
+## تمارين
+
+<Exercise num="1">
+
+لتكن $U = \{1, 2, \ldots, 8\}$ و$A = \{1, 2, 3\}$ و$B = \{2, 4, 6, 8\}$. احسب $\overline{A}$ و$\overline{A \cap B}$ و$\overline{A} \cup \overline{B}$.
+
+<Reveal>
+
+$\overline{A} = \{4, 5, 6, 7, 8\}$. و$A \cap B = \{2\}$ فـ $\overline{A \cap B} = \{1, 3, 4, 5, 6, 7, 8\}$. و$\overline{B} = \{1, 3, 5, 7\}$ فـ $\overline{A} \cup \overline{B} = \{1, 3, 4, 5, 6, 7, 8\}$، وهما متساويتان كما يقول قانون دي مورغان.
+
+</Reveal>
+
+</Exercise>
+
+<Exercise num="2">
+
+لتكن $U = \mathbb{R}$ و$A = [0, 1]$. احسب $\overline{A}$.
+
+<Reveal>
+
+$\overline{A} = (-\infty, 0) \cup (1, \infty)$. لاحظ أن الأقواس انقلبت: الطرفان 0 و1 داخل $A$، فهما خارج متممتها.
+
+</Reveal>
+
+</Exercise>

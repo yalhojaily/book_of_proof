@@ -1,0 +1,21 @@
+---
+// Collapsible block: hints, solutions, step-by-step reveals.
+interface Props { label?: string; kind?: 'hint' | 'solution' | 'step' }
+const { label, kind = 'solution' } = Astro.props;
+const defaults = { hint: 'تلميح', solution: 'اعرض الحل', step: 'الخطوة التالية' };
+---
+<details class={`reveal reveal-${kind}`}>
+  <summary><span class="chev" aria-hidden="true">‹</span>{label ?? defaults[kind]}</summary>
+  <div class="reveal-body"><slot /></div>
+</details>
+<style>
+  .reveal { margin: 0.6em 0 0.9em; border: 1px dashed var(--line-strong); border-radius: var(--radius-sm); background: var(--bg); }
+  .reveal summary { cursor: pointer; list-style: none; padding: 7px 14px; font-family: var(--font-ui); font-weight: 600; font-size: 15px; color: var(--ink-2); display: flex; align-items: center; gap: 8px; user-select: none; }
+  .reveal summary::-webkit-details-marker { display: none; }
+  .chev { display: inline-block; transition: transform 0.2s; font-size: 18px; line-height: 1; }
+  .reveal[open] .chev { transform: rotate(-90deg); }
+  .reveal-hint summary { color: var(--amber); }
+  .reveal-solution summary { color: var(--green); }
+  .reveal[open] { border-style: solid; }
+  .reveal-body { padding: 4px 16px 6px; border-top: 1px dashed var(--line); }
+</style>

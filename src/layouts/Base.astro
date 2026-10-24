@@ -1,0 +1,81 @@
+---
+import '@/styles/global.css';
+import ThemeToggle from '@/components/ui/ThemeToggle.astro';
+import { url } from '@/lib/url';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = 'موقع مصاحب تفاعلي لكتاب Book of Proof لريتشارد هاموك' } = Astro.props;
+const fullTitle = title === 'الرئيسية' ? 'كتاب البرهان — موقع مصاحب' : `${title} · كتاب البرهان`;
+---
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
+    <script is:inline>
+      try {
+        const t = localStorage.getItem('theme');
+        if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+        const d = t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches);
+        if (d) document.documentElement.classList.add('is-dark');
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container bar">
+        <a class="brand" href={url()}>
+          <span class="mark" aria-hidden="true">∎</span>
+          <span class="name">كتاب البرهان</span>
+          <span class="en sub">Book of Proof</span>
+        </a>
+        <nav class="nav">
+          <a href={url()}>الفهرس</a>
+          <a href={url('about/')}>عن الموقع</a>
+          <ThemeToggle />
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        <p>
+          موقع مصاحب غير رسمي لكتاب <span class="en">Book of Proof, 3rd ed.</span> لريتشارد هاموك.
+          الشروح والأمثلة هنا مكتوبة من جديد، وأرقام الصفحات تحيل إلى الكتاب الأصلي المتاح مجاناً على{' '}
+          <a href="https://richardhammack.github.io/BookOfProof/" rel="noopener">موقع المؤلف</a>.
+        </p>
+      </div>
+    </footer>
+    <style>
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: color-mix(in srgb, var(--bg) 85%, transparent);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--line);
+      }
+      .bar { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 12px; }
+      .brand { display: flex; align-items: baseline; gap: 10px; text-decoration: none; min-width: 0; }
+      .mark { font-size: 22px; color: var(--blue); line-height: 1; }
+      .name { font-weight: 700; font-size: 18px; white-space: nowrap; }
+      .sub { font-size: 13px; white-space: nowrap; }
+      .nav { display: flex; align-items: center; gap: 4px; }
+      .nav a { text-decoration: none; color: var(--ink-2); padding: 6px 10px; border-radius: 10px; font-size: 15px; white-space: nowrap; }
+      .nav a:hover { background: var(--bg-sunk); color: var(--ink); }
+      @media (max-width: 520px) { .sub { display: none; } .nav a { padding: 6px 7px; } }
+      main { min-height: 70vh; }
+      .site-footer { border-top: 1px solid var(--line); margin-top: 64px; padding: 24px 0 40px; color: var(--ink-3); font-size: 14px; }
+      .site-footer a { color: var(--ink-2); }
+    </style>
+  </body>
+</html>
