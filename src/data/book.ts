@@ -74,10 +74,10 @@ export const parts: Part[] = [
         ar: 'المنطق',
         en: 'Logic',
         page: 34,
-        blurb: 'القضايا، أدوات الربط، الشرطيات، جداول الصدق، المكمِّمات والنفي.',
+        blurb: 'العبارات، أدوات الربط، الشرطيات، جداول الصدق، المكمِّمات والنفي.',
         available: true,
         sections: [
-          s('2.1', 'القضايا', 'Statements', 35),
+          s('2.1', 'العبارات', 'Statements', 35),
           s('2.2', 'و، أو، ليس', 'And, Or, Not', 39),
           s('2.3', 'العبارات الشرطية', 'Conditional Statements', 42),
           s('2.4', 'العبارات ثنائية الشرط', 'Biconditional Statements', 46),
