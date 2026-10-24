@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Base from '@/layouts/Base.astro';
 import Progress from '@/components/ui/Progress.astro';
-import { allChapters, plain } from '@/data/book';
+import { allChapters, plain, secLabel } from '@/data/book';
 import { url, lessonUrl, chapterUrl } from '@/lib/url';
 import { inlineMath } from '@/lib/inline-math';
 import Intuition from '@/components/pedagogy/Intuition.astro';
@@ -44,7 +44,7 @@ const stages = [...(lesson.body ?? '').matchAll(/<Stage\s+n=\{(\d+)\}\s+id="([^"
 const components = { Intuition, Definition, Fact, Example, Exercise, Pitfall, Note, Reveal, Steps, BookRef, Stage, ReadingGuide, Takeaways, BookPages, BookSolutions };
 const pdfAt = (bookPage: number) => `${url('book/book-of-proof.pdf')}#page=${bookPage + 12}`;
 ---
-<Base title={`${sec.id} ${plain(sec.ar)}`} description={lesson.data.summary}>
+<Base title={`${sec.id.endsWith('.x') ? `الفصل ${ch.num}:` : sec.id} ${plain(sec.ar)}`} description={lesson.data.summary}>
   <div class={`container lesson-grid hue-${ch.part.hue}`}>
     <!-- Chapter navigation (right side in RTL) -->
     <aside class="chap-nav">
@@ -60,10 +60,10 @@ const pdfAt = (bookPage: number) => `${url('book/book-of-proof.pdf')}#page=${boo
               <li>
                 {ready.has(s.id) ? (
                   <a href={lessonUrl(ch.slug, s.slug)} class:list={{ here }} aria-current={here ? 'page' : undefined} data-progress-section={s.id}>
-                    <span class="id ltr">{s.id}</span><span class="t" set:html={inlineMath(s.ar)} /><span class="ok" aria-hidden="true">✓</span>
+                    <span class="id ltr">{secLabel(s.id)}</span><span class="t" set:html={inlineMath(s.ar)} /><span class="ok" aria-hidden="true">✓</span>
                   </a>
                 ) : (
-                  <span class="disabled"><span class="id ltr">{s.id}</span><span class="t" set:html={inlineMath(s.ar)} /></span>
+                  <span class="disabled"><span class="id ltr">{secLabel(s.id)}</span><span class="t" set:html={inlineMath(s.ar)} /></span>
                 )}
               </li>
             );
@@ -80,7 +80,7 @@ const pdfAt = (bookPage: number) => `${url('book/book-of-proof.pdf')}#page=${boo
         <a href={chapterUrl(ch.slug)}>الفصل {ch.num}: {ch.ar}</a>
       </nav>
       <header class="lesson-head">
-        <span class="sec-id ltr">{sec.id}</span>
+        <span class="sec-id ltr">{secLabel(sec.id)}</span>
         <h1 set:html={inlineMath(sec.ar)} />
         <p class="en">{sec.en}</p>
         <p class="summary" set:html={inlineMath(lesson.data.summary)} />
@@ -104,10 +104,10 @@ const pdfAt = (bookPage: number) => `${url('book/book-of-proof.pdf')}#page=${boo
 
       <nav class="pn">
         {prev ? (
-          <a class="card" href={lessonUrl(ch.slug, prev.slug)}><small>القسم السابق</small><span class="ltr">{prev.id}</span> <Fragment set:html={inlineMath(prev.ar)} /></a>
+          <a class="card" href={lessonUrl(ch.slug, prev.slug)}><small>القسم السابق</small><span class="ltr">{secLabel(prev.id)}</span> <Fragment set:html={inlineMath(prev.ar)} /></a>
         ) : <span></span>}
         {next ? (
-          <a class="card next" href={lessonUrl(ch.slug, next.slug)}><small>القسم التالي</small><span class="ltr">{next.id}</span> <Fragment set:html={inlineMath(next.ar)} /></a>
+          <a class="card next" href={lessonUrl(ch.slug, next.slug)}><small>القسم التالي</small><span class="ltr">{secLabel(next.id)}</span> <Fragment set:html={inlineMath(next.ar)} /></a>
         ) : <span></span>}
       </nav>
     </article>

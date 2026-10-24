@@ -38,6 +38,7 @@ CHAPTERS = {
     1: dict(body=(15, 45), solutions=(304, 309)),
     2: dict(body=(46, 76), solutions=(309, 316)),
     3: dict(body=(77, 122), solutions=(316, 327)),
+    4: dict(body=(125, 139), solutions=(327, 329)),
 }
 
 
@@ -126,7 +127,11 @@ def main(chap: int):
                 m = re.match(rf"^Exercises for Section {chap}\.(\d+)$", text)
                 if m:
                     raw.append(((f"{chap}.{m.group(1)}", "exercises"), pg, y0))
+                # From Chapter 4 on, exercises sit at the end of the chapter: they go to section "N.x"
+                if re.match(rf"^Exercises for Chapter {chap}$", text):
+                    raw.append(((f"{chap}.x", "exercises"), pg, y0))
         raw.sort(key=lambda t: (t[1], t[2]))
+        chapter_level = any(lbl[0].endswith(".x") for lbl, _, _ in raw)
         # first section starts at the very top of the chapter opening page (include chapter title/intro)
         if raw and raw[0][0][1] == "reading":
             raw[0] = (raw[0][0], b0, 20 + GAP)
@@ -140,6 +145,8 @@ def main(chap: int):
                 m = re.match(r"^Sections? (\d+)\.(\d+)$", text)  # the book has a "Sections 3.4" typo
                 if m and int(m.group(1)) == chap:
                     raw.append(((f"{chap}.{m.group(2)}", "solutions"), pg, y0))
+                elif chapter_level and re.match(rf"^Chapter {chap} Exercises$", text):
+                    raw.append(((f"{chap}.x", "solutions"), pg, y0))
                 elif m or re.match(rf"^Chapter {chap + 1} Exercises$", text):
                     raw.append((None, pg, y0))
         raw.sort(key=lambda t: (t[1], t[2]))
@@ -151,7 +158,7 @@ def main(chap: int):
     dest.write_text(json.dumps(data, ensure_ascii=False, indent=1))
     total = sum(len(v) for s in store.values() for v in s.values())
     print(f"chapter {chap}: {total} strips")
-    for sec, kinds in sorted(store.items(), key=lambda kv: [int(x) for x in kv[0].split('.')]):
+    for sec, kinds in sorted(store.items(), key=lambda kv: [int(x) if x.isdigit() else 999 for x in kv[0].split('.')]):
         print(" ", sec, {k: [x["page"] for x in v] for k, v in kinds.items()})
 
 

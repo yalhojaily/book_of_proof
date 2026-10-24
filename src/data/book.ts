@@ -129,13 +129,14 @@ export const parts: Part[] = [
         en: 'Direct Proof',
         page: 113,
         blurb: 'النظريات والتعريفات، وكيف تنتقل من الفرضية إلى النتيجة خطوة بخطوة.',
-        available: false,
+        available: true,
         sections: [
           s('4.1', 'النظريات', 'Theorems', 113),
           s('4.2', 'التعريفات', 'Definitions', 115),
           s('4.3', 'البرهان المباشر', 'Direct Proof', 118),
           s('4.4', 'استخدام الحالات', 'Using Cases', 124),
           s('4.5', 'معالجة الحالات المتشابهة', 'Treating Similar Cases', 125),
+          s('4.x', 'تمارين الفصل', 'Exercises for Chapter 4', 126),
         ],
       },
       {
@@ -324,6 +325,9 @@ export const allChapters = parts.flatMap((p) => p.chapters.map((c) => ({ ...c, p
 export function findChapter(slug: string) {
   return allChapters.find((c) => c.slug === slug);
 }
+
+/** Display label for a section id: chapter-exercise pages ("4.x") show a pencil. */
+export const secLabel = (id: string) => (id.endsWith('.x') ? '✎' : id);
 
 /** Strip $...$ math markers for plain-text contexts such as <title>. */
 export const plain = (s: string) => s.replace(/\$([^$]+)\$/g, (_, m) => m.replace(/\\(in|subseteq)/g, (_x: string, c: string) => (c === 'in' ? '∈' : '⊆')).replace(/\\(varepsilon|delta)/g, (_x: string, c: string) => (c === 'delta' ? 'δ' : 'ε')));
