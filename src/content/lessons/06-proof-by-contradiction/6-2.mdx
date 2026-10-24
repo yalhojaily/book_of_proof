@@ -1,0 +1,128 @@
+---
+chapter: proof-by-contradiction
+section: "6.2"
+summary: لبرهان «إذا P فإن Q» بالتناقض، افترض P و∼Q معاً، ثم استنتج تناقضاً. تحصل على فرضين بدل فرض واحد، لكنك لا تعرف مسبقاً أين ستصل.
+goals:
+  - كتابة برهان شرطية بالتناقض بالسطر الأول الصحيح
+  - المقارنة بين الطرق الثلاث للعبارة الشرطية
+  - استعمال دي مورغان في نفي التالي
+terms:
+  - { ar: افترض P و∼Q, en: suppose P and ∼Q }
+  - { ar: قانون دي مورغان, en: DeMorgan's law }
+---
+import MethodCompare from '@/components/widgets/MethodCompare.tsx';
+import ProofBuilder from '@/components/widgets/ProofBuilder.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import { methodPresets, puzzles62, q6_2 } from '@/data/proofs-ch6';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+متى تكون «إذا $P$ فإن $Q$» كاذبة؟ في حالة واحدة فقط: $P$ صادقة و$Q$ كاذبة. فلبرهانها بالتناقض نفترض هذه الحالة بالضبط، ونبيّن أنها مستحيلة.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="141–142" minutes={10}>
+
+- **الإطار (ص 141):** لماذا نفترض $P$ و$\sim Q$.
+- **مثالان (ص 141–142):** «إذا كان $a^2$ زوجياً فإن $a$ زوجي» مرة ثالثة بطريقة جديدة، ثم مثال القسمة مع دي مورغان: إذا كان $a \ge 2$ فإن $a \nmid b$ أو $a \nmid (b + 1)$.
+
+| ستقرأ | المعنى |
+|---|---|
+| Suppose P and ∼Q | افترض P وليس Q |
+| By DeMorgan's law | بقانون دي مورغان |
+
+</ReadingGuide>
+
+<BookPages section="6.2" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية وأمثلة محلولة">
+
+### الإطار
+
+<Definition title="برهان الشرطية بالتناقض">
+
+**القضية.** إذا $P$، فإن $Q$.
+
+**البرهان.** افترض، بقصد الوصول إلى تناقض، $P$ و$\sim Q$.
+
+$\vdots$
+
+إذن $C \wedge \sim C$. $\blacksquare$
+
+</Definition>
+
+### الطرق الثلاث جنباً إلى جنب
+
+لديك الآن ثلاث طرق لكل عبارة شرطية. اختر عبارة، وقارن ما تفترضه وأين يجب أن تصل في كل طريقة:
+
+<MethodCompare client:visible presets={methodPresets} />
+
+<Example title="مثال القسمة (ص 142)">
+
+**القضية.** إذا كان $a, b \in \mathbb{Z}$ و$a \ge 2$، فإن $a \nmid b$ أو $a \nmid (b + 1)$.
+
+**البرهان.** افترض، بقصد الوصول إلى تناقض، أن $a \ge 2$ وأنه ليس صحيحاً أن ($a \nmid b$ أو $a \nmid (b + 1)$). بدي مورغان: $a \mid b$ و$a \mid (b + 1)$. إذن $b = ac$ و$b + 1 = ad$. بالطرح: $a(d - c) = 1$. وبما أن $a$ موجب فإن $d - c$ عدد صحيح موجب، فـ $a = \frac{1}{d - c} \le 1 < 2$. إذن $a \ge 2$ و$a < 2$: تناقض. $\blacksquare$
+
+لاحظ أن التناقض استعمل **الفرضين معاً**: $a \ge 2$ و$\sim Q$. هذه علامة أن التناقض هو الطريقة المناسبة هنا.
+
+</Example>
+
+<Pitfall title="نفي الشرطية">
+
+نفي «إذا $P$ فإن $Q$» هو «$P$ و$\sim Q$»، وليس «إذا $P$ فإن $\sim Q$». العبارة الثانية شرطية، والنفي ليس شرطية.
+
+</Pitfall>
+
+### تدرّب: رتّب البرهان
+
+<ProofBuilder client:visible puzzles={puzzles62} />
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة">
+
+<QuickCheck client:visible questions={q6_2} />
+
+</Stage>
+
+<Stage n={5} id="practice" title="التطبيق" sub="تمارين الكتاب لهذا الفصل في صفحة واحدة">
+
+في [صفحة تمارين الفصل](../6-x/)، التمارين **1، 2، 8، 9، 18** شرطيات تبرهنها بالتناقض.
+
+<Exercise num="1">
+
+برهن بالتناقض: ليكن $n \in \mathbb{Z}$. إذا كان $n^2$ مضاعفاً لـ 4، فإن $n$ زوجي.
+
+<Reveal>
+
+**البرهان.** افترض، بقصد الوصول إلى تناقض، أن $4 \mid n^2$ وأن $n$ فردي. إذن $n = 2k + 1$، فـ $n^2 = 4k^2 + 4k + 1 = 4(k^2 + k) + 1$. وبما أن $4 \mid n^2$ فإن $n^2 = 4m$. إذن $4m = 4(k^2 + k) + 1$، أي $4(m - k^2 - k) = 1$، فـ $4 \mid 1$، وهذا تناقض. $\blacksquare$
+
+لاحظ أن البرهان استعمل الفرضين. (وهو أيضاً يقبل برهاناً بالعكس النقيض. جرّبه.)
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- لبرهان «إذا $P$ فإن $Q$» بالتناقض: افترض $P$ و$\sim Q$.
+- نفي الشرطية «$P$ و$\sim Q$»، لا شرطية أخرى.
+- التناقض مناسب حين تحتاج الفرضين معاً للوصول إلى المستحيل.
+
+</Takeaways>
+
+في القسم التالي: براهين داخل براهين.
+
+</Stage>

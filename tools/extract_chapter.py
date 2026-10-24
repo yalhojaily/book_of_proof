@@ -40,6 +40,7 @@ CHAPTERS = {
     3: dict(body=(77, 122), solutions=(316, 327)),
     4: dict(body=(125, 139), solutions=(327, 329)),
     5: dict(body=(140, 148), solutions=(329, 333)),
+    6: dict(body=(149, 156), solutions=(333, 335)),
 }
 
 
