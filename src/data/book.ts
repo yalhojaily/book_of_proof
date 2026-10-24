@@ -98,7 +98,7 @@ export const parts: Part[] = [
         en: 'Counting',
         page: 65,
         blurb: 'مبادئ الضرب والجمع، التباديل والتوافيق، مثلث باسكال، والبرهان التوافقي.',
-        available: false,
+        available: true,
         sections: [
           s('3.1', 'القوائم', 'Lists', 65),
           s('3.2', 'مبدأ الضرب', 'The Multiplication Principle', 67),

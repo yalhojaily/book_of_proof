@@ -394,3 +394,14 @@ svg text {
     animation: none !important;
   }
 }
+
+/* Long formulas inside widgets scroll horizontally instead of overflowing the card */
+.widget .tex {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  vertical-align: middle;
+  padding: 2px 0;
+  direction: ltr; /* scroll starts at the beginning of the formula */
+}

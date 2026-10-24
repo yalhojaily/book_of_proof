@@ -37,6 +37,7 @@ GAP = 10  # pt above a heading where a cut is made
 CHAPTERS = {
     1: dict(body=(15, 45), solutions=(304, 309)),
     2: dict(body=(46, 76), solutions=(309, 316)),
+    3: dict(body=(77, 122), solutions=(316, 327)),
 }
 
 
@@ -136,7 +137,7 @@ def main(chap: int):
         for pg in range(s0, s1 + 1):
             for y0, _y1, text in lines_on_page(pg):
                 text = text.strip()
-                m = re.match(r"^Section (\d+)\.(\d+)$", text)
+                m = re.match(r"^Sections? (\d+)\.(\d+)$", text)  # the book has a "Sections 3.4" typo
                 if m and int(m.group(1)) == chap:
                     raw.append(((f"{chap}.{m.group(2)}", "solutions"), pg, y0))
                 elif m or re.match(rf"^Chapter {chap + 1} Exercises$", text):

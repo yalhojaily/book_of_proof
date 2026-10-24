@@ -1,0 +1,144 @@
+---
+chapter: counting
+section: "3.6"
+summary: نرتّب الأعداد (n اختر k) في مثلث، فيصبح كل عدد مجموع العددين فوقه. والصف n هو معاملات (x + y)ⁿ.
+goals:
+  - بناء مثلث باسكال وفهم قاعدة باسكال
+  - استخدام نظرية ذات الحدين لإيجاد معاملات
+terms:
+  - { ar: مثلث باسكال, en: "Pascal's triangle" }
+  - { ar: قاعدة باسكال, en: "Pascal's formula" }
+  - { ar: نظرية ذات الحدين, en: binomial theorem }
+  - { ar: معامل, en: coefficient }
+---
+import Pascal from '@/components/widgets/Pascal.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { q3_6 } from '@/data/quiz-ch3';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+احسب $(x+y)^2 = x^2 + 2xy + y^2$، ثم $(x+y)^3 = x^3 + 3x^2y + 3xy^2 + y^3$. المعاملات 1 2 1، ثم 1 3 3 1. هل تلاحظ أن كل عدد في السطر الثاني مجموع عددين فوقه؟ ($3 = 1 + 2$). هذه هي الأعداد $\binom{n}{k}$ نفسها، وليس ذلك صدفة.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="90–92" minutes={10}>
+
+- **Figure 3.3 (ص 90):** المثلث بصيغتين: بالرموز $\binom{n}{k}$ وبالأعداد.
+- **المعادلة (3.3) قاعدة باسكال (ص 90):** وبرهانها: كل مجموعة جزئية من $\{0, 1, \ldots, n\}$ إما تحتوي 0 أو لا. هذا أول برهان توافقي في الكتاب، وستعود إليه في القسم 3.10.
+- **من المثلث إلى ذات الحدين (ص 91):** لماذا معامل $x^{n-k}y^k$ هو $\binom{n}{k}$: عدد طرق اختيار $y$ من $k$ أقواس.
+- **Theorem 3.1 (ص 92):** نظرية ذات الحدين.
+
+| ستقرأ | المعنى |
+|---|---|
+| Pascal's triangle | مثلث باسكال |
+| binomial theorem | نظرية ذات الحدين |
+| coefficient | معامل |
+
+</ReadingGuide>
+
+<BookPages section="3.6" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية وأمثلة محلولة">
+
+### المثلث وقاعدته
+
+<Fact title="قاعدة باسكال">
+
+$$
+\binom{n+1}{k} = \binom{n}{k-1} + \binom{n}{k}.
+$$
+
+</Fact>
+
+مرّر المؤشر على أي عدد لترى العددين اللذين يكوّنانه، وجرّب «لوّن الأعداد الفردية» لترى نمطاً مفاجئاً:
+
+<Pascal client:visible rows={10} />
+
+### نظرية ذات الحدين
+
+<Fact num="3.1" title="نظرية ذات الحدين">
+
+لأي عدد صحيح غير سالب $n$:
+
+$$
+(x + y)^n = \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^{k}.
+$$
+
+</Fact>
+
+لماذا؟ $(x+y)^n$ حاصل ضرب $n$ قوساً. كل حدّ في الناتج يأتي من اختيار $x$ أو $y$ من كل قوس. والحدّ $x^{n-k}y^k$ يظهر بعدد طرق اختيار الأقواس الـ $k$ التي نأخذ منها $y$، أي $\binom{n}{k}$.
+
+<Example title="معامل محدد">
+
+ما معامل $x^3$ في $(x + 2)^5$؟
+
+<Reveal>
+
+بنظرية ذات الحدين مع $y = 2$: الحدّ الذي فيه $x^3$ هو $\binom{5}{2} x^3 \cdot 2^2 = 10 \cdot 4 \cdot x^3$. المعامل $40$.
+
+</Reveal>
+
+</Example>
+
+<Example title="مجموع الصف">
+
+بيّن أن $\sum_{k=0}^{n} \binom{n}{k} = 2^n$.
+
+<Reveal>
+
+ضع $x = y = 1$ في نظرية ذات الحدين: $(1+1)^n = \sum_{k} \binom{n}{k}$. وتفسير ذلك عدّاً: الطرف الأيمن يعدّ المجموعات الجزئية حسب حجمها، والأيسر يعدّها كلها.
+
+</Reveal>
+
+</Example>
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q3_6} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="3.6" count={14} core={[1, 3, 5, 7, 9, 11, 13]} />
+
+<BookPages section="3.6" kind="exercises" />
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="3.6" />
+
+<Note>
+
+التمارين الزوجية بلا حلول في الكتاب عمداً، لتتدرّب على الحكم على صحة حلّك بنفسك. إن شككت في حلّ، علّمه ↻ للمراجعة.
+
+</Note>
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- كل عدد في مثلث باسكال مجموع العددين فوقه: $\binom{n+1}{k} = \binom{n}{k-1} + \binom{n}{k}$.
+- الصف $n$ يعطي معاملات $(x+y)^n$.
+- مجموع الصف $n$ يساوي $2^n$.
+
+</Takeaways>
+
+في القسم التالي: كيف نعدّ عناصر اتحاد مجموعات متداخلة.
+
+</Stage>
