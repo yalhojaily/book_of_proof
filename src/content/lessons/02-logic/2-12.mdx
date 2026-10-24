@@ -1,0 +1,102 @@
+---
+chapter: logic
+section: "2.12"
+summary: لماذا ندرس المنطق، وكيف سيبقى في خلفية كل ما يأتي. ومراجعة شاملة للفصل في صفحة واحدة.
+goals:
+  - استيعاب الأدوار الثلاثة للمنطق في البرهان
+  - مراجعة أدوات الفصل كله في مرجع واحد
+terms:
+  - { ar: مرجع سريع, en: cheat sheet }
+---
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import { q2_12 } from '@/data/quiz-ch2';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+من الآن فصاعداً نادراً ما سترى الرموز $\wedge$ و$\forall$ و$\Rightarrow$ في البراهين. سيكتب الكتاب بالكلمات. لكن المنطق لن يختفي: سيصبح كقواعد النحو عند الكاتب الماهر، لا يذكرها، لكنه يلتزم بها في كل جملة.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="64" minutes={5}>
+
+صفحة واحدة. ركّز على الأسباب الثلاثة لدراسة المنطق:
+
+1. جداول الصدق تحدد المعنى الدقيق لكلمات مثل «و» و«أو» و«إذا… فإن…».
+2. قواعد الاستدلال تنتج معلومات جديدة من معلومات معروفة.
+3. قوانين مثل دي مورغان تحوّل العبارات إلى صيغ مكافئة أنفع.
+
+</ReadingGuide>
+
+<BookPages section="2.12" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="مرجع الفصل" sub="كل أدوات الفصل الثاني في مكان واحد">
+
+### جداول الصدق الخمسة
+
+| $P$ | $Q$ | $P \wedge Q$ | $P \vee Q$ | $P \Rightarrow Q$ | $P \Leftrightarrow Q$ | ${\sim}P$ |
+|---|---|---|---|---|---|---|
+| T | T | T | T | T | T | F |
+| T | F | F | T | F | F | F |
+| F | T | F | T | T | F | T |
+| F | F | F | F | T | T | T |
+
+### التكافؤات الأساسية
+
+| الاسم | التكافؤ |
+|---|---|
+| العكس النقيض | $P \Rightarrow Q = {\sim}Q \Rightarrow {\sim}P$ |
+| الشرط بلا سهم | $P \Rightarrow Q = {\sim}P \vee Q$ |
+| الشرط الثنائي | $P \Leftrightarrow Q = (P \Rightarrow Q) \wedge (Q \Rightarrow P)$ |
+| دي مورغان | ${\sim}(P \wedge Q) = {\sim}P \vee {\sim}Q$، ${\sim}(P \vee Q) = {\sim}P \wedge {\sim}Q$ |
+| التوزيع | $P \wedge (Q \vee R) = (P \wedge Q) \vee (P \wedge R)$ |
+
+### النفي
+
+| العبارة | نفيها |
+|---|---|
+| $\forall x \in X,\ P(x)$ | $\exists x \in X,\ {\sim}P(x)$ |
+| $\exists x \in X,\ P(x)$ | $\forall x \in X,\ {\sim}P(x)$ |
+| $P \Rightarrow Q$ | $P \wedge {\sim}Q$ |
+
+### الاستدلال
+
+| من | نستنتج |
+|---|---|
+| $P \Rightarrow Q$، $P$ | $Q$ |
+| $P \Rightarrow Q$، ${\sim}Q$ | ${\sim}P$ |
+| $P \vee Q$، ${\sim}P$ | $Q$ |
+
+### الصياغات
+
+- $P \Rightarrow Q$: «إذا $P$ فإن $Q$»، «$Q$ إذا $P$»، «$P$ فقط إذا $Q$»، «$P$ كافٍ لـ $Q$»، «$Q$ لازم لـ $P$».
+- $P \Leftrightarrow Q$: «إذا وفقط إذا»، «لازم وكافٍ»، «والعكس صحيح».
+- العبارة الشرطية بمتغير فيها «لكل» ضمنية.
+
+</Stage>
+
+<Stage n={4} id="check" title="مراجعة الفصل" sub="أسئلة من الفصل كله">
+
+<QuickCheck client:visible questions={q2_12} title="مراجعة الفصل الثاني" />
+
+</Stage>
+
+<Stage n={5} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- المنطق يحدد المعنى الدقيق، ويولّد معلومات جديدة، ويحوّل العبارات إلى صيغ مكافئة.
+- سيبقى في الخلفية: البراهين تُكتب بالكلمات، لكنك ستقرؤها بهذه الرموز في ذهنك.
+
+</Takeaways>
+
+انتهى الجزء الأول من الأساسيات بالمجموعات والمنطق. الفصل التالي عن العدّ، ثم يبدأ الجزء الثاني بالبرهان المباشر.
+
+</Stage>

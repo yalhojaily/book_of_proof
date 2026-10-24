@@ -36,6 +36,7 @@ GAP = 10  # pt above a heading where a cut is made
 # chapter -> (first pdf page of chapter, last pdf page of chapter, first & last pdf page of its solutions)
 CHAPTERS = {
     1: dict(body=(15, 45), solutions=(304, 309)),
+    2: dict(body=(46, 76), solutions=(309, 316)),
 }
 
 

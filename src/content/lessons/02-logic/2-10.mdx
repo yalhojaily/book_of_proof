@@ -1,0 +1,160 @@
+---
+chapter: logic
+section: "2.10"
+summary: أربع قواعد تكفي لنفي أي عبارة. دي مورغان، ونفي ∀ و∃، ونفي الشرط.
+goals:
+  - نفي عبارات فيها «و» و«أو» بقانوني دي مورغان
+  - نفي عبارات مكمَّمة، بما فيها ذات المكمِّمات المتعددة
+  - 'نفي عبارة شرطية باستخدام ${\sim}(P \Rightarrow Q) = P \wedge {\sim}Q$'
+terms:
+  - { ar: نفي العبارة, en: negating a statement }
+  - { ar: المعادلات (2.8) و(2.9), en: negating quantifiers }
+---
+import NegationStepper from '@/components/widgets/NegationStepper.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { q2_10 } from '@/data/quiz-ch2';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+كيف تثبت أن أحدهم مخطئ حين يقول «كل البجع أبيض»؟ لا تحتاج أن تثبت أن كل البجع أسود. يكفي أن تجد بجعة واحدة غير بيضاء. نفي «كل… كذا» هو «يوجد… ليس كذا». ستحتاج هذه المهارة في البرهان بالتناقض (الفصل 6) وفي الدحض (الفصل 9).
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="59–62" minutes={15}>
+
+- **دي مورغان للنفي (ص 59–60):** المعادلتان (2.6) و(2.7)، ثم Example 2.10 و2.11.
+- **نفي المكمِّمات (ص 60):** المعادلتان (2.8) و(2.9). أهم ما في القسم.
+- **Example 2.12 و2.13 (ص 61):** نفي عبارة بمكمِّم واحد، ثم بمكمِّمين خطوة بخطوة.
+- **نفي الشرط (ص 61–62):** المعادلة (2.10)، ثم الفرق بين Example 2.14 (عدد ثابت) وExample 2.15 (متغير، فيظهر ∃).
+
+| ستقرأ | المعنى |
+|---|---|
+| negation, negate | نفي، ينفي |
+| it is not the case that… | ليس صحيحاً أن… |
+
+</ReadingGuide>
+
+<BookPages section="2.10" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية وأمثلة محلولة">
+
+### القواعد الأربع
+
+| تنفي | تحصل على | الاسم |
+|---|---|---|
+| ${\sim}(P \wedge Q)$ | ${\sim}P \vee {\sim}Q$ | دي مورغان |
+| ${\sim}(P \vee Q)$ | ${\sim}P \wedge {\sim}Q$ | دي مورغان |
+| ${\sim}(\forall x \in X,\ P(x))$ | $\exists x \in X,\ {\sim}P(x)$ | (2.8) |
+| ${\sim}(\exists x \in X,\ P(x))$ | $\forall x \in X,\ {\sim}P(x)$ | (2.9) |
+| ${\sim}(P \Rightarrow Q)$ | $P \wedge {\sim}Q$ | (2.10) |
+
+الفكرة في كل القواعد واحدة: **النفي يدخل إلى الداخل ويقلب كل شيء يمرّ به**: $\wedge$ تصبح $\vee$، و$\forall$ تصبح $\exists$، والعكس.
+
+<NegationStepper client:visible />
+
+<Pitfall title="نفي الشرط ليس شرطاً">
+
+نفي «إذا أمطرت حملت المظلة» ليس «إذا أمطرت لم أحمل المظلة»، ولا «إذا لم تمطر لم أحملها». النفي هو **«أمطرت ولم أحمل المظلة»**: الحالة الوحيدة التي يكذب فيها الوعد.
+
+</Pitfall>
+
+<Pitfall title="القيود لا تُنفى">
+
+في $\forall \varepsilon > 0$ الجزء «$\varepsilon > 0$» يحدد **من أين** نختار، وليس جزءاً من الادعاء. لذلك نفي $\forall \varepsilon > 0,\ P(\varepsilon)$ هو $\exists \varepsilon > 0,\ {\sim}P(\varepsilon)$، لا $\exists \varepsilon \le 0$.
+
+</Pitfall>
+
+<Example title="بالكلمات">
+
+انفِ: «كل طالب في الفصل حلّ تمريناً واحداً على الأقل».
+
+<Reveal>
+
+رمزياً: $\forall s,\ \exists e,\ \text{Solved}(s, e)$. النفي: $\exists s,\ \forall e,\ {\sim}\text{Solved}(s, e)$. بالكلمات: «يوجد طالب في الفصل لم يحلّ أي تمرين».
+
+</Reveal>
+
+</Example>
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q2_10} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="2.10" count={12} core={[1, 3, 5, 7, 9, 11]} />
+
+<BookPages section="2.10" kind="exercises" />
+
+### تمارين إضافية بحلول كاملة
+
+<Exercise num="1">
+
+انفِ: «لكل عدد حقيقي $x$، إذا كان $x > 0$ فإن $x$ له جذر تربيعي حقيقي».
+
+<Reveal>
+
+$\forall x \in \mathbb{R},\ (x > 0) \Rightarrow (\exists y \in \mathbb{R},\ y^2 = x)$. النفي:
+
+$$
+\exists x \in \mathbb{R},\ (x > 0) \wedge (\forall y \in \mathbb{R},\ y^2 \neq x).
+$$
+
+بالكلمات: يوجد عدد حقيقي موجب ليس له جذر تربيعي حقيقي. (والأصلية صادقة، فالنفي كاذب.)
+
+</Reveal>
+
+</Exercise>
+
+<Exercise num="2">
+
+انفِ: «الدالة $f$ متزايدة»، علماً أن تعريفها: لكل $a, b \in \mathbb{R}$، إذا كان $a < b$ فإن $f(a) < f(b)$.
+
+<Reveal>
+
+$\exists a, b \in \mathbb{R},\ (a < b) \wedge (f(a) \ge f(b))$: يوجد عددان $a < b$ لا تحافظ الدالة على ترتيبهما.
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="2.10" />
+
+<Note>
+
+التمارين الزوجية بلا حلول في الكتاب عمداً، لتتدرّب على الحكم على صحة حلّك بنفسك. إن شككت في حلّ، علّمه ↻ للمراجعة.
+
+</Note>
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- النفي يدخل ويقلب: $\wedge \leftrightarrow \vee$، و$\forall \leftrightarrow \exists$.
+- ${\sim}(P \Rightarrow Q) = P \wedge {\sim}Q$: نفي الشرط «و».
+- القيود مثل $\varepsilon > 0$ لا تُنفى.
+
+</Takeaways>
+
+في القسم التالي: كيف نستنتج عبارات جديدة من عبارات صادقة.
+
+</Stage>

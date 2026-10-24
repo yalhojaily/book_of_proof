@@ -1,0 +1,160 @@
+---
+chapter: logic
+section: "2.7"
+summary: «لكل» ∀ و«يوجد» ∃. كيف يحوّلان الجملة المفتوحة إلى عبارة، ولماذا يغيّر ترتيبهما المعنى كلياً.
+goals:
+  - قراءة العبارات المكمَّمة وكتابتها
+  - الحكم على صدق $\forall x, P(x)$ و$\exists x, P(x)$
+  - فهم أثر ترتيب المكمِّمين في $\forall x\, \exists y$ و$\exists y\, \forall x$
+terms:
+  - { ar: مكمِّم, en: quantifier }
+  - { ar: المكمِّم الكلي (لكل), en: universal quantifier (∀) }
+  - { ar: المكمِّم الوجودي (يوجد), en: existential quantifier (∃) }
+  - { ar: مثال مضاد, en: counterexample }
+---
+import QuantifierLab from '@/components/widgets/QuantifierLab.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { q2_7 } from '@/data/quiz-ch2';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+«لكل باب مفتاح يفتحه» و«يوجد مفتاح يفتح كل باب». الكلمات نفسها تقريباً، لكن المعنى مختلف جذرياً. الأولى عادية: كل باب له مفتاحه. والثانية تتحدث عن مفتاح رئيسي واحد. هذا الفرق بالضبط هو موضوع هذا القسم.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="53–55" minutes={10}>
+
+- **لماذا نحتاج المكمِّمات (ص 53):** محاولة كتابة «كل عناصر X فردية» بـ $\wedge$ لا تنتهي. ثم Definition 2.1.
+- **Example 2.5 (ص 54):** ترجمات صادقة، ثم Example 2.6: ترجمات كاذبة.
+- **Example 2.7 (ص 55):** الجذر التكعيبي وأثر تبديل ترتيب المكمِّمين. أهم مثال في القسم.
+- **آخر فقرة:** «All students do not pay» مقابل «Not all students pay».
+
+| ستقرأ | المعنى |
+|---|---|
+| for all, for every, for each | لكل |
+| there exists, there is | يوجد |
+| universally / existentially quantified | مكمَّمة كلياً / وجودياً |
+
+</ReadingGuide>
+
+<BookPages section="2.7" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية وأمثلة محلولة">
+
+### المكمِّمان
+
+<Definition title="المكمِّمات">
+
+- $\forall x \in X,\ P(x)$ («لكل $x$ في $X$، $P(x)$») صادقة إذا كانت $P(x)$ صادقة لكل عنصر في $X$، وكاذبة إذا وُجد ولو عنصر واحد لا يحققها.
+- $\exists x \in X,\ P(x)$ («يوجد $x$ في $X$ بحيث $P(x)$») صادقة إذا كانت $P(x)$ صادقة لعنصر واحد على الأقل في $X$.
+
+</Definition>
+
+لاحظ عدم التماثل الذي رأيته في الفصل الأول: لنفي «لكل» يكفي **مثال مضاد** واحد، ولإثبات «يوجد» يكفي **مثال** واحد. أما إثبات «لكل» فيحتاج برهاناً يشمل كل العناصر.
+
+<QuantifierLab client:visible start="one" />
+
+### الترتيب يغيّر المعنى
+
+في $\forall x,\ \exists y,\ R(x, y)$ يُختار $y$ **بعد** $x$، فيمكن أن يختلف $y$ باختلاف $x$. أما في $\exists y,\ \forall x,\ R(x, y)$ فـ $y$ يُختار **أولاً**، ويجب أن يصلح لكل $x$ معاً. انتقل إلى التبويب الثاني وجرّب العلاقة $y = x$: كل صف فيه خانة، لكن لا يوجد عمود ممتلئ.
+
+<QuantifierLab client:visible start="two" />
+
+<Example title="هل تصدق؟">
+
+(أ) $\forall x \in \mathbb{R},\ \exists y \in \mathbb{R},\ y > x$. (ب) $\exists y \in \mathbb{R},\ \forall x \in \mathbb{R},\ y > x$. (ج) $\forall n \in \mathbb{N},\ \exists m \in \mathbb{N},\ m < n$.
+
+<Reveal>
+
+(أ) صادقة: لأي $x$ خذ $y = x + 1$.
+
+(ب) كاذبة: تقول إن هناك عدداً أكبر من كل الأعداد الحقيقية. أي $y$ تختاره، فالعدد $x = y$ يكسر الشرط.
+
+(ج) كاذبة: عند $n = 1$ لا يوجد عدد طبيعي أصغر منه، لأن $\mathbb{N}$ تبدأ من 1. مثال مضاد واحد يكفي.
+
+</Reveal>
+
+</Example>
+
+<Pitfall title="«الكل ليس» غير «ليس الكل»">
+
+«كل الأعداد الصحيحة ليست زوجية» تعني أنه لا يوجد عدد صحيح زوجي، وهذا كاذب. أما «ليست كل الأعداد الصحيحة زوجية» فصادقة. في الرياضيات قل دائماً ما تقصده بالضبط.
+
+</Pitfall>
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q2_7} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="2.7" count={10} core={[1, 3, 5, 7, 9]} />
+
+<BookPages section="2.7" kind="exercises" />
+
+### تمارين إضافية بحلول كاملة
+
+<Exercise num="1">
+
+اكتب بالكلمات وحدّد صحتها: $\forall x \in \mathbb{Q},\ \exists y \in \mathbb{Q},\ xy = 1$.
+
+<Reveal>
+
+«لكل عدد نسبي $x$ يوجد عدد نسبي $y$ بحيث $xy = 1$». كاذبة: عند $x = 0$ يكون $xy = 0$ دائماً. ولو استبدلنا $\mathbb{Q}$ بـ $\mathbb{Q} - \{0\}$ لصارت صادقة ($y = 1/x$).
+
+</Reveal>
+
+</Exercise>
+
+<Exercise num="2">
+
+ترجم رمزياً: «يوجد عدد طبيعي أصغر من أو يساوي كل الأعداد الطبيعية». هل هي صادقة؟
+
+<Reveal>
+
+$\exists m \in \mathbb{N},\ \forall n \in \mathbb{N},\ m \le n$. صادقة: $m = 1$. هذا مثال خاص على مبدأ الترتيب الحسن من القسم 1.9.
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="2.7" />
+
+<Note>
+
+التمارين الزوجية بلا حلول في الكتاب عمداً، لتتدرّب على الحكم على صحة حلّك بنفسك. إن شككت في حلّ، علّمه ↻ للمراجعة.
+
+</Note>
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- $\forall$ تحتاج كل العناصر، ويكفي مثال مضاد واحد لنفيها.
+- $\exists$ يكفيها مثال واحد.
+- في $\forall x\, \exists y$ يمكن أن يتغير $y$ مع $x$، وفي $\exists y\, \forall x$ يجب أن يصلح $y$ واحد للجميع.
+
+</Takeaways>
+
+في القسم التالي: «لكل» مختبئة في كل عبارة شرطية فيها متغير.
+
+</Stage>

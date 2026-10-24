@@ -75,7 +75,7 @@ export const parts: Part[] = [
         en: 'Logic',
         page: 34,
         blurb: 'القضايا، أدوات الربط، الشرطيات، جداول الصدق، المكمِّمات والنفي.',
-        available: false,
+        available: true,
         sections: [
           s('2.1', 'القضايا', 'Statements', 35),
           s('2.2', 'و، أو، ليس', 'And, Or, Not', 39),

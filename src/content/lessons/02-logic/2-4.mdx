@@ -1,0 +1,159 @@
+---
+chapter: logic
+section: "2.4"
+summary: الشرط وعكسه مختلفان. وحين يصح الاتجاهان معاً نكتب P ⇔ Q ونقرؤها «إذا وفقط إذا».
+goals:
+  - التمييز بين $P \Rightarrow Q$ وعكسها $Q \Rightarrow P$
+  - كتابة جدول صدق $P \Leftrightarrow Q$
+  - التعرّف على صياغات «إذا وفقط إذا»
+terms:
+  - { ar: العكس, en: converse }
+  - { ar: الشرط الثنائي, en: biconditional }
+  - { ar: إذا وفقط إذا, en: if and only if (iff) }
+  - { ar: شرط لازم وكافٍ, en: necessary and sufficient }
+---
+import OpenConditional from '@/components/widgets/OpenConditional.tsx';
+import Connectives from '@/components/widgets/Connectives.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { q2_4 } from '@/data/quiz-ch2';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+«كل من يسكن الرياض يسكن السعودية» صحيحة. اقلبها: «كل من يسكن السعودية يسكن الرياض». خاطئة بوضوح. قلب الشرط ينتج جملة مختلفة تماماً، قد تكون صحيحة وقد لا تكون. هذا من أكثر الأخطاء شيوعاً في التفكير اليومي وفي البراهين.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="46–47" minutes={5}>
+
+- **العكس (ص 46):** مثال «مضاعف 6 ⇒ يقبل القسمة على 2» وعكسه الكاذب بمثال مضاد $a = 4$.
+- **تعريف $\Leftrightarrow$:** يعني $(P \Rightarrow Q) \wedge (Q \Rightarrow P)$، ولماذا نقرؤه «$P$ if and only if $Q$».
+- **الجدول والصياغات (ص 47):** $P \Leftrightarrow Q$ صادقة حين تتساوى قيمتا الصدق، وقائمة الصياغات المكافئة.
+
+| ستقرأ | المعنى |
+|---|---|
+| converse | العكس |
+| if and only if | إذا وفقط إذا |
+| …and conversely | …والعكس صحيح |
+
+</ReadingGuide>
+
+<BookPages section="2.4" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية وأمثلة محلولة">
+
+### العكس
+
+**عكس** العبارة $P \Rightarrow Q$ هو $Q \Rightarrow P$. والعبارتان مستقلتان: قد تصدق إحداهما وتكذب الأخرى. جرّب: اختر $P$ و$Q$ وانظر إلى السطرين الأول والأخير.
+
+<OpenConditional client:visible initialP="m6" initialQ="even" />
+
+جرّب الآن $P$: «$x$ فردي» و$Q$: «$x^2$ فردي». ستجد العبارة وعكسها صادقتين معاً.
+
+### الشرط الثنائي
+
+<Definition title="إذا وفقط إذا">
+
+$P \Leftrightarrow Q$ تعني $(P \Rightarrow Q) \wedge (Q \Rightarrow P)$، ونقرؤها «$P$ إذا وفقط إذا $Q$». تكون صادقة حين يكون لـ $P$ و$Q$ **قيمة الصدق نفسها**.
+
+</Definition>
+
+<Connectives client:visible ops={['imp', 'iff']} />
+
+لماذا «إذا وفقط إذا»؟ «$P$ إذا $Q$» تعني $Q \Rightarrow P$، و«$P$ فقط إذا $Q$» تعني $P \Rightarrow Q$. والاثنتان معاً تعطيان $\Leftrightarrow$.
+
+<Note title="في البراهين">
+
+لبرهان $P \Leftrightarrow Q$ تبرهن عادة اتجاهين منفصلين: $P \Rightarrow Q$ ثم $Q \Rightarrow P$. سترى ذلك في الفصل 7. وفي التعريفات الرياضية يُكتب «if» وهو يعني «iff»، اختصاراً متعارفاً عليه.
+
+</Note>
+
+<Example title="هل يصح الاتجاهان؟">
+
+لكل عدد صحيح $n$: (أ) «$n$ من مضاعفات 4 $\Leftrightarrow$ $n$ زوجي». (ب) «$n$ زوجي $\Leftrightarrow$ $n + 1$ فردي».
+
+<Reveal>
+
+(أ) كاذبة: الاتجاه $\Rightarrow$ صحيح، لكن العكس خطأ، ومثاله المضاد $n = 2$.
+
+(ب) صادقة: إذا كان $n = 2k$ فإن $n + 1 = 2k + 1$ فردي، وإذا كان $n + 1 = 2k + 1$ فإن $n = 2k$ زوجي.
+
+</Reveal>
+
+</Example>
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q2_4} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="2.4" count={5} core={[1, 3, 5]} />
+
+<BookPages section="2.4" kind="exercises" />
+
+### تمارين إضافية بحلول كاملة
+
+<Exercise num="1">
+
+اكتب العبارة وعكسها، وحدّد صحة كل منهما: «إذا كان المثلث متساوي الأضلاع فإنه متساوي الزوايا».
+
+<Reveal>
+
+العبارة صادقة، وعكسها «إذا كان المثلث متساوي الزوايا فإنه متساوي الأضلاع» صادق أيضاً. إذن: المثلث متساوي الأضلاع إذا وفقط إذا كان متساوي الزوايا.
+
+</Reveal>
+
+</Exercise>
+
+<Exercise num="2">
+
+أعطِ مثالاً من الحياة لعبارة صادقة وعكسها كاذب، ومثالاً لعبارة صادقة وعكسها صادق.
+
+<Reveal>
+
+عكسها كاذب: «إذا كان اليوم الجمعة فهو من أيام نهاية الأسبوع». عكسها صادق: «إذا كان العام كبيساً ففبراير فيه 29 يوماً».
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="2.4" />
+
+<Note>
+
+التمارين الزوجية بلا حلول في الكتاب عمداً، لتتدرّب على الحكم على صحة حلّك بنفسك. إن شككت في حلّ، علّمه ↻ للمراجعة.
+
+</Note>
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- العكس $Q \Rightarrow P$ عبارة مستقلة عن $P \Rightarrow Q$.
+- $P \Leftrightarrow Q$ تعني الاتجاهين معاً، وتصدق حين تتساوى قيمتا الصدق.
+- «لازم وكافٍ» و«والعكس صحيح» صياغات أخرى لـ $\Leftrightarrow$.
+
+</Takeaways>
+
+في القسم التالي: جداول الصدق لعبارات مركّبة من كل هذه الأدوات.
+
+</Stage>

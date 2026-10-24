@@ -1,0 +1,149 @@
+---
+chapter: logic
+section: "2.6"
+summary: عبارتان مختلفتان في الشكل ومتطابقتان في المعنى. التكافؤ المنطقي، والعكس النقيض، وقانونا دي مورغان.
+goals:
+  - التحقق من تكافؤ عبارتين بجدول الصدق
+  - معرفة أن $P \Rightarrow Q$ تكافئ عكسها النقيض
+  - تطبيق قانوني دي مورغان والتوزيع
+terms:
+  - { ar: تكافؤ منطقي, en: logical equivalence }
+  - { ar: العكس النقيض, en: contrapositive }
+  - { ar: قانونا دي مورغان, en: "DeMorgan's laws" }
+  - { ar: قوانين الإبدال والتوزيع والتجميع, en: commutative / distributive / associative laws }
+---
+import TruthTable from '@/components/widgets/TruthTable.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { q2_6 } from '@/data/quiz-ch2';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+«إذا أمطرت ابتلّ الشارع» و«إذا لم يبتلّ الشارع فإنها لم تمطر». جملتان مختلفتان، لكن من يقبل إحداهما لا بد أن يقبل الأخرى. نقول إنهما **متكافئتان منطقياً**. وهذه ليست ملاحظة لغوية فقط: الصيغة الثانية هي طريقة برهان كاملة ستتعلمها في الفصل 5.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="50–52" minutes={10}>
+
+- **$P \Leftrightarrow Q$ تكافئ $(P \wedge Q) \vee ({\sim}P \wedge {\sim}Q)$ (ص 50–51):** أول مثال على التكافؤ، وتعريفه: تطابق الجدولين صفاً بصف. لاحظ أن الكتاب يكتب التكافؤ بإشارة $=$.
+- **العكس النقيض (ص 51):** $P \Rightarrow Q = ({\sim}Q) \Rightarrow ({\sim}P)$، مع الإشارة إلى الفصل 5.
+- **Fact 2.1 قانونا دي مورغان (ص 51):** وتفسيرهما البديهي بعد الجدول.
+- **قائمة القوانين (ص 52):** العكس النقيض، ودي مورغان، والإبدال، والتوزيع، والتجميع. ارجع إليها كثيراً.
+
+| ستقرأ | المعنى |
+|---|---|
+| logically equivalent | متكافئتان منطقياً |
+| contrapositive law | قانون العكس النقيض |
+| DeMorgan's laws | قانونا دي مورغان |
+
+</ReadingGuide>
+
+<BookPages section="2.6" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية وأمثلة محلولة">
+
+### التعريف
+
+<Definition title="التكافؤ المنطقي">
+
+تكون العبارتان **متكافئتين منطقياً** إذا كان لهما قيمة الصدق نفسها في **كل** صف من جدول الصدق. ويكتب الكتاب ذلك $P \Rightarrow Q = ({\sim}Q) \Rightarrow ({\sim}P)$.
+
+</Definition>
+
+اختر مثالاً، أو اكتب عبارتين من عندك:
+
+<TruthTable client:visible mode="compare" presets={[
+  { a: 'P ⇒ Q', b: '∼Q ⇒ ∼P', note: 'العكس النقيض يكافئ العبارة الأصلية دائماً.' },
+  { a: 'P ⇒ Q', b: 'Q ⇒ P', note: 'العكس لا يكافئ العبارة الأصلية: يختلفان في صفين.' },
+  { a: '∼(P ∧ Q)', b: '∼P ∨ ∼Q', note: 'قانون دي مورغان الأول.' },
+  { a: '∼(P ∨ Q)', b: '∼P ∧ ∼Q', note: 'قانون دي مورغان الثاني.' },
+  { a: 'P ∧ (Q ∨ R)', b: '(P ∧ Q) ∨ (P ∧ R)', note: 'التوزيع، تماماً مثل p(q + r) = pq + pr.' },
+  { a: 'P ⇒ Q', b: '∼P ∨ Q', note: 'طريقة أخرى لكتابة الشرط دون ⇒.' },
+  { a: '(P ⇒ Q) ∧ (P ⇒ R)', b: 'P ⇒ (Q ∧ R)', note: 'لبرهان أن P تستلزم أمرين، برهن كلاً منهما على حدة.' },
+]} />
+
+### أهم القوانين
+
+| القانون | الصيغة |
+|---|---|
+| العكس النقيض | $P \Rightarrow Q = {\sim}Q \Rightarrow {\sim}P$ |
+| دي مورغان | ${\sim}(P \wedge Q) = {\sim}P \vee {\sim}Q$، و${\sim}(P \vee Q) = {\sim}P \wedge {\sim}Q$ |
+| الإبدال | $P \wedge Q = Q \wedge P$، و$P \vee Q = Q \vee P$ |
+| التوزيع | $P \wedge (Q \vee R) = (P \wedge Q) \vee (P \wedge R)$، و$P \vee (Q \wedge R) = (P \vee Q) \wedge (P \vee R)$ |
+| التجميع | $P \wedge (Q \wedge R) = (P \wedge Q) \wedge R$، وكذلك لـ $\vee$ |
+
+قانونا دي مورغان هنا هما قانونا المتممة في الفصل الأول بالضبط: $\overline{A \cup B} = \overline{A} \cap \overline{B}$. والسبب أن $x \in A \cup B$ تعني $(x \in A) \vee (x \in B)$.
+
+<Pitfall title="الأقواس ضرورية عند خلط ∧ و∨">
+
+$P \vee (Q \wedge R)$ و$(P \vee Q) \wedge R$ غير متكافئتين. جرّبهما في الأداة أعلاه. لذلك لا تكتب $P \vee Q \wedge R$ دون أقواس.
+
+</Pitfall>
+
+<Example title="التبسيط بالقوانين">
+
+بيّن دون جدول صدق أن ${\sim}({\sim}P \vee Q) = P \wedge {\sim}Q$.
+
+<Reveal>
+
+بقانون دي مورغان الثاني: ${\sim}({\sim}P \vee Q) = {\sim}{\sim}P \wedge {\sim}Q$. ونفي النفي يعيد العبارة: ${\sim}{\sim}P = P$. إذن الناتج $P \wedge {\sim}Q$. ولأن ${\sim}P \vee Q = P \Rightarrow Q$، فقد برهنا أيضاً أن ${\sim}(P \Rightarrow Q) = P \wedge {\sim}Q$.
+
+</Reveal>
+
+</Example>
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q2_6} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="2.6" count={14} core={[1, 3, 5, 7, 9, 11, 13]} />
+
+<BookPages section="2.6" kind="exercises" />
+
+<Note title="تحقّق من جداولك">
+
+اكتب الجدول بيدك أولاً، ثم أدخل العبارتين في الأداة أعلاه لتتأكد.
+
+</Note>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="2.6" />
+
+<Note>
+
+التمارين الزوجية بلا حلول في الكتاب عمداً، لتتدرّب على الحكم على صحة حلّك بنفسك. إن شككت في حلّ، علّمه ↻ للمراجعة.
+
+</Note>
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- العبارتان متكافئتان إذا تطابق جدولاهما صفاً بصف، ويكفي صف واحد مختلف لنفي التكافؤ.
+- $P \Rightarrow Q$ تكافئ عكسها النقيض ${\sim}Q \Rightarrow {\sim}P$، ولا تكافئ عكسها $Q \Rightarrow P$.
+- دي مورغان: النفي يقلب $\wedge$ إلى $\vee$ والعكس.
+
+</Takeaways>
+
+في القسم التالي: «لكل» و«يوجد».
+
+</Stage>
