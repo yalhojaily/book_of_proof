@@ -6,14 +6,14 @@ const LABEL: Record<Ans, string> = { pq: 'P \\Rightarrow Q', qp: 'Q \\Rightarrow
 
 const DEFAULT: { s: string; a: Ans; why: string }[] = [
   { s: 'Q if P', a: 'pq', why: '«Q إذا P»: الشرط بعد كلمة if هو المقدَّم دائماً، أينما وقع في الجملة.' },
-  { s: 'P only if Q', a: 'pq', why: '«P فقط إذا Q»: لا يمكن أن تصدق P إلا وQ صادقة، أي P ⇒ Q. هذه أكثر صيغة خادعة.' },
+  { s: 'P only if Q', a: 'pq', why: '«P فقط إذا Q»: لا يمكن أن تصدق P إلا وQ صادقة، أي ⁦P ⇒ Q⁩. هذه أكثر صيغة خادعة.' },
   { s: 'P is sufficient for Q', a: 'pq', why: 'تحقق P يكفي لتحقق Q.' },
-  { s: 'P is necessary for Q', a: 'qp', why: 'لا تتحقق Q دون P، أي Q ⇒ P.' },
+  { s: 'P is necessary for Q', a: 'qp', why: 'لا تتحقق Q دون P، أي ⁦Q ⇒ P⁩.' },
   { s: 'Q whenever P', a: 'pq', why: 'كلما صدقت P صدقت Q.' },
-  { s: 'Q only if P', a: 'qp', why: 'بالقاعدة نفسها: «Q فقط إذا P» تعني Q ⇒ P.' },
-  { s: 'P provided that Q', a: 'qp', why: '«P بشرط Q»: الشرط هنا Q، أي Q ⇒ P.' },
-  { s: 'P is necessary and sufficient for Q', a: 'iff', why: 'ضروري (Q ⇒ P) وكافٍ (P ⇒ Q) معاً.' },
-  { s: 'If P, then Q, and conversely', a: 'iff', why: '«والعكس صحيح» تضيف Q ⇒ P.' },
+  { s: 'Q only if P', a: 'qp', why: 'بالقاعدة نفسها: «Q فقط إذا P» تعني ⁦Q ⇒ P⁩.' },
+  { s: 'P provided that Q', a: 'qp', why: '«P بشرط Q»: الشرط هنا Q، أي ⁦Q ⇒ P⁩.' },
+  { s: 'P is necessary and sufficient for Q', a: 'iff', why: 'ضروري ⁦(Q ⇒ P)⁩ وكافٍ ⁦(P ⇒ Q)⁩ معاً.' },
+  { s: 'If P, then Q, and conversely', a: 'iff', why: '«والعكس صحيح» تضيف ⁦Q ⇒ P⁩.' },
   { s: 'For Q, it is sufficient that P', a: 'pq', why: 'P تكفي لـ Q.' },
 ];
 

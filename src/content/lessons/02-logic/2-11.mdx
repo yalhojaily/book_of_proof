@@ -12,6 +12,7 @@ terms:
   - { ar: قاعدة النفي, en: modus tollens }
   - { ar: الحذف, en: elimination }
 ---
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
 import InferenceChecker from '@/components/widgets/InferenceChecker.tsx';
 
 <Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
@@ -86,7 +87,17 @@ import InferenceChecker from '@/components/widgets/InferenceChecker.tsx';
 
 </Stage>
 
-<Stage n={4} id="summary" title="الخلاصة">
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة">
+
+<QuickCheck client:visible questions={[
+  { q: 'من «إذا $P$ فإن $Q$» و«$P$» نستنتج:', options: ['$Q$', '$\\sim Q$', 'لا شيء'], answer: 0, why: 'قاعدة الإثبات (modus ponens).' },
+  { q: 'من «إذا $P$ فإن $Q$» و«$Q$» نستنتج $P$. هل هذا صحيح؟', options: ['لا، مغالطة إثبات التالي', 'نعم'], answer: 0, why: 'قد تصدق $Q$ لسبب آخر غير $P$.' },
+  { q: 'من «إذا $P$ فإن $Q$» و«$\\sim Q$» نستنتج:', options: ['$\\sim P$', '$P$', 'لا شيء'], answer: 0, why: 'قاعدة النفي (modus tollens)، وهي أساس برهان العكس النقيض.' },
+]} />
+
+</Stage>
+
+<Stage n={5} id="summary" title="الخلاصة">
 
 <Takeaways>
 

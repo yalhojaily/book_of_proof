@@ -28,7 +28,7 @@ export default function ModClock() {
   );
 
   return (
-    <Shell title="التطابق بمقياس n: ساعة الأعداد" foot="كل موضع على الساعة باقٍ من بواقي القسمة على n، وتحته الأعداد التي تعطيه. يكون a ≡ b (mod n) إذا وقعا على الموضع نفسه، أي إذا كان n يقسم الفرق a − b.">
+    <Shell title="التطابق بمقياس n: ساعة الأعداد" foot="كل موضع على الساعة باقٍ من بواقي القسمة على n، وتحته الأعداد التي تعطيه. يكون ⁦a ≡ b (mod n)⁩ إذا وقعا على الموضع نفسه، أي إذا كان n يقسم الفرق ⁦a − b⁩.">
       <div className="controls" style={{ gap: 14 }}>
         <label className="ltr" style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
           <Tex>{`n = ${n}`}</Tex>

@@ -59,7 +59,7 @@ export default function OpenConditional({ initialP = 'm6', initialQ = 'even', sh
   );
 
   return (
-    <Shell title="الشرط مع متغير: هل يصح لكل x؟" foot="كل عدد من 1 إلى 30 يقع في أحد الصناديق الأربعة. العبارة P(x) ⇒ Q(x) تعني «لكل x»، فتكون كاذبة إذا وُجد ولو عدد واحد في الصندوق الأحمر.">
+    <Shell title="الشرط مع متغير: هل يصح لكل x؟" foot="كل عدد من 1 إلى 30 يقع في أحد الصناديق الأربعة. العبارة ⁦P(x) ⇒ Q(x)⁩ تعني «لكل x»، فتكون كاذبة إذا وُجد ولو عدد واحد في الصندوق الأحمر.">
       <div className="controls" style={{ gap: 14 }}>
         {sel(pk, setPk, 'P(x):')}
         {sel(qk, setQk, 'Q(x):')}

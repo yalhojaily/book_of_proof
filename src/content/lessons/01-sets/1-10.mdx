@@ -10,6 +10,7 @@ terms:
   - { ar: مسلّمات زيرميلو–فرانكل, en: Zermelo–Fraenkel axioms }
 exercises: هذا القسم للاطلاع، ولا يُستخدم في بقية الكتاب، ولا تمارين له.
 ---
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
 
 import Russell from '@/components/widgets/Russell.tsx';
 
@@ -94,7 +95,16 @@ $$
 
 </Stage>
 
-<Stage n={4} id="summary" title="الخلاصة">
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة">
+
+<QuickCheck client:visible questions={[
+  { q: 'مفارقة راسل تأتي من المجموعة:', options: ['مجموعة كل المجموعات التي لا تنتمي إلى نفسها', 'مجموعة كل الأعداد الطبيعية', 'المجموعة الخالية'], answer: 0, why: 'إن انتمت إلى نفسها فهي لا تنتمي، وإن لم تنتمِ فهي تنتمي.' },
+  { q: 'كيف تتجنب نظرية المجموعات الحديثة هذه المفارقة؟', options: ['بقواعد تمنع تكوين «مجموعة» من أي وصف كان', 'بإلغاء المجموعات اللانهائية'], answer: 0, why: 'ليس كل وصف يحدد مجموعة. في هذا الكتاب نعمل دائماً داخل مجموعة شاملة معقولة.' },
+]} />
+
+</Stage>
+
+<Stage n={5} id="summary" title="الخلاصة">
 
 <Takeaways>
 

@@ -54,7 +54,7 @@ export default function RelationLab({ size = 5, initial = 4 }: { size?: number; 
   );
 
   return (
-    <Shell title="مختبر العلاقات" foot="العلاقة على A مجموعة جزئية من A × A. اضغط أي خانة في الجدول لتضيف الزوج أو تحذفه. السهم من x إلى y يعني xRy، والحلقة عند x تعني xRx.">
+    <Shell title="مختبر العلاقات" foot="العلاقة على A مجموعة جزئية من ⁦A × A⁩. اضغط أي خانة في الجدول لتضيف الزوج أو تحذفه. السهم من x إلى y يعني xRy، والحلقة عند x تعني xRx.">
       <div className="controls">
         {PRESETS.map((p, i) => (
           <button key={p.name} className="chip ltr" aria-pressed={pi === i} onClick={() => { setR(fromPreset(i)); setPi(i); }}>{p.name}</button>

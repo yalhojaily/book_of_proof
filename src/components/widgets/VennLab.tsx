@@ -4,11 +4,11 @@ import { Venn, LAYOUT3 } from './venn';
 import { parse, evalAtom, toTex, describeAtom, type Node } from '@/lib/setexpr';
 
 const PRESETS: { l: string; r: string; note: string }[] = [
-  { l: '(A∪B)∩C', r: 'A∪(B∩C)', note: 'مكان القوسين يغيّر المعنى، لذلك لا نكتب A ∪ B ∩ C دون أقواس.' },
+  { l: '(A∪B)∩C', r: 'A∪(B∩C)', note: 'مكان القوسين يغيّر المعنى، لذلك لا نكتب ⁦A ∪ B ∩ C⁩ دون أقواس.' },
   { l: "(A∪B)'", r: "A'∩B'", note: 'قانون دي مورغان: متممة الاتحاد تساوي تقاطع المتممتين.' },
   { l: "(A∩B)'", r: "A'∪B'", note: 'قانون دي مورغان الثاني.' },
   { l: 'A∩(B∪C)', r: '(A∩B)∪(A∩C)', note: 'التوزيع: التقاطع يتوزع على الاتحاد.' },
-  { l: 'A−(B∪C)', r: '(A−B)∩(A−C)', note: 'حذف B ∪ C من A هو حذف B وحذف C معاً.' },
+  { l: 'A−(B∪C)', r: '(A−B)∩(A−C)', note: 'حذف ⁦B ∪ C⁩ من A هو حذف B وحذف C معاً.' },
   { l: 'A−(B∩C)', r: '(A−B)∩(A−C)', note: 'تبدو صحيحة، لكنها ليست كذلك. أين تختلفان؟' },
 ];
 

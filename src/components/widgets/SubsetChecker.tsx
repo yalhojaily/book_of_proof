@@ -38,7 +38,7 @@ export default function SubsetChecker() {
   );
 
   return (
-    <Shell title="هل A مجموعة جزئية من B؟" foot="اضغط على الأعداد لتغيير المجموعتين. جرّب أن تجعل A خالية، أو أن تجعل A = B.">
+    <Shell title="هل A مجموعة جزئية من B؟" foot="اضغط على الأعداد لتغيير المجموعتين. جرّب أن تجعل A خالية، أو أن تجعل ⁦A = B⁩.">
       <div style={{ display: 'grid', gap: 6, marginBottom: 10 }}>
         {(['A', 'B'] as const).map((w) => (
           <div key={w} style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>

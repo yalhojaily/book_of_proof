@@ -68,7 +68,7 @@ export const puzzles43: Puzzle[] = [
 
 export const puzzles44: Puzzle[] = [
   {
-    title: 'n² + n زوجي',
+    title: '⁦n² + n⁩ زوجي',
     prop: r`لكل عدد صحيح $n$، العدد $n^2 + n$ زوجي.`,
     steps: [
       r`ليكن $n$ عدداً صحيحاً. إما أن يكون زوجياً أو فردياً.`,

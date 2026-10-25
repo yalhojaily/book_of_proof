@@ -16,13 +16,13 @@ const ITEMS: Item[] = [
   },
   {
     title: 'نفي «لكل»',
-    words: 'لكل عدد طبيعي n، العدد n² + n زوجي.',
+    words: 'لكل عدد طبيعي n، العدد ⁦n² + n⁩ زوجي.',
     steps: [
       { tex: '{\\sim}\\big(\\forall n \\in \\mathbb{N},\\ n^2 + n \\text{ is even}\\big)', rule: 'نضع النفي أمام العبارة كلها.' },
       { tex: '\\exists n \\in \\mathbb{N},\\ {\\sim}(n^2 + n \\text{ is even})', rule: 'نفي ∀ يصبح ∃، ويدخل النفي إلى الداخل.' },
       { tex: '\\exists n \\in \\mathbb{N},\\ n^2 + n \\text{ is odd}', rule: 'نبسّط: العدد الصحيح الذي ليس زوجياً فردي.' },
     ],
-    result: 'يوجد عدد طبيعي n يكون n² + n عنده فردياً. (والأصلية صادقة، فالنفي كاذب.)',
+    result: 'يوجد عدد طبيعي n يكون ⁦n² + n⁩ عنده فردياً. (والأصلية صادقة، فالنفي كاذب.)',
   },
   {
     title: 'نفي «يوجد»',
@@ -36,14 +36,14 @@ const ITEMS: Item[] = [
   },
   {
     title: 'مكمِّمان',
-    words: 'لكل عدد حقيقي x يوجد عدد حقيقي y بحيث x + y = 0.',
+    words: 'لكل عدد حقيقي x يوجد عدد حقيقي y بحيث ⁦x + y = 0⁩.',
     steps: [
       { tex: '{\\sim}\\big(\\forall x \\in \\mathbb{R},\\ \\exists y \\in \\mathbb{R},\\ x + y = 0\\big)', rule: 'نضع النفي أمام العبارة.' },
       { tex: '\\exists x \\in \\mathbb{R},\\ {\\sim}\\big(\\exists y \\in \\mathbb{R},\\ x + y = 0\\big)', rule: 'المكمِّم الأول: ∀ يصبح ∃.' },
       { tex: '\\exists x \\in \\mathbb{R},\\ \\forall y \\in \\mathbb{R},\\ {\\sim}(x + y = 0)', rule: 'المكمِّم الثاني: ∃ يصبح ∀.' },
       { tex: '\\exists x \\in \\mathbb{R},\\ \\forall y \\in \\mathbb{R},\\ x + y \\neq 0', rule: 'نبسّط.' },
     ],
-    result: 'يوجد عدد حقيقي x لا يجعله أي عدد حقيقي y يحقق x + y = 0.',
+    result: 'يوجد عدد حقيقي x لا يجعله أي عدد حقيقي y يحقق ⁦x + y = 0⁩.',
   },
   {
     title: 'نفي شرط',
@@ -59,15 +59,15 @@ const ITEMS: Item[] = [
   },
   {
     title: 'تعريف التقارب',
-    words: 'لكل ε > 0 يوجد N بحيث |aₙ − L| < ε لكل n ≥ N.',
+    words: 'لكل ⁦ε > 0⁩ يوجد N بحيث ⁦|aₙ − L| < ε⁩ لكل ⁦n ≥ N⁩.',
     steps: [
       { tex: '{\\sim}\\big(\\forall \\varepsilon > 0,\\ \\exists N \\in \\mathbb{N},\\ \\forall n \\ge N,\\ |a_n - L| < \\varepsilon\\big)', rule: 'نضع النفي أمام العبارة. (ستلقى هذا التعريف في الفصل 13.)' },
       { tex: '\\exists \\varepsilon > 0,\\ {\\sim}\\big(\\exists N \\in \\mathbb{N},\\ \\forall n \\ge N,\\ |a_n - L| < \\varepsilon\\big)', rule: '∀ تصبح ∃.' },
       { tex: '\\exists \\varepsilon > 0,\\ \\forall N \\in \\mathbb{N},\\ {\\sim}\\big(\\forall n \\ge N,\\ |a_n - L| < \\varepsilon\\big)', rule: '∃ تصبح ∀.' },
       { tex: '\\exists \\varepsilon > 0,\\ \\forall N \\in \\mathbb{N},\\ \\exists n \\ge N,\\ {\\sim}(|a_n - L| < \\varepsilon)', rule: '∀ تصبح ∃.' },
-      { tex: '\\exists \\varepsilon > 0,\\ \\forall N \\in \\mathbb{N},\\ \\exists n \\ge N,\\ |a_n - L| \\ge \\varepsilon', rule: 'نبسّط. لاحظ أن «ε > 0» و«n ≥ N» قيود على المتغير، فلا تُنفى.' },
+      { tex: '\\exists \\varepsilon > 0,\\ \\forall N \\in \\mathbb{N},\\ \\exists n \\ge N,\\ |a_n - L| \\ge \\varepsilon', rule: 'نبسّط. لاحظ أن «⁦ε > 0⁩» و«⁦n ≥ N⁩» قيود على المتغير، فلا تُنفى.' },
     ],
-    result: 'يوجد ε > 0 بحيث مهما اخترت N، تجد n ≥ N يكون عنده aₙ بعيداً عن L بمقدار ε على الأقل.',
+    result: 'يوجد ⁦ε > 0⁩ بحيث مهما اخترت N، تجد ⁦n ≥ N⁩ يكون عنده aₙ بعيداً عن L بمقدار ε على الأقل.',
   },
 ];
 

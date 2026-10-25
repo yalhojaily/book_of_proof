@@ -20,7 +20,7 @@ export default function Russell() {
   };
 
   return (
-    <Shell title="مفارقة راسل: هل A ∈ A؟" foot="عرّف A مجموعةَ كل المجموعات التي لا تنتمي إلى نفسها. ابدأ بأي افتراض واتبع التعريف، وراقب ما يحدث.">
+    <Shell title="مفارقة راسل: هل ⁦A ∈ A⁩؟" foot="عرّف A مجموعةَ كل المجموعات التي لا تنتمي إلى نفسها. ابدأ بأي افتراض واتبع التعريف، وراقب ما يحدث.">
       <div style={{ textAlign: 'center', fontSize: '1.25em', margin: '0 0 10px' }}>
         <Tex>{'A = \\{X : X \\text{ is a set and } X \\notin X\\}'}</Tex>
       </div>
@@ -80,7 +80,7 @@ export default function Russell() {
         </div>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginTop: 14 }}>
-        <button className="btn active" onClick={flip}>{assume === null ? 'افترض أن A ∈ A' : 'اتبع التعريف'}</button>
+        <button className="btn active" onClick={flip}>{assume === null ? 'افترض أن ⁦A ∈ A⁩' : 'اتبع التعريف'}</button>
         <button className="btn" onClick={() => { setAssume(null); setSteps(0); }}>من جديد</button>
       </div>
       {steps >= 3 && (

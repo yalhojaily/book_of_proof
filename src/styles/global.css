@@ -184,6 +184,7 @@ code {
 .katex-display {
   direction: ltr;
   overflow-x: auto;
+  position: relative; /* keep KaTeX's hidden MathML inside the scroll box */
   overflow-y: hidden;
   padding: 0.25em 0;
 }
@@ -404,4 +405,18 @@ svg text {
   vertical-align: middle;
   padding: 2px 0;
   direction: ltr; /* scroll starts at the beginning of the formula */
+}
+
+/* Cross-references between sections ("القسم 2.10"), added by src/lib/remark-xref.mjs */
+a.xref {
+  color: inherit;
+  text-decoration: underline dotted;
+  text-decoration-color: var(--hue, var(--blue));
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+  white-space: nowrap;
+}
+a.xref:hover {
+  color: var(--hue, var(--blue));
+  text-decoration-style: solid;
 }

@@ -17,7 +17,7 @@ export const contraFrames: Frame[] = [
 
 export const puzzles5: Puzzle[] = [
   {
-    title: 'n² + 2n فردي',
+    title: '⁦n² + 2n⁩ فردي',
     prop: r`ليكن $n \in \mathbb{Z}$. إذا كان $n^2 + 2n$ فردياً، فإن $n$ فردي.`,
     steps: [
       r`(بالعكس النقيض) افترض أن $n$ ليس فردياً.`,

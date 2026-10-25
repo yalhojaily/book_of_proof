@@ -74,7 +74,7 @@ export default function MembershipTester() {
   const res = def.check(raw);
   const all = Array.isArray(res) && res.every((s) => s.ok);
   return (
-    <Shell title="هل العنصر في المجموعة؟" foot="لتبرهن أن عنصراً ينتمي إلى مجموعة معرّفة بشرط: تحقق أولاً أنه من المجموعة الأم S، ثم أن الشرط P صادق له. لا شيء غير ذلك. وإذا كانت المجموعة قيم صيغة مثل 3x³ + 2، فابحث عن x صحيح يعطي العنصر.">
+    <Shell title="هل العنصر في المجموعة؟" foot="لتبرهن أن عنصراً ينتمي إلى مجموعة معرّفة بشرط: تحقق أولاً أنه من المجموعة الأم S، ثم أن الشرط P صادق له. لا شيء غير ذلك. وإذا كانت المجموعة قيم صيغة مثل ⁦3x³ + 2⁩، فابحث عن x صحيح يعطي العنصر.">
       <div className="controls">
         {SETS.map((s, i) => (
           <button key={i} className="chip" aria-pressed={i === si} onClick={() => { setSi(i); setRaw(SETS[i].placeholder); }}>

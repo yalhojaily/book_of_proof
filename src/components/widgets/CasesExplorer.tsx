@@ -31,7 +31,7 @@ const PRESETS: Preset[] = [
     odd: ['(2k+1)^2 + (2k+1) = 4k^2 + 6k + 2', '= 2(2k^2 + 3k + 1)'],
   },
   {
-    label: 'n² − 1 (n فردي)',
+    label: '⁦n² − 1⁩ (n فردي)',
     tex: 'n^2 - 1',
     f: (n) => n * n - 1,
     claim: 'multiple of 8 when n is odd',
@@ -56,7 +56,7 @@ export default function CasesExplorer() {
   const p = PRESETS[pi];
   const ns = Array.from({ length: 12 }, (_, i) => i + 1);
   return (
-    <Shell title="البرهان بالحالات: زوجي أم فردي؟" foot="الجدول يقنعك بالنمط لكنه لا يبرهنه، فهو يفحص أعداداً قليلة فقط. البرهان يعالج كل عدد زوجي دفعة واحدة بكتابته 2k، وكل عدد فردي بكتابته 2k + 1.">
+    <Shell title="البرهان بالحالات: زوجي أم فردي؟" foot="الجدول يقنعك بالنمط لكنه لا يبرهنه، فهو يفحص أعداداً قليلة فقط. البرهان يعالج كل عدد زوجي دفعة واحدة بكتابته 2k، وكل عدد فردي بكتابته ⁦2k + 1⁩.">
       <div className="controls">
         {PRESETS.map((q, i) => (
           <button key={i} className="btn" aria-pressed={i === pi} onClick={() => setPi(i)}>
@@ -83,7 +83,7 @@ export default function CasesExplorer() {
         </table>
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 10, marginTop: 12 }}>
-        {([['الحالة 1: n زوجي، n = 2k', p.even, 'var(--set-a)'], ['الحالة 2: n فردي، n = 2k + 1', p.odd, 'var(--set-b)']] as const).map(([t, steps, c]) => (
+        {([['الحالة 1: n زوجي، ⁦n = 2k⁩', p.even, 'var(--set-a)'], ['الحالة 2: n فردي، ⁦n = 2k + 1⁩', p.odd, 'var(--set-b)']] as const).map(([t, steps, c]) => (
           <div key={t} style={{ border: `2px solid ${c}`, borderRadius: 12, padding: 10 }}>
             <b style={{ color: c, fontSize: 14.5 }}>{t}</b>
             <div className="ltr" style={{ display: 'grid', gap: 4, marginTop: 6 }}>
