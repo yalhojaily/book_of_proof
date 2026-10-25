@@ -1,0 +1,117 @@
+---
+chapter: calculus
+section: "13.5"
+summary: 'f متصلة عند c إذا كانت $\lim_{x \to c} f(x) = f(c)$. والمشتقة نهاية أيضاً. ونبرهن أن كل دالة قابلة للاشتقاق متصلة.'
+goals:
+  - تعريف الاتصال بالنهاية
+  - فهم قاعدة التركيب في النهايات
+  - برهان أن القابلية للاشتقاق تقتضي الاتصال
+terms:
+  - { ar: الاتصال, en: continuity }
+  - { ar: المشتقة, en: derivative }
+---
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { q13_5 } from '@/data/proofs-ch13';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+«الدالة المتصلة ترسم دون رفع القلم». هذا وصف جميل لكنه غير دقيق. التعريف الدقيق بسيط بعد أن عرفت النهايات: قيمة الدالة عند النقطة تساوي ما تقترب منه قرب النقطة. لا قفزة ولا ثقب.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="256–258" minutes={20}>
+
+- **التعريف 13.3 (ص 256):** الاتصال، والاتصال بلغة ε و δ.
+- **المبرهنة 13.9 (ص 257):** قاعدة التركيب: النهاية تدخل داخل الدالة المتصلة.
+- **المشتقة والمبرهنة 13.10 (ص 257–258):** القابلية للاشتقاق تقتضي الاتصال.
+
+</ReadingGuide>
+
+<BookPages section="13.5" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح" sub="المفاهيم نفسها بالعربية، مع أمثلة محلولة">
+
+<Definition num="13.3" title="الاتصال">
+
+$f$ **متصلة** عند $c$ إذا كانت $\lim_{x \to c} f(x) = f(c)$. أي: لكل $\varepsilon > 0$ يوجد $\delta > 0$ بحيث $|x - c| < \delta$ يعطي $|f(x) - f(c)| < \varepsilon$. (لاحظ اختفاء الشرط $0 <$: عند $x = c$ الفرق صفر.)
+
+</Definition>
+
+<Fact num="13.9" title="قاعدة التركيب">
+
+إذا كانت $\lim_{x \to c} g(x) = L$ وكانت $f$ متصلة عند $L$، فإن $\lim_{x \to c} f(g(x)) = f\left(\lim_{x \to c} g(x)\right) = f(L)$.
+
+</Fact>
+
+<Example title="المبرهنة 13.10: الاشتقاق يقتضي الاتصال">
+
+المشتقة $f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c}$. إذا كانت موجودة، فلـ $x \neq c$:
+
+$$
+f(x) - f(c) = \frac{f(x) - f(c)}{x - c} \cdot (x - c) \;\xrightarrow{x \to c}\; f'(c) \cdot 0 = 0,
+$$
+
+بقاعدة الضرب. إذن $\lim_{x \to c} f(x) = f(c)$. $\blacksquare$
+
+والعكس خاطئ: $|x|$ متصلة عند 0 وليست قابلة للاشتقاق هناك.
+
+</Example>
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q13_5} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="13.5" count={2} core={[1]} />
+
+<BookPages section="13.5" kind="exercises" />
+
+### تمرين إضافي بحل كامل
+
+<Exercise num="1">
+
+برهن من التعريف أن $f(x) = 7x - 2$ متصلة عند كل $c \in \mathbb{R}$.
+
+<Reveal>
+
+ليكن $\varepsilon > 0$، وخذ $\delta = \frac{\varepsilon}{7}$. إذا كان $|x - c| < \delta$ فإن $|f(x) - f(c)| = 7|x - c| < \varepsilon$. $\blacksquare$
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="13.5" />
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- متصلة عند c: $\lim_{x \to c} f(x) = f(c)$.
+- النهاية تدخل داخل الدالة المتصلة.
+- القابلية للاشتقاق تقتضي الاتصال، لا العكس.
+
+</Takeaways>
+
+في القسم التالي: النهايات عند اللانهاية.
+
+</Stage>

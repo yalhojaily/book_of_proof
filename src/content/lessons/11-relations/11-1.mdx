@@ -1,0 +1,129 @@
+---
+chapter: relations
+section: "11.1"
+summary: 'العلاقة على مجموعة $A$ مجموعة جزئية $R \subseteq A \times A$. نكتب $xRy$ بدل $(x, y) \in R$. فالرموز المألوفة مثل $<$ و$=$ و$\mid$ كلها علاقات.'
+goals:
+  - فهم تعريف العلاقة بأنها مجموعة من الأزواج المرتبة
+  - كتابة علاقة بالقائمة وبالصيغة الوصفية
+  - رسم مخطط العلاقة
+terms:
+  - { ar: علاقة, en: relation }
+  - { ar: مخطط العلاقة, en: relation diagram }
+---
+import RelationLab from '@/components/widgets/RelationLab.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { q11_1 } from '@/data/proofs-ch11';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+«أصغر من» تربط بين عددين: $2 < 5$ صحيحة و$5 < 2$ خاطئة. كيف نصف «أصغر من» بلغة المجموعات؟ ببساطة: نكتب **كل** الأزواج $(x, y)$ التي يكون فيها $x < y$. هذه المجموعة من الأزواج هي العلاقة نفسها، لا أكثر.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="201–204" minutes={15}>
+
+يبدأ الجزء الرابع: العلاقات والدوال ونظرية الأعداد الأصلية.
+
+- **الفكرة (ص 201):** الرموز التي تقارن بين شيئين، وكيف نحولها إلى مجموعات.
+- **التعريف 11.1 والأمثلة 11.1–11.3 (ص 202):** علاقتا $<$ و$\le$ على $\{1, 2, 3, 4\}$، ومخطط العلاقة.
+- **أمثلة 11.4–11.6 (ص 203):** علاقة كيفية بلا اسم، وعلاقة على $\mathbb{Z}$، و$=$ على $\mathbb{R}$ (خط مستقيم في المستوى).
+
+| ستقرأ | المعنى |
+|---|---|
+| relation on A | علاقة على A |
+| xRy | x مرتبط بـ y |
+
+</ReadingGuide>
+
+<BookPages section="11.1" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أداة تفاعلية">
+
+<Definition num="11.1" title="العلاقة">
+
+**العلاقة** على مجموعة $A$ هي مجموعة جزئية $R \subseteq A \times A$. إذا كان $(x, y) \in R$ نكتب $xRy$ ونقول إن $x$ مرتبط بـ $y$. وإذا لم يكن، نكتب $x \not R y$.
+
+</Definition>
+
+<Example title="المثال 11.1">
+
+على $A = \{1, 2, 3, 4\}$، العلاقة «أصغر من» هي
+
+$$
+R = \{(1,2), (1,3), (1,4), (2,3), (2,4), (3,4)\}.
+$$
+
+فـ $1 R 3$ لأن $(1, 3) \in R$، و$3 \not R 1$. وهذا يطابق $1 < 3$ و$3 \not< 1$. فالرمز $<$ هو اسم للمجموعة $R$.
+
+</Example>
+
+### جرّب بنفسك
+
+اختر علاقة جاهزة، أو اضغط خانات الجدول لتبني علاقتك. الخانة في الصف $x$ والعمود $y$ تعني الزوج $(x, y)$.
+
+<RelationLab client:visible initial={1} />
+
+<Note title="علاقات بلا معنى مألوف">
+
+أي مجموعة جزئية من $A \times A$ علاقة، حتى لو لم يكن لها اسم أو معنى (المثال 11.4). وعلى مجموعة من $n$ عنصراً يوجد $2^{n^2}$ علاقة.
+
+</Note>
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q11_1} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="11.1" count={15} core={[1, 3, 5, 7, 9, 11, 13]} />
+
+<BookPages section="11.1" kind="exercises" />
+
+### تمرين إضافي بحل كامل
+
+<Exercise num="1">
+
+على $A = \{1, 2, 3, 4, 6\}$ اكتب العلاقة «$x$ يقسم $y$ و$x \neq y$».
+
+<Reveal>
+
+$R = \{(1,2), (1,3), (1,4), (1,6), (2,4), (2,6), (3,6)\}$.
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="11.1" />
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- العلاقة على $A$ مجموعة جزئية من $A \times A$.
+- $xRy$ تعني $(x, y) \in R$.
+- الرموز $<$ و$\le$ و$=$ و$\mid$ و$\equiv$ أسماء لعلاقات.
+
+</Takeaways>
+
+في القسم التالي: ثلاث خصائص تصنّف العلاقات.
+
+</Stage>

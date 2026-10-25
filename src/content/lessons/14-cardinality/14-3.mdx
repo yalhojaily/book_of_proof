@@ -1,0 +1,116 @@
+---
+chapter: cardinality
+section: "14.3"
+summary: '$|A| \le |B|$ إذا وُجدت دالة متباينة من A إلى B. ومبرهنة كانتور: $|A| < |\mathcal{P}(A)|$ لكل مجموعة، فهناك عدد لا نهائي من اللانهايات المختلفة.'
+goals:
+  - تعريف المقارنة بين الأعداد الأصلية
+  - فهم برهان مبرهنة كانتور
+  - استعمال المبرهنتين 14.8 و14.9
+terms:
+  - { ar: أصغر من أو يساوي, en: less than or equal (cardinality) }
+  - { ar: مبرهنة كانتور, en: "Cantor's theorem" }
+---
+import PowerSetDiag from '@/components/widgets/PowerSetDiag.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { q14_3 } from '@/data/proofs-ch14';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+إذا استطعت أن تُجلس كل ضيف على كرسي مختلف (قد تبقى كراسٍ فارغة)، فالضيوف ليسوا أكثر من الكراسي. هذه هي المقارنة: دالة متباينة. والسؤال الكبير: هل توجد لانهاية أكبر من $|\mathbb{R}|$؟ نعم، ولا نهاية لهذا السلم.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="280–283" minutes={25}>
+
+- **التعريف 14.4 (ص 281):** $|A| \le |B|$ و$|A| < |B|$.
+- **المبرهنة 14.7 (ص 281–282):** $|A| < |\mathcal{P}(A)|$. برهان قصير وعميق، فيه الفكرة القطرية بصورة مجردة.
+- **سلم اللانهايات (ص 282):** $|\mathbb{N}| < |\mathcal{P}(\mathbb{N})| < |\mathcal{P}(\mathcal{P}(\mathbb{N}))| < \cdots$.
+- **المبرهنتان 14.8 و14.9 (ص 282–283):** المجموعة الجزئية اللانهائية من مجموعة قابلة للعدّ قابلة للعدّ، والمجموعة التي تحوي مجموعة غير قابلة للعدّ غير قابلة للعدّ.
+
+</ReadingGuide>
+
+<BookPages section="14.3" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أداة تفاعلية">
+
+<Definition num="14.4" title="المقارنة">
+
+- $|A| \le |B|$ إذا وُجدت دالة متباينة $A \to B$.
+- $|A| < |B|$ إذا كان $|A| \le |B|$ و$|A| \neq |B|$.
+
+</Definition>
+
+<Fact num="14.7" title="مبرهنة كانتور">
+
+لكل مجموعة $A$: $|A| < |\mathcal{P}(A)|$.
+
+</Fact>
+
+الجزء السهل: $a \mapsto \{a\}$ متباينة، فـ $|A| \le |\mathcal{P}(A)|$. والجزء العميق: لا توجد دالة غامرة $f : A \to \mathcal{P}(A)$. جرّب أي دالة:
+
+<PowerSetDiag client:visible />
+
+<Note title="البرهان مكتوباً">
+
+لتكن $f : A \to \mathcal{P}(A)$ أي دالة. عرّف $B = \{a \in A : a \notin f(a)\}$. لو كان $B = f(b)$ لعنصر ما $b$، فإما $b \in B$، وعندها بتعريف $B$ يكون $b \notin f(b) = B$، تناقض. وإما $b \notin B$، وعندها $b \notin f(b)$ فـ $b \in B$، تناقض. إذن $B$ ليست في مدى $f$.
+
+</Note>
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q14_3} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="14.3" count={10} core={[1, 3, 5, 7, 9]} />
+
+<BookPages section="14.3" kind="exercises" />
+
+### تمرين إضافي بحل كامل
+
+<Exercise num="1">
+
+برهن أن مجموعة الأعداد الأولية قابلة للعدّ لا نهائياً.
+
+<Reveal>
+
+هي مجموعة جزئية من $\mathbb{N}$ (القابلة للعدّ)، وهي لا نهائية (إقليدس، القسم 6.1). فبالمبرهنة 14.8 هي قابلة للعدّ لا نهائياً.
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="14.3" />
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- $|A| \le |B|$: دالة متباينة.
+- $|A| < |\mathcal{P}(A)|$ دائماً: لا نهاية لسلم اللانهايات.
+- جزء لا نهائي من قابل للعدّ قابل للعدّ؛ ومن يحوي غير قابل للعدّ غير قابل للعدّ.
+
+</Takeaways>
+
+في القسم الأخير: كيف تبرهن تساوي عددين أصليين دون بناء تقابل.
+
+</Stage>

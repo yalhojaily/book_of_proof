@@ -1,0 +1,130 @@
+---
+chapter: relations
+section: "11.3"
+summary: علاقة التكافؤ انعكاسية وتماثلية ومتعدية. هي تعميم لفكرة «التساوي من جهة ما»، وتقسم المجموعة إلى فصول تكافؤ.
+goals:
+  - التعرف على علاقات التكافؤ وبرهانها
+  - إيجاد فصول التكافؤ
+  - 'فهم فصول $\equiv \pmod n$'
+terms:
+  - { ar: علاقة تكافؤ, en: equivalence relation }
+  - { ar: فصل تكافؤ, en: equivalence class }
+---
+import RelationLab from '@/components/widgets/RelationLab.tsx';
+import PartitionLab from '@/components/widgets/PartitionLab.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { q11_3 } from '@/data/proofs-ch11';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+في الساعة، 3 و15 «متساويان»: كلاهما الثالثة. و$\frac12$ و$\frac24$ متساويان كعددين مع أنهما كتابتان مختلفتان. علاقة التكافؤ تجعل أشياء مختلفة «متساوية» من زاوية معيّنة، وتجمع كل الأشياء المتساوية في مجموعة واحدة اسمها فصل التكافؤ.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="210–214" minutes={20}>
+
+- **التعريف 11.3 والشكل 11.2 (ص 210):** أربع علاقات تكافؤ على مجموعة صغيرة. لاحظ أن مخططاتها «جزر» منفصلة.
+- **التعريف 11.4 والأمثلة 11.9–11.11 (ص 211):** فصل التكافؤ $[a]$.
+- **المثال 11.12 (ص 212):** كثيرات الحدود ذات المشتقة نفسها.
+- **المثال 11.13 (ص 212–213):** فصول $\equiv \pmod n$، وهي أساس القسم 11.5.
+
+</ReadingGuide>
+
+<BookPages section="11.3" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية">
+
+<Definition num="11.3–11.4" title="علاقة التكافؤ وفصولها">
+
+العلاقة $R$ على $A$ **علاقة تكافؤ** إذا كانت انعكاسية وتماثلية ومتعدية.
+
+**فصل التكافؤ** لعنصر $a \in A$ هو $[a] = \{x \in A : xRa\}$.
+
+</Definition>
+
+### على مجموعة منتهية
+
+في المختبر، اختر «≡ (mod 2)» أو «=»: تظهر فصول التكافؤ تحت الخصائص. ثم ابنِ علاقة تكافؤ بنفسك بثلاثة فصول.
+
+<RelationLab client:visible initial={4} />
+
+### على الأعداد الصحيحة
+
+<PartitionLab client:visible />
+
+<Example title="المثال 11.13: فصول التطابق">
+
+لـ $\equiv \pmod 3$ على $\mathbb{Z}$ ثلاثة فصول:
+
+$$
+[0] = \{\dots, -3, 0, 3, 6, \dots\}, \quad [1] = \{\dots, -2, 1, 4, 7, \dots\}, \quad [2] = \{\dots, -1, 2, 5, 8, \dots\}.
+$$
+
+ولاحظ أن $[0] = [3] = [-6]$: الفصل الواحد له أسماء كثيرة.
+
+</Example>
+
+<Note title="كيف تبرهن أن علاقة ما علاقة تكافؤ">
+
+ثلاث فقرات، كما في المثال 11.8: الانعكاسية (عنصر عام $x$)، ثم التماثل (افترض $xRy$)، ثم التعدي (افترض $xRy$ و$yRz$). وبعد البرهان صِف الفصول.
+
+</Note>
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q11_3} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="11.3" count={16} core={[1, 3, 5, 7, 9, 11, 13, 15]} />
+
+<BookPages section="11.3" kind="exercises" />
+
+### تمرين إضافي بحل كامل
+
+<Exercise num="1">
+
+عرّف على $\mathbb{Z}$: $x R y$ إذا كان $x + y$ زوجياً. برهن أنها علاقة تكافؤ وصِف فصولها.
+
+<Reveal>
+
+**انعكاسية:** $x + x = 2x$ زوجي. **تماثلية:** $x + y = y + x$. **متعدية:** إذا كان $x + y = 2a$ و$y + z = 2b$ فإن $x + z = 2a + 2b - 2y = 2(a + b - y)$ زوجي. **الفصول:** $x R y$ تعني أن $x$ و$y$ لهما الزوجية نفسها، فالفصلان هما الزوجية والفردية: $[0]$ و$[1]$.
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="11.3" />
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- علاقة التكافؤ: انعكاسية وتماثلية ومتعدية.
+- $[a]$: كل ما يرتبط بـ $a$.
+- لـ $\equiv \pmod n$ عدد $n$ من الفصول.
+
+</Takeaways>
+
+في القسم التالي: الفصول تشكّل تجزئة، وكل تجزئة تأتي من علاقة تكافؤ.
+
+</Stage>

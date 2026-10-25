@@ -1,0 +1,132 @@
+---
+chapter: relations
+section: "11.2"
+summary: العلاقة قد تكون انعكاسية (كل عنصر مرتبط بنفسه)، أو تماثلية (الارتباط في الاتجاهين)، أو متعدية (من x إلى y ومن y إلى z يعطي من x إلى z).
+goals:
+  - تعريف الانعكاسية والتماثلية والتعدي
+  - التحقق من الخصائص في علاقة منتهية من مخططها
+  - برهان الخصائص لعلاقة على مجموعة لا نهائية
+terms:
+  - { ar: انعكاسية, en: reflexive }
+  - { ar: تماثلية, en: symmetric }
+  - { ar: متعدية, en: transitive }
+---
+import RelationLab from '@/components/widgets/RelationLab.tsx';
+import ProofBuilder from '@/components/widgets/ProofBuilder.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { puzzles112, q11_2 } from '@/data/proofs-ch11';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+«أخو» علاقة تماثلية: إذا كان أحمد أخا خالد فخالد أخو أحمد. و«أطول من» متعدية: إذا كان أحمد أطول من خالد، وخالد أطول من سعد، فأحمد أطول من سعد. و«يسكن في الحي نفسه مع» انعكاسية وتماثلية ومتعدية معاً. هذه الخصائص الثلاث تصف «شكل» العلاقة.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="205–208" minutes={20}>
+
+- **التعريف 11.2 والجدول (ص 205):** الخصائص الثلاث، وجدول يصنّف $<$ و$\le$ و$=$ و$\mid$ و$\neq$ على $\mathbb{Z}$.
+- **المثال 11.7 (ص 206–207):** كيف تقرأ الخصائص من المخطط: حلقة عند كل نقطة، وسهم معاكس لكل سهم، واختصار لكل مسار من سهمين. انتبه لحالة «صادقة بلا معنى» (vacuously true).
+- **المثال 11.8 (ص 208):** برهان أن $\equiv \pmod n$ انعكاسية وتماثلية ومتعدية. نموذج لكل برهان من هذا النوع.
+
+| ستقرأ | المعنى |
+|---|---|
+| reflexive / symmetric / transitive | انعكاسية / تماثلية / متعدية |
+| vacuously true | صادقة بلا معنى |
+
+</ReadingGuide>
+
+<BookPages section="11.2" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية وأمثلة محلولة">
+
+<Definition num="11.2" title="الخصائص الثلاث">
+
+لتكن $R$ علاقة على $A$.
+
+1. $R$ **انعكاسية** إذا كان $xRx$ لكل $x \in A$.
+2. $R$ **تماثلية** إذا كان $xRy$ يقتضي $yRx$ لكل $x, y \in A$.
+3. $R$ **متعدية** إذا كان $xRy$ و$yRz$ يقتضيان $xRz$ لكل $x, y, z \in A$.
+
+</Definition>
+
+### في المخطط
+
+- انعكاسية: حلقة عند **كل** نقطة.
+- تماثلية: لكل سهم سهم معاكس.
+- متعدية: كلما وُجد مسار من سهمين $x \to y \to z$ وُجد السهم المباشر $x \to z$.
+
+<RelationLab client:visible initial={3} />
+
+جرّب: ابدأ بـ $<$، ثم احذف زوجاً واحداً مثل $(1, 3)$، وانظر كيف تسقط المتعدية ويظهر لك المسار الذي يكسرها.
+
+<Pitfall title="صادقة بلا معنى">
+
+التماثل والتعدي عبارات شرطية. إذا لم يوجد أي زوج يحقق المقدَّم، فالعبارة صادقة. لهذا العلاقة الخالية تماثلية ومتعدية. أما الانعكاسية فليست شرطية: تطلب وجود $(x, x)$ فعلاً لكل $x$.
+
+</Pitfall>
+
+### البرهان لعلاقة على مجموعة لا نهائية
+
+لا يمكن رسم مخطط، فنبرهن كل خاصية من تعريفها.
+
+<ProofBuilder client:visible puzzles={puzzles112} />
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q11_2} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="11.2" count={18} core={[1, 3, 5, 7, 9, 11, 13, 15]} />
+
+<BookPages section="11.2" kind="exercises" />
+
+### تمرين إضافي بحل كامل
+
+<Exercise num="1">
+
+عرّف على $\mathbb{Z}$: $x R y$ إذا كان $xy \ge 0$. هل $R$ انعكاسية؟ تماثلية؟ متعدية؟
+
+<Reveal>
+
+**انعكاسية:** نعم، $x \cdot x = x^2 \ge 0$. **تماثلية:** نعم، $xy = yx$. **متعدية:** لا. مثال مضاد: $1 R 0$ لأن $0 \ge 0$، و$0 R (-1)$، لكن $1 \cdot (-1) = -1 < 0$، فـ $1 \not R (-1)$.
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="11.2" />
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- انعكاسية: $xRx$ لكل $x$.
+- تماثلية: $xRy \Rightarrow yRx$.
+- متعدية: $xRy \wedge yRz \Rightarrow xRz$.
+- لنفي خاصية يكفي مثال مضاد واحد.
+
+</Takeaways>
+
+في القسم التالي: العلاقات التي تحقق الخصائص الثلاث معاً.
+
+</Stage>

@@ -1,0 +1,131 @@
+---
+chapter: cardinality
+section: "14.1"
+summary: 'لمجموعتين العدد الأصلي نفسه إذا وُجد تقابل بينهما. بهذا التعريف نجد أن $|\mathbb{N}| = |\mathbb{Z}|$، لكن $|\mathbb{N}| \neq |\mathbb{R}|$: بعض اللانهايات أكبر من غيرها.'
+goals:
+  - تعريف تساوي العدد الأصلي بالتقابل
+  - 'برهان $|\mathbb{N}| = |\mathbb{Z}|$'
+  - 'فهم حجة كانتور القطرية وأن $|\mathbb{N}| \neq |\mathbb{R}|$'
+  - بناء تقابلات بين فترات حقيقية
+terms:
+  - { ar: العدد الأصلي, en: cardinality }
+  - { ar: الحجة القطرية, en: diagonal argument }
+---
+import HilbertPairs from '@/components/widgets/HilbertPairs.tsx';
+import CantorDiagonal from '@/components/widgets/CantorDiagonal.tsx';
+import ProofBuilder from '@/components/widgets/ProofBuilder.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { puzzles141, q14_1 } from '@/data/proofs-ch14';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+طفل لا يعرف العدّ يريد أن يعرف هل الكراسي تكفي الضيوف. يكفي أن يُجلس كل ضيف على كرسي: إذا لم يبقَ ضيف واقف ولا كرسي فارغ، فالعددان متساويان، دون عدّ. هذه الفكرة تعمل مع المجموعات اللانهائية أيضاً، ونتائجها مدهشة: الأعداد الزوجية «بعدد» الأعداد الطبيعية، لكن الأعداد الحقيقية أكثر منها.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="269–274" minutes={35}>
+
+من أجمل أقسام الكتاب. اقرأه على مهل.
+
+- **التعريف 14.1 (ص 269):** التقابل معيار المساواة.
+- **المثالان 14.1 و14.2 والمبرهنة 14.1 (ص 270–271):** $|\mathbb{N}| = |\mathbb{Z}|$، والفقرة عن شعور «عدم الارتياح».
+- **المبرهنة 14.2 (ص 272):** لا تقابل بين $\mathbb{N}$ و$\mathbb{R}$: حجة كانتور القطرية. لاحظ لماذا يتجنب البرهان الرقمين 0 و9.
+- **المثالان 14.3 و14.4 (ص 273):** $|(0, \infty)| = |(0, 1)| = |\mathbb{R}|$ بتقابلات هندسية.
+
+</ReadingGuide>
+
+<BookPages section="14.1" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية وأمثلة محلولة">
+
+<Definition num="14.1" title="تساوي العدد الأصلي">
+
+للمجموعتين $A$ و$B$ **العدد الأصلي نفسه**، ونكتب $|A| = |B|$، إذا وُجد تقابل $f : A \to B$. وإلا نكتب $|A| \neq |B|$.
+
+</Definition>
+
+### مجموعات لا نهائية تساوي أجزاءها
+
+<HilbertPairs client:visible />
+
+### لكن ليست كل اللانهايات متساوية
+
+<CantorDiagonal client:visible />
+
+<Fact num="14.2" title="ℕ وℝ">
+
+لا يوجد تقابل $f : \mathbb{N} \to \mathbb{R}$. إذن $|\mathbb{N}| \neq |\mathbb{R}|$.
+
+</Fact>
+
+<Note title="لماذا يتجنب البرهان 0 و9؟">
+
+لأن بعض الأعداد لها كتابتان عشريتان: $0.1999\ldots = 0.2000\ldots$. لو بنينا $b$ من الرقمين 0 و9 لربما كان كتابة أخرى لعدد في القائمة. باستعمال 1 و2 فقط لا تحدث هذه المشكلة.
+
+</Note>
+
+### تدرّب: رتّب البرهان
+
+<ProofBuilder client:visible puzzles={puzzles141} />
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q14_1} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+المجموعة A (1–14): صِف تقابلاً بصيغة. المجموعة B (15–16): عن أمثلة القسم.
+
+<ExerciseTracker client:visible section="14.1" count={16} core={[1, 3, 5, 7, 9, 11, 13, 15]} />
+
+<BookPages section="14.1" kind="exercises" />
+
+### تمرين إضافي بحل كامل
+
+<Exercise num="1">
+
+صِف تقابلاً من $(0, 1)$ إلى $(2, 7)$.
+
+<Reveal>
+
+$f(x) = 5x + 2$. إذا كان $0 < x < 1$ فإن $2 < 5x + 2 < 7$. متباينة لأن $5a + 2 = 5b + 2$ تعطي $a = b$. غامرة: لكل $y \in (2, 7)$ خذ $x = \frac{y - 2}{5} \in (0, 1)$.
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="14.1" />
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- $|A| = |B|$: يوجد تقابل.
+- المجموعة اللانهائية قد تساوي جزءاً حقيقياً منها: $|\mathbb{N}| = |\mathbb{Z}|$.
+- $|\mathbb{N}| \neq |\mathbb{R}|$: حجة كانتور القطرية.
+- كل الفترات المفتوحة و$\mathbb{R}$ لها العدد الأصلي نفسه.
+
+</Takeaways>
+
+في القسم التالي: المجموعات القابلة للعدّ.
+
+</Stage>

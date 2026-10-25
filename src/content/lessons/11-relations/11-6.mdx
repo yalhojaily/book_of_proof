@@ -1,0 +1,75 @@
+---
+chapter: relations
+section: "11.6"
+summary: 'العلاقة من $A$ إلى $B$ مجموعة جزئية من $A \times B$. هذا تعميم بسيط، لكنه الأساس الذي تُبنى عليه الدوال في الفصل التالي.'
+goals:
+  - تعريف العلاقة بين مجموعتين
+  - رؤية الدالة كنوع خاص من العلاقات
+terms:
+  - { ar: علاقة من A إلى B, en: relation from A to B }
+---
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import { q11_6 } from '@/data/proofs-ch11';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+«الطالب مسجّل في المقرر» تربط عناصر من مجموعتين مختلفتين: الطلاب والمقررات. لا معنى لأن «يُسجَّل» مقرر في طالب. هذه علاقة من مجموعة إلى أخرى.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="221–222" minutes={5}>
+
+صفحة واحدة: التعريف 11.7، ومثال بمخطط بين مجموعتين (الشكل 11.3). لا تمارين لهذا القسم.
+
+</ReadingGuide>
+
+<BookPages section="11.6" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح" sub="المفاهيم نفسها بالعربية">
+
+<Definition num="11.7" title="العلاقة من A إلى B">
+
+**العلاقة من $A$ إلى $B$** مجموعة جزئية $R \subseteq A \times B$. ونكتب $aRb$ إذا كان $(a, b) \in R$.
+
+</Definition>
+
+<Example title="مثال">
+
+$A = \{1, 2, 3\}$ و$B = \{x, y\}$. العلاقة $R = \{(1, x), (1, y), (3, x)\}$ ترسم بأسهم من عناصر $A$ (يساراً) إلى عناصر $B$ (يميناً). لاحظ أن 1 له سهمان و2 بلا سهم.
+
+</Example>
+
+<Note title="نحو الدوال">
+
+الدالة من $A$ إلى $B$ علاقة يخرج فيها من **كل** عنصر في $A$ سهم **واحد بالضبط**. العلاقة في المثال ليست دالة لسببين: 1 له سهمان، و2 بلا سهم. هذا موضوع الفصل التالي.
+
+</Note>
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="سؤال سريع">
+
+<QuickCheck client:visible questions={q11_6} />
+
+</Stage>
+
+<Stage n={5} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- العلاقة من $A$ إلى $B$: مجموعة جزئية من $A \times B$.
+- الدالة علاقة خاصة: سهم واحد بالضبط من كل عنصر.
+
+</Takeaways>
+
+الفصل التالي: الدوال.
+
+</Stage>

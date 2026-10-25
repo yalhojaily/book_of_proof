@@ -1,0 +1,118 @@
+---
+chapter: functions
+section: "12.1"
+summary: 'الدالة $f : A \to B$ علاقة من $A$ إلى $B$ تربط كل عنصر من $A$ بعنصر واحد بالضبط من $B$. بهذا التعريف تصبح الدالة مجموعة من الأزواج، مثل أي شيء آخر في الرياضيات.'
+goals:
+  - تعريف الدالة بأنها مجموعة أزواج
+  - التمييز بين المجال والمجال المقابل والمدى
+  - الحكم على مجموعة من الأزواج هل هي دالة
+terms:
+  - { ar: دالة, en: function }
+  - { ar: المجال, en: domain }
+  - { ar: المجال المقابل, en: codomain }
+  - { ar: المدى, en: range }
+---
+import FunctionArrows from '@/components/widgets/FunctionArrows.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { q12_1 } from '@/data/proofs-ch12';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+في الحساب تعلّمت الدالة «قاعدة»: $f(x) = x^2$. لكن ماذا عن دالة لا قاعدة لها، مثل «فصيلة دم كل شخص»؟ الرياضيون حلّوا هذا بفكرة بسيطة: الدالة هي **الجدول** نفسه، أي مجموعة الأزواج (المدخل، المخرج). والشرط الوحيد: كل مدخل له مخرج واحد بالضبط.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="223–228" minutes={25}>
+
+- **الفكرة (ص 223–224):** رسم الدالة مجموعة جزئية من $A \times B$، والشكلان 12.1 و12.2.
+- **التعريف 12.1 (ص 224):** الشرط الدقيق: لكل $a$ يوجد $b$ وحيد.
+- **التعريف 12.2 والمثال 12.2 (ص 225–226):** المجال والمجال المقابل والمدى، وطريقتا الرسم.
+- **المثال 12.3 والتعريف 12.3 (ص 227):** دالة من $\mathbb{Z}^2$، ومتى تتساوى دالتان. لاحظ أن الدالة لا تحتاج «قاعدة».
+
+</ReadingGuide>
+
+<BookPages section="12.1" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أداة تفاعلية">
+
+<Definition num="12.1–12.2" title="الدالة">
+
+لتكن $A$ و$B$ مجموعتين. **الدالة** $f$ من $A$ إلى $B$ (نكتب $f : A \to B$) علاقة $f \subseteq A \times B$ تحقق: لكل $a \in A$ يوجد **عنصر وحيد** $b \in B$ بحيث $(a, b) \in f$. ونكتب $f(a) = b$.
+
+- $A$ **المجال**، و$B$ **المجال المقابل**.
+- **المدى** $\{f(a) : a \in A\} \subseteq B$: القيم التي تُصاب فعلاً.
+
+</Definition>
+
+<FunctionArrows client:visible />
+
+<Note title="ما ليس شرطاً">
+
+مسموح أن يصل سهمان إلى العنصر نفسه في $B$، ومسموح أن يبقى عنصر من $B$ بلا سهم. الشرطان الوحيدان على $A$: لا عنصر بلا سهم، ولا عنصر بسهمين.
+
+</Note>
+
+<Example title="المثال 12.3: دالة بمتغيرين">
+
+$\varphi : \mathbb{Z}^2 \to \mathbb{Z}$، $\varphi(m, n) = 6m - 9n$. مداها ليس كل $\mathbb{Z}$: كل قيمة مضاعف لـ 3، فـ $1$ مثلاً ليس في المدى. المدى $\{3k : k \in \mathbb{Z}\}$.
+
+</Example>
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q12_1} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="12.1" count={12} core={[1, 3, 5, 7, 9, 11]} />
+
+<BookPages section="12.1" kind="exercises" />
+
+### تمرين إضافي بحل كامل
+
+<Exercise num="1">
+
+هل $f = \{(x, y) \in \mathbb{Z} \times \mathbb{Z} : 2x + y = 7\}$ دالة من $\mathbb{Z}$ إلى $\mathbb{Z}$؟
+
+<Reveal>
+
+نعم. لكل $x \in \mathbb{Z}$ يوجد $y$ وحيد: $y = 7 - 2x$، وهو عدد صحيح. (قارن بالتمرين 8 حيث $x + 3y = 4$: هناك $y = \frac{4 - x}{3}$ ليس صحيحاً دائماً.)
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="12.1" />
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- الدالة مجموعة أزواج: لكل مدخل مخرج واحد بالضبط.
+- المدى جزء من المجال المقابل، وقد يكون أصغر منه.
+- الدالة لا تحتاج قاعدة أو صيغة.
+
+</Takeaways>
+
+في القسم التالي: الدوال المتباينة والغامرة.
+
+</Stage>

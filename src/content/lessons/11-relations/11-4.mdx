@@ -1,0 +1,115 @@
+---
+chapter: relations
+section: "11.4"
+summary: 'فصول التكافؤ إما متساوية أو منفصلة تماماً، وتغطي المجموعة كلها. أي إنها تجزئة. والعكس صحيح: كل تجزئة هي فصول علاقة تكافؤ.'
+goals:
+  - 'برهان أن $[a] = [b]$ إذا وفقط إذا كان $aRb$'
+  - تعريف التجزئة
+  - الربط بين التجزئات وعلاقات التكافؤ
+terms:
+  - { ar: تجزئة, en: partition }
+---
+import PartitionLab from '@/components/widgets/PartitionLab.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { q11_4 } from '@/data/proofs-ch11';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+قسّم طلاب مدرسة حسب الصف: كل طالب في صف واحد بالضبط، ولا يوجد صف خالٍ. هذه تجزئة. وعلاقة «في الصف نفسه مع» علاقة تكافؤ فصولها هي الصفوف. التجزئة والعلاقة التكافؤية طريقتان لقول الشيء نفسه.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="215–217" minutes={12}>
+
+- **المبرهنة 11.1 (ص 215):** $[a] = [b]$ إذا وفقط إذا $aRb$. برهان «إذا وفقط إذا» تطبيقي.
+- **التعريف 11.5 والأمثلة (ص 216):** التجزئة.
+- **المبرهنة 11.2 (ص 216–217):** فصول علاقة التكافؤ تجزئة.
+
+</ReadingGuide>
+
+<BookPages section="11.4" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أداة تفاعلية">
+
+<Definition num="11.5" title="التجزئة">
+
+**تجزئة** المجموعة $A$ مجموعة من المجموعات الجزئية غير الخالية من $A$، اتحادها $A$، وكل اثنتين منها منفصلتان.
+
+</Definition>
+
+<Fact num="11.1–11.2" title="الفصول تجزئة">
+
+لتكن $R$ علاقة تكافؤ على $A$. إذن $[a] = [b] \iff aRb$. ولذلك أي فصلين إما متساويان أو منفصلان، ومجموعة الفصول تجزئة لـ $A$.
+
+</Fact>
+
+<PartitionLab client:visible />
+
+<Note title="فكرة برهان المبرهنة 11.1">
+
+(⇐) إذا كان $aRb$ وكان $x \in [a]$، فإن $xRa$ و$aRb$، فبالتعدي $xRb$، أي $x \in [b]$. إذن $[a] \subseteq [b]$، وبالتماثل $[b] \subseteq [a]$.
+
+(⇒) إذا كان $[a] = [b]$ فإن $a \in [a]$ (انعكاسية)، فـ $a \in [b]$، أي $aRb$.
+
+لاحظ كيف تُستعمل الخصائص الثلاث كلها.
+
+</Note>
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q11_4} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="11.4" count={6} core={[1, 3, 5]} />
+
+<BookPages section="11.4" kind="exercises" />
+
+### تمرين إضافي بحل كامل
+
+<Exercise num="1">
+
+كم تجزئة لمجموعة من ثلاثة عناصر $\{a, b, c\}$؟
+
+<Reveal>
+
+خمس: $\{\{a\},\{b\},\{c\}\}$، و$\{\{a,b\},\{c\}\}$، و$\{\{a,c\},\{b\}\}$، و$\{\{b,c\},\{a\}\}$، و$\{\{a,b,c\}\}$. وهذا يطابق وجود خمس علاقات تكافؤ عليها (تمرين 6 في 11.3).
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="11.4" />
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- $[a] = [b] \iff aRb$.
+- الفصول متساوية أو منفصلة، واتحادها المجموعة: تجزئة.
+- كل تجزئة تعرّف علاقة تكافؤ، والعكس.
+
+</Takeaways>
+
+في القسم التالي: نجعل الفصول نفسها أعداداً نجمعها ونضربها.
+
+</Stage>

@@ -1,0 +1,109 @@
+---
+chapter: calculus
+section: "13.7"
+summary: 'المتتالية $\{a_n\}$ تتقارب إلى $L$ إذا كان لكل $\varepsilon > 0$ عدد $N$ بحيث تكون كل الحدود بعد $N$ ضمن ε من L. وإلا فهي متباعدة.'
+goals:
+  - فهم تعريف تقارب المتتالية
+  - برهان التقارب بإيجاد N
+  - برهان التباعد إلى اللانهاية
+terms:
+  - { ar: متتالية, en: sequence }
+  - { ar: تتقارب, en: converges }
+  - { ar: تتباعد, en: diverges }
+---
+import SequenceLab from '@/components/widgets/SequenceLab.tsx';
+import ProofBuilder from '@/components/widgets/ProofBuilder.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { puzzles137, q13_7 } from '@/data/proofs-ch13';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+$0.9, 0.99, 0.999, \dots$ تقترب من 1. لكن «تقترب» هنا تعني شيئاً محدداً: مهما ضيّقت الشريط حول 1، تدخل الحدود فيه في لحظة ما ولا تخرج منه بعد ذلك أبداً.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="261–264" minutes={20}>
+
+- **المتتالية كدالة (ص 261):** المتتالية دالة $\mathbb{N} \to \mathbb{R}$.
+- **التعريف 13.5 (ص 262):** التقارب، وشكله.
+- **المثالان 13.8 و13.9 (ص 262–263):** برهان تقارب، وتحقيق في متتالية.
+- **التعريف 13.6 (ص 264):** التباعد إلى اللانهاية.
+
+</ReadingGuide>
+
+<BookPages section="13.7" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية">
+
+<Definition num="13.5–13.6" title="التقارب والتباعد">
+
+- $\{a_n\}$ **تتقارب** إلى $L$ إذا كان لكل $\varepsilon > 0$ عدد $N \in \mathbb{N}$ بحيث $n > N$ يقتضي $|a_n - L| < \varepsilon$.
+- وإلا فهي **متباعدة**.
+- **تتباعد إلى ∞** إذا كان لكل $M$ عدد $N$ بحيث $n > N$ يقتضي $a_n > M$.
+
+</Definition>
+
+<SequenceLab client:visible only={[0, 1, 2]} />
+
+### تدرّب: رتّب البرهان
+
+<ProofBuilder client:visible puzzles={puzzles137} />
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q13_7} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="13.7" count={14} core={[1, 3, 5, 7, 9, 11, 13]} />
+
+<BookPages section="13.7" kind="exercises" />
+
+### تمرين إضافي بحل كامل
+
+<Exercise num="1">
+
+برهن أن $\{n^2\}$ تتباعد إلى ∞.
+
+<Reveal>
+
+ليكن $M$ عدداً. خذ $N$ عدداً طبيعياً أكبر من $\sqrt{|M|}$. إذا كان $n > N$ فإن $n^2 > N^2 > |M| \ge M$. $\blacksquare$
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="13.7" />
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- التقارب: لكل ε يوجد N، وبعد N كل الحدود ضمن ε.
+- البرهان: مسودة تعطي N بدلالة ε، ثم برهان نظيف.
+- التذبذب الدائم يعني التباعد.
+
+</Takeaways>
+
+في القسم التالي: المتسلسلات، أي مجاميع المتتاليات.
+
+</Stage>

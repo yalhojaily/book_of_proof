@@ -1,0 +1,117 @@
+---
+chapter: relations
+section: "11.5"
+summary: 'فصول $\equiv \pmod n$ تشكّل مجموعة جديدة $\mathbb{Z}_n$. نجمعها ونضربها بممثليها: $[a] + [b] = [a + b]$، بعد التأكد من أن الجواب لا يعتمد على اختيار الممثلين.'
+goals:
+  - 'تعريف $\mathbb{Z}_n$ وعملياته'
+  - فهم معنى «معرّف جيداً»
+  - 'ملاحظة الفروق بين $\mathbb{Z}_n$ و$\mathbb{Z}$'
+terms:
+  - { ar: الأعداد الصحيحة بمقياس n, en: integers modulo n }
+  - { ar: معرّف جيداً, en: well-defined }
+---
+import ZnLab from '@/components/widgets/ZnLab.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { q11_5 } from '@/data/proofs-ch11';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+الساعة 10 الآن. بعد 5 ساعات؟ الساعة 3. أي إن $10 + 5 = 3$ في «حساب الساعة». هذا الحساب حقيقي ومفيد (في التشفير والحاسوب مثلاً). في هذا القسم نبنيه بدقة: الأعداد فيه هي فصول التكافؤ نفسها.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="218–221" minutes={15}>
+
+- **الفكرة (ص 218–219):** الفصول الخمسة لـ $\equiv \pmod 5$ وطريقة جمعها.
+- **التعريف 11.6 (ص 219):** $\mathbb{Z}_n$، والجمع والضرب.
+- **المشكلة (ص 219–220):** هل العملية «معرّفة جيداً»؟ ولماذا يجب أن نسأل.
+- **الجداول (ص 220–221):** جدولا الجمع والضرب في $\mathbb{Z}_5$، وملاحظات عن الفروق مع $\mathbb{Z}$.
+
+</ReadingGuide>
+
+<BookPages section="11.5" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أداة تفاعلية">
+
+<Definition num="11.6" title="الأعداد الصحيحة بمقياس n">
+
+$\mathbb{Z}_n = \{[0], [1], \dots, [n - 1]\}$، فصول التكافؤ لـ $\equiv \pmod n$. ونعرّف
+
+$$
+[a] + [b] = [a + b], \qquad [a] \cdot [b] = [a \cdot b].
+$$
+
+</Definition>
+
+<ZnLab client:visible />
+
+<Note title="لماذا «معرّف جيداً» مهم؟">
+
+$[2] = [7]$ في $\mathbb{Z}_5$. فإذا جمعنا $[2] + [3]$ نحصل على $[5]$، وإذا جمعنا $[7] + [3]$ نحصل على $[10]$. هل الجواب واحد؟ نعم: $[5] = [10] = [0]$. لكن يجب برهان أن هذا يحدث **دائماً**، وإلا لم يكن «الجمع» عملية حقيقية. البرهان: إذا كان $a \equiv a'$ و$b \equiv b'$ فإن $a + b \equiv a' + b' \pmod n$ (التمرين 8).
+
+</Note>
+
+<Pitfall title="Zₙ ليست ℤ">
+
+في $\mathbb{Z}_6$: $[2] \cdot [3] = [0]$ مع أن أياً منهما ليس $[0]$. فقاعدة «إذا كان $ab = 0$ فـ $a = 0$ أو $b = 0$» تفشل حين لا يكون $n$ أولياً.
+
+</Pitfall>
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q11_5} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="11.5" count={8} core={[1, 3, 5, 7]} />
+
+<BookPages section="11.5" kind="exercises" />
+
+### تمرين إضافي بحل كامل
+
+<Exercise num="1">
+
+في $\mathbb{Z}_7$، احسب $[5] \cdot [6] + [4]$.
+
+<Reveal>
+
+$[30] + [4] = [34]$، و$34 = 4 \cdot 7 + 6$، فالجواب $[6]$.
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="11.5" />
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- عناصر $\mathbb{Z}_n$ فصول، والعمليات بالممثلين.
+- العمليات معرّفة جيداً: لا تعتمد على الممثل.
+- إذا لم يكن $n$ أولياً قد يكون حاصل ضرب فصلين غير صفريين صفراً.
+
+</Takeaways>
+
+في القسم التالي: علاقات بين مجموعتين مختلفتين، تمهيداً للدوال.
+
+</Stage>

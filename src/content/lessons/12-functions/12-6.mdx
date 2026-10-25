@@ -1,0 +1,115 @@
+---
+chapter: functions
+section: "12.6"
+summary: 'لأي دالة $f : A \to B$: صورة $X \subseteq A$ هي $f(X) = \{f(x) : x \in X\}$، والصورة العكسية لـ $Y \subseteq B$ هي $f^{-1}(Y) = \{x \in A : f(x) \in Y\}$. الثانية معرّفة حتى لو لم تكن f تقابلاً.'
+goals:
+  - حساب الصورة والصورة العكسية
+  - برهان علاقات الصورة مع الاتحاد والتقاطع
+terms:
+  - { ar: الصورة, en: image }
+  - { ar: الصورة العكسية, en: preimage }
+---
+import ImagePreimage from '@/components/widgets/ImagePreimage.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { q12_6 } from '@/data/proofs-ch12';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+الدالة «درجة كل طالب». صورة «طلاب الشعبة أ» هي مجموعة درجاتهم. والصورة العكسية لـ «الدرجات فوق 90» هي مجموعة الطلاب المتفوقين. كلاهما مفيد، ولا يحتاج أي منهما أن تكون الدالة قابلة للعكس.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="242–243" minutes={12}>
+
+- **التعريف 12.9 (ص 242):** الصورة والصورة العكسية.
+- **المثالان 12.13 و12.14 (ص 242):** دالة منتهية، ثم $f(x) = x^2$ حيث $f^{-1}(f(X)) \neq X$.
+- **المبرهنة 12.4 (ص 243):** الصورة والصورة العكسية مع الاتحاد والتقاطع. لاحظ أن الصورة العكسية «تحترم» كل العمليات، والصورة لا.
+
+</ReadingGuide>
+
+<BookPages section="12.6" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أداة تفاعلية">
+
+<Definition num="12.9" title="الصورة والصورة العكسية">
+
+لتكن $f : A \to B$.
+
+- **صورة** $X \subseteq A$: $f(X) = \{f(x) : x \in X\} \subseteq B$.
+- **الصورة العكسية** لـ $Y \subseteq B$: $f^{-1}(Y) = \{x \in A : f(x) \in Y\} \subseteq A$.
+
+</Definition>
+
+<ImagePreimage client:visible />
+
+<Fact num="12.4" title="مع العمليات">
+
+- $f(W \cup X) = f(W) \cup f(X)$، لكن $f(W \cap X) \subseteq f(W) \cap f(X)$ فقط.
+- $f^{-1}(Y \cup Z) = f^{-1}(Y) \cup f^{-1}(Z)$ و$f^{-1}(Y \cap Z) = f^{-1}(Y) \cap f^{-1}(Z)$.
+
+</Fact>
+
+<Note title="لماذا يفشل التقاطع مع الصورة؟">
+
+جرّب في الأداة: $W = \{s\}$ و$X = \{u\}$. إذن $W \cap X = \varnothing$ فصورته خالية، لكن $f(W) = f(X) = \{4\}$ فتقاطعهما $\{4\}$. السبب أن $f$ ليست متباينة.
+
+</Note>
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q12_6} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="12.6" count={14} core={[1, 3, 5, 7, 9, 11, 13]} />
+
+<BookPages section="12.6" kind="exercises" />
+
+### تمرين إضافي بحل كامل
+
+<Exercise num="1">
+
+برهن: $f^{-1}(Y \cap Z) = f^{-1}(Y) \cap f^{-1}(Z)$ (التمرين 10).
+
+<Reveal>
+
+سلسلة تكافؤات: $x \in f^{-1}(Y \cap Z) \iff f(x) \in Y \cap Z \iff f(x) \in Y \text{ و } f(x) \in Z \iff x \in f^{-1}(Y) \text{ و } x \in f^{-1}(Z) \iff x \in f^{-1}(Y) \cap f^{-1}(Z)$. $\blacksquare$
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="12.6" />
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- $f(X)$: صور عناصر X. $f^{-1}(Y)$: من صورته في Y.
+- الصورة العكسية معرّفة لكل دالة.
+- $X \subseteq f^{-1}(f(X))$، والمساواة إذا كانت f متباينة.
+
+</Takeaways>
+
+الفصل التالي: البراهين في التحليل (النهايات والاتصال).
+
+</Stage>

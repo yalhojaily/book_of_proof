@@ -1,0 +1,138 @@
+---
+chapter: functions
+section: "12.2"
+summary: 'الدالة متباينة إذا لم يشترك عنصران في صورة واحدة، وغامرة إذا أُصيب كل عنصر من المجال المقابل، وتقابل إذا كانت الاثنتين. ولكل منهما طريقة برهان ثابتة.'
+goals:
+  - تعريف المتباينة والغامرة والتقابل
+  - برهان أن دالة متباينة أو غامرة أو نفي ذلك
+  - فهم أثر المجال والمجال المقابل على هذه الخصائص
+terms:
+  - { ar: متباينة, en: injective (one-to-one) }
+  - { ar: غامرة, en: surjective (onto) }
+  - { ar: تقابل, en: bijective }
+---
+import FunctionArrows from '@/components/widgets/FunctionArrows.tsx';
+import HorizontalLine from '@/components/widgets/HorizontalLine.tsx';
+import ProofBuilder from '@/components/widgets/ProofBuilder.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { puzzles122, q12_2 } from '@/data/proofs-ch12';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+في مسرح، كل متفرج يجلس على كرسي. إذا لم يجلس اثنان على كرسي واحد، فالجلوس «متباين». وإذا لم يبقَ كرسي فارغ، فهو «غامر». وإذا تحقق الأمران، فعدد المتفرجين يساوي عدد الكراسي بالضبط، دون أن نعدّ أياً منهما. هذه الفكرة الأخيرة هي أساس الفصل 14.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="228–232" minutes={25}>
+
+- **التعريف 12.4 (ص 228–229):** التعريفات الثلاثة، والصياغات المكافئة.
+- **طرق البرهان (ص 229–230):** مربعات «How to show f is injective / surjective». احفظها.
+- **أمثلة 12.4–12.7 (ص 231–232):** لاحظ في 12.4 و12.5 أن الدالة نفسها تصبح غامرة بتغيير المجال المقابل، وفي 12.6 دالة على $\mathbb{Z} \times \mathbb{Z}$، وفي 12.7 دالة ليست متباينة ولا غامرة.
+
+| ستقرأ | المعنى |
+|---|---|
+| injective / one-to-one | متباينة |
+| surjective / onto | غامرة |
+| bijective | تقابل |
+
+</ReadingGuide>
+
+<BookPages section="12.2" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية وأمثلة محلولة">
+
+<Definition num="12.4" title="المتباينة والغامرة والتقابل">
+
+الدالة $f : A \to B$:
+
+1. **متباينة** إذا كان $f(a) = f(a')$ يقتضي $a = a'$ لكل $a, a' \in A$.
+2. **غامرة** إذا كان لكل $b \in B$ عنصر $a \in A$ بحيث $f(a) = b$.
+3. **تقابل** إذا كانت متباينة وغامرة.
+
+</Definition>
+
+<FunctionArrows client:visible />
+
+### طرق البرهان
+
+| المطلوب | البرهان |
+|---|---|
+| f متباينة (مباشر) | افترض $f(a) = f(a')$، وبرهن $a = a'$. |
+| f متباينة (عكس نقيض) | افترض $a \neq a'$، وبرهن $f(a) \neq f(a')$. |
+| f غامرة | خذ $b \in B$ عاماً، وجد $a \in A$ (غالباً بحل المعادلة $f(a) = b$) وتحقق أن $a \in A$ وأن $f(a) = b$. |
+| f ليست متباينة | مثال: $a \neq a'$ مع $f(a) = f(a')$. |
+| f ليست غامرة | مثال: $b \in B$ لا يُصاب، مع برهان أنه لا يُصاب. |
+
+### الدوال الحقيقية: اختبار الخط الأفقي
+
+<HorizontalLine client:visible />
+
+<Pitfall title="خطأ شائع في الغامرة">
+
+بعد حل $f(a) = b$ يجب التحقق أن $a$ الناتج **في المجال**. مثلاً $f : \mathbb{Z} \to \mathbb{Z}$، $f(n) = 2n + 1$: حل $2n + 1 = b$ يعطي $n = \frac{b - 1}{2}$، وهو ليس صحيحاً إذا كان $b$ زوجياً. فالدالة ليست غامرة.
+
+</Pitfall>
+
+### تدرّب: رتّب البرهان
+
+<ProofBuilder client:visible puzzles={puzzles122} />
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q12_2} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="12.2" count={19} core={[1, 3, 5, 7, 9, 11, 13, 15, 17, 19]} />
+
+<BookPages section="12.2" kind="exercises" />
+
+### تمرين إضافي بحل كامل
+
+<Exercise num="1">
+
+$f : \mathbb{Z} \times \mathbb{Z} \to \mathbb{Z}$، $f(m, n) = m + n$. هل هي متباينة؟ غامرة؟
+
+<Reveal>
+
+**ليست متباينة:** $f(1, 0) = f(0, 1) = 1$ مع $(1, 0) \neq (0, 1)$. **غامرة:** لكل $b \in \mathbb{Z}$ خذ $(b, 0) \in \mathbb{Z} \times \mathbb{Z}$، فـ $f(b, 0) = b$.
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="12.2" />
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- متباينة: $f(a) = f(a') \Rightarrow a = a'$.
+- غامرة: لكل $b$ يوجد $a$ مع $f(a) = b$، وتحقق أن $a$ في المجال.
+- النفي بمثال مضاد.
+- المجال والمجال المقابل جزء من الدالة: تغييرهما يغيّر الخصائص.
+
+</Takeaways>
+
+في القسم التالي: مبدأ أعشاش الحمام بلغة الدوال.
+
+</Stage>

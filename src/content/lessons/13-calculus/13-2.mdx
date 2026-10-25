@@ -1,0 +1,128 @@
+---
+chapter: calculus
+section: "13.2"
+summary: '$\lim_{x \to c} f(x) = L$ تعني: لكل $\varepsilon > 0$ يوجد $\delta > 0$ بحيث $0 < |x - c| < \delta$ يقتضي $|f(x) - L| < \varepsilon$. نبرهن النهايات بإيجاد δ بدلالة ε.'
+goals:
+  - فهم التعريف الدقيق للنهاية
+  - برهان نهايات بسيطة بإيجاد δ
+  - استعمال حيلة «اشترط δ ≤ 1» مع الدوال غير الخطية
+terms:
+  - { ar: النهاية, en: limit }
+  - { ar: إبسلون ودلتا, en: epsilon and delta }
+---
+import EpsilonDelta from '@/components/widgets/EpsilonDelta.tsx';
+import ProofBuilder from '@/components/widgets/ProofBuilder.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { puzzles132, q13_2 } from '@/data/proofs-ch13';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+«$f(x)$ تقترب من $L$ حين يقترب $x$ من $c$». ما معنى «تقترب» بدقة؟ فكّر فيها كتحدٍّ: خصمك يحدد مقدار الدقة الذي يريده ($\varepsilon$)، وأنت تردّ بمقدار القرب من $c$ الذي يضمن تلك الدقة ($\delta$). إذا استطعت أن تردّ على كل تحدٍّ مهما كان صعباً، فالنهاية $L$.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="246–249" minutes={30}>
+
+- **التعريف غير الدقيق 13.1 (ص 246):** ولماذا لا يكفي للبراهين.
+- **التعريف الدقيق 13.2 والشكل 13.1 (ص 247):** اقرأه ببطء، وطابق كل جزء منه مع الشكل.
+- **المثال 13.1 (ص 248):** $\lim_{x \to 2} (3x + 4) = 10$. لاحظ المسودة أولاً (إيجاد δ)، ثم البرهان المكتوب.
+- **المثال 13.2 (ص 248–249):** $\lim_{x \to 2} 5x^2 = 20$، وحيلة حصر $|x + 2|$.
+
+</ReadingGuide>
+
+<BookPages section="13.2" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية وأمثلة محلولة">
+
+<Definition num="13.2" title="التعريف الدقيق للنهاية">
+
+$\lim_{x \to c} f(x) = L$ إذا كان لكل $\varepsilon > 0$ يوجد $\delta > 0$ بحيث:
+
+$$
+0 < |x - c| < \delta \implies |f(x) - L| < \varepsilon.
+$$
+
+</Definition>
+
+<EpsilonDelta client:visible only={[0, 1, 2]} />
+
+### هيكل البرهان
+
+<Definition title="برهان $\lim_{x \to c} f(x) = L$">
+
+**المسودة:** ابدأ من $|f(x) - L| < \varepsilon$، وحوّلها إلى صورة $|x - c| < (\text{شيء})$. هذا الشيء هو δ.
+
+**البرهان:** ليكن $\varepsilon > 0$. خذ $\delta = \dots$. افترض $0 < |x - c| < \delta$. إذن $|f(x) - L| \le \dots < \varepsilon$. $\blacksquare$
+
+</Definition>
+
+<Example title="حيلة δ ≤ 1 (المثال 13.2)">
+
+$|5x^2 - 20| = 5|x - 2||x + 2|$. العامل $|x + 2|$ ليس ثابتاً. نشترط $\delta \le 1$، فيكون $1 < x < 3$ و$|x + 2| < 5$. إذن $|5x^2 - 20| < 25|x - 2|$، ويكفي $\delta = \min\left(1, \frac{\varepsilon}{25}\right)$.
+
+</Example>
+
+### تدرّب: رتّب البرهان
+
+<ProofBuilder client:visible puzzles={puzzles132} />
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q13_2} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="13.2" count={6} core={[1, 3, 5]} />
+
+<BookPages section="13.2" kind="exercises" />
+
+### تمرين إضافي بحل كامل
+
+<Exercise num="1">
+
+برهن: $\lim_{x \to 3} (2 - 4x) = -10$.
+
+<Reveal>
+
+**المسودة:** $|(2 - 4x) - (-10)| = |12 - 4x| = 4|x - 3|$. نريده أقل من ε، فيكفي $|x - 3| < \frac{\varepsilon}{4}$.
+
+**البرهان.** ليكن $\varepsilon > 0$، وخذ $\delta = \frac{\varepsilon}{4}$. إذا كان $0 < |x - 3| < \delta$ فإن $|(2 - 4x) + 10| = 4|x - 3| < 4\delta = \varepsilon$. $\blacksquare$
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="13.2" />
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- لكل ε يوجد δ: ε يُعطى أولاً، وδ يعتمد عليه.
+- المسودة: من $|f(x) - L|$ إلى $|x - c|$.
+- للدوال غير الخطية: اشترط $\delta \le 1$ لتحصر العوامل الأخرى.
+
+</Takeaways>
+
+في القسم التالي: كيف تبرهن أن نهاية غير موجودة.
+
+</Stage>

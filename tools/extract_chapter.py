@@ -45,6 +45,10 @@ CHAPTERS = {
     8: dict(body=(169, 183), solutions=(340, 344)),
     9: dict(body=(184, 191), solutions=(344, 346)),
     10: dict(body=(192, 209), solutions=(346, 356)),
+    11: dict(body=(213, 234), solutions=(356, 361)),
+    12: dict(body=(235, 255), solutions=(361, 367)),
+    13: dict(body=(256, 280), solutions=(367, 373)),
+    14: dict(body=(281, 302), solutions=(373, 376)),
 }
 
 
@@ -137,6 +141,16 @@ def main(chap: int):
                 if re.match(rf"^Exercises for Chapter {chap}$", text):
                     raw.append(((f"{chap}.x", "exercises"), pg, y0))
         raw.sort(key=lambda t: (t[1], t[2]))
+        # drop stray matches (e.g. a wrapped "Example 11.17"): reading sections must count up 1, 2, 3, ...
+        seen, kept = 0, []
+        for lbl, pg, y in raw:
+            if lbl[1] == "reading":
+                num = int(lbl[0].split(".")[1])
+                if num != seen + 1:
+                    continue
+                seen = num
+            kept.append((lbl, pg, y))
+        raw = kept
         chapter_level = any(lbl[0].endswith(".x") for lbl, _, _ in raw)
         # first section starts at the very top of the chapter opening page (include chapter title/intro)
         if raw and raw[0][0][1] == "reading":

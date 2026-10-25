@@ -1,0 +1,112 @@
+---
+chapter: functions
+section: "12.4"
+summary: 'إذا كانت $f : A \to B$ و$g : B \to C$ فإن $g \circ f : A \to C$ هي $x \mapsto g(f(x))$. التركيب تجميعي وغير تبديلي، ويحفظ التباين والغامرية.'
+goals:
+  - حساب تركيب دالتين
+  - فهم أن التركيب تجميعي وليس تبديلياً
+  - برهان أن تركيب متباينتين متباين، وتركيب غامرتين غامر
+terms:
+  - { ar: التركيب, en: composition }
+---
+import CompositionLab from '@/components/widgets/CompositionLab.tsx';
+import ProofBuilder from '@/components/widgets/ProofBuilder.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { puzzles124, q12_4 } from '@/data/proofs-ch12';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+آلة تقشّر البرتقال، وآلة أخرى تعصره. ضعهما على خط واحد فتحصل على آلة جديدة: برتقال يدخل وعصير يخرج. هذا تركيب. والترتيب مهم: عصر البرتقال ثم تقشيره شيء آخر تماماً.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="235–238" minutes={15}>
+
+- **التعريف 12.5 والشكل 12.5 (ص 235–236):** التركيب، ولماذا يجب أن يكون المجال المقابل لـ $f$ هو مجال $g$.
+- **أمثلة 12.8–12.10 (ص 236):** لاحظ في 12.10 أن $g \circ f \neq f \circ g$.
+- **المبرهنتان 12.1 و12.2 (ص 237):** التجميع، وحفظ التباين والغامرية.
+
+</ReadingGuide>
+
+<BookPages section="12.4" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أدوات تفاعلية">
+
+<Definition num="12.5" title="التركيب">
+
+إذا كانت $f : A \to B$ و$g : B \to C$، فإن **تركيبهما** $g \circ f : A \to C$ معرّف بـ $(g \circ f)(x) = g(f(x))$.
+
+</Definition>
+
+<CompositionLab client:visible />
+
+<Fact num="12.1–12.2" title="خصائص التركيب">
+
+- **تجميعي:** $h \circ (g \circ f) = (h \circ g) \circ f$.
+- **غير تبديلي:** قد تكون $g \circ f \neq f \circ g$، وقد تكون إحداهما غير معرّفة أصلاً.
+- إذا كانت $f$ و$g$ متباينتين فـ $g \circ f$ متباينة. وإذا كانتا غامرتين فـ $g \circ f$ غامرة.
+
+</Fact>
+
+### تدرّب: رتّب البرهان
+
+<ProofBuilder client:visible puzzles={puzzles124} />
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q12_4} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="12.4" count={10} core={[1, 3, 5, 7, 9]} />
+
+<BookPages section="12.4" kind="exercises" />
+
+### تمرين إضافي بحل كامل
+
+<Exercise num="1">
+
+برهن: إذا كانت $f : A \to B$ و$g : B \to C$ غامرتين فإن $g \circ f$ غامرة.
+
+<Reveal>
+
+**البرهان.** ليكن $c \in C$. بما أن $g$ غامرة يوجد $b \in B$ مع $g(b) = c$. وبما أن $f$ غامرة يوجد $a \in A$ مع $f(a) = b$. إذن $(g \circ f)(a) = g(f(a)) = g(b) = c$. $\blacksquare$
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="12.4" />
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- $(g \circ f)(x) = g(f(x))$: f أولاً.
+- تجميعي، غير تبديلي.
+- يحفظ التباين والغامرية والتقابل.
+
+</Takeaways>
+
+في القسم التالي: الدالة العكسية.
+
+</Stage>

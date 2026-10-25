@@ -1,0 +1,98 @@
+---
+chapter: calculus
+section: "13.8"
+summary: 'المتسلسلة $\sum a_k$ تتقارب إلى $S$ إذا تقاربت متتالية مجاميعها الجزئية إلى $S$. وبهذا نبرهن اختبارات التقارب التي تعرفها من التفاضل والتكامل.'
+goals:
+  - تعريف تقارب المتسلسلة بالمجاميع الجزئية
+  - فهم اختبار التباعد وحدوده
+terms:
+  - { ar: متسلسلة, en: series }
+  - { ar: المجاميع الجزئية, en: partial sums }
+---
+import SequenceLab from '@/components/widgets/SequenceLab.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { q13_8 } from '@/data/proofs-ch13';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+امشِ نصف المسافة إلى الجدار، ثم نصف الباقي، ثم نصف الباقي… مجموع خطواتك $\frac12 + \frac14 + \frac18 + \cdots$. لا نستطيع أن نجمع عدداً لا نهائياً من الحدود فعلاً، فنعرّف «المجموع» بأنه نهاية المجاميع الجزئية. وهنا يساوي 1.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="265–268" minutes={20}>
+
+- **المجاميع الجزئية (ص 265–266):** والتعريف 13.7.
+- **المثال 13.10 (ص 266–267):** $\sum \frac{1}{2^k} = 1$.
+- **المبرهنة 13.11 والنتيجة 13.1 (ص 267):** إذا تقاربت المتسلسلة فإن حدودها تقترب من 0، واختبار التباعد.
+
+</ReadingGuide>
+
+<BookPages section="13.8" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أداة تفاعلية">
+
+<Definition num="13.7" title="تقارب المتسلسلة">
+
+المجموع الجزئي $s_n = a_1 + a_2 + \cdots + a_n$. والمتسلسلة $\sum_{k=1}^\infty a_k$ **تتقارب** إلى $S$ إذا كانت المتتالية $\{s_n\}$ تتقارب إلى $S$.
+
+</Definition>
+
+<SequenceLab client:visible only={[3, 4]} />
+
+<Fact num="13.11" title="اختبار التباعد">
+
+إذا تقاربت $\sum a_k$ فإن $a_k \to 0$. ولذلك: إذا لم تقترب $a_k$ من 0 فالمتسلسلة متباعدة.
+
+</Fact>
+
+<Pitfall title="الاتجاه المعاكس خاطئ">
+
+$\frac{1}{k} \to 0$ ومع ذلك $\sum \frac{1}{k}$ متباعدة (جرّبها في الأداة، وراجع التمرين 21 في الفصل 10). اقتراب الحدود من 0 شرط لازم وليس كافياً.
+
+</Pitfall>
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q13_8} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+التمارين تبرهن اختبارات التقارب المعروفة: المتسلسلة الهندسية، والمقارنة، والمقارنة بالنهاية، والتقارب المطلق، والنسبة.
+
+<ExerciseTracker client:visible section="13.8" count={5} core={[1, 2]} />
+
+<BookPages section="13.8" kind="exercises" />
+
+<Note title="لا حلول في الكتاب">
+
+يقول الكتاب إن حلول هذه التمارين ليست في آخره لأنها موجودة في كتب التفاضل والتكامل الجيدة. جرّب بنفسك أولاً، ثم قارن ببرهان أي كتاب تفاضل.
+
+</Note>
+
+</Stage>
+
+<Stage n={6} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- مجموع المتسلسلة = نهاية المجاميع الجزئية.
+- تقارب المتسلسلة يقتضي $a_k \to 0$، لا العكس.
+
+</Takeaways>
+
+الفصل التالي والأخير: الأعداد الأصلية، أي مقارنة أحجام المجموعات اللانهائية.
+
+</Stage>

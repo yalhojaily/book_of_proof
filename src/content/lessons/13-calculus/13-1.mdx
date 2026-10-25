@@ -1,0 +1,79 @@
+---
+chapter: calculus
+section: "13.1"
+summary: 'القيمة المطلقة $|x - y|$ هي المسافة بين $x$ و$y$. ومتباينة المثلث $|x - y| \le |x - z| + |z - y|$ أهم أداة في براهين التحليل.'
+goals:
+  - فهم القيمة المطلقة كمسافة
+  - معرفة متباينة المثلث وصيغها
+terms:
+  - { ar: القيمة المطلقة, en: absolute value }
+  - { ar: متباينة المثلث, en: triangle inequality }
+---
+import TriangleIneq from '@/components/widgets/TriangleIneq.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import { q13_1 } from '@/data/proofs-ch13';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+في التفاضل والتكامل تعلّمت أن تحسب النهايات والمشتقات. في هذا الفصل تتعلّم لماذا تصح تلك القواعد، أي كيف تبرهنها. اللغة كلها مبنية على شيء واحد: المسافة بين عددين، $|x - y|$. ومن الصغر في المسافات تُبنى النهايات.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="244–245" minutes={10}>
+
+- **مقدمة الفصل (ص 244):** لماذا هذا الفصل، وما الذي يفترضه من التفاضل والتكامل.
+- **المبرهنة 13.1 (ص 245):** متباينة المثلث وبرهانها، وصيغتها الأخرى $|a + b| \le |a| + |b|$.
+
+لا تمارين لهذا القسم.
+
+</ReadingGuide>
+
+<BookPages section="13.1" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أداة تفاعلية">
+
+<Fact num="13.1" title="متباينة المثلث">
+
+إذا كان $x, y, z \in \mathbb{R}$، فإن $|x - y| \le |x - z| + |z - y|$.
+
+وبوضع $a = x - z$ و$b = z - y$ نحصل على الصيغة المكافئة $|a + b| \le |a| + |b|$.
+
+</Fact>
+
+<TriangleIneq client:visible />
+
+<Note title="كيف تُستعمل؟">
+
+في البراهين نريد عادة أن نبيّن أن $|f(x) - L|$ صغير. الحيلة: أدخل حداً وسيطاً. اكتب $f(x) - L = (f(x) - M) + (M - L)$، ثم متباينة المثلث تعطي $|f(x) - L| \le |f(x) - M| + |M - L|$، وكل منهما يمكن أن نجعله صغيراً. سترى هذا في قوانين النهايات (13.4).
+
+</Note>
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="سؤال سريع">
+
+<QuickCheck client:visible questions={q13_1} />
+
+</Stage>
+
+<Stage n={5} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- $|x - y|$ هي المسافة.
+- $|x - y| \le |x - z| + |z - y|$، أي $|a + b| \le |a| + |b|$.
+- الحيلة: أدخل حداً وسيطاً ثم استعمل المتباينة.
+
+</Takeaways>
+
+في القسم التالي: التعريف الدقيق للنهاية.
+
+</Stage>

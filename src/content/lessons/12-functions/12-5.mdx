@@ -1,0 +1,116 @@
+---
+chapter: functions
+section: "12.5"
+summary: 'بعكس أسهم الدالة $f$ نحصل على العلاقة العكسية $f^{-1}$. وهي دالة إذا وفقط إذا كانت $f$ تقابلاً، وعندها $f^{-1} \circ f = i_A$ و$f \circ f^{-1} = i_B$.'
+goals:
+  - تعريف الدالة المحايدة والعلاقة العكسية
+  - فهم متى تكون العكسية دالة
+  - إيجاد الدالة العكسية بحل المعادلة
+terms:
+  - { ar: الدالة المحايدة, en: identity function }
+  - { ar: الدالة العكسية, en: inverse function }
+---
+import FunctionArrows from '@/components/widgets/FunctionArrows.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { q12_5 } from '@/data/proofs-ch12';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+التشفير دالة: تحوّل الرسالة إلى رموز. وفك التشفير دالة عكسية: تعيد الرموز إلى الرسالة. متى يمكن فك التشفير دائماً؟ حين لا تتحول رسالتان إلى الرموز نفسها (متباينة)، وحين يكون لكل رمز رسالة جاءت منه (غامرة).
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="238–241" minutes={20}>
+
+- **التعريفان 12.6 و12.7 (ص 238–239):** الدالة المحايدة، والعلاقة العكسية.
+- **المبرهنة 12.3 (ص 240):** $f^{-1}$ دالة إذا وفقط إذا كانت $f$ تقابلاً.
+- **التعريف 12.8 والمثالان (ص 240–241):** الدالة العكسية، وكيف تجدها: اكتب $y = f(x)$ وحلّ لـ $x$.
+
+</ReadingGuide>
+
+<BookPages section="12.5" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أداة تفاعلية">
+
+<Definition num="12.6–12.8" title="المحايدة والعكسية">
+
+- **الدالة المحايدة** $i_A : A \to A$، $i_A(x) = x$.
+- **العلاقة العكسية** لـ $f$: $f^{-1} = \{(b, a) : (a, b) \in f\}$.
+- إذا كانت $f$ تقابلاً، فـ $f^{-1} : B \to A$ دالة، و$f^{-1} \circ f = i_A$ و$f \circ f^{-1} = i_B$.
+
+</Definition>
+
+اختر «تقابل» ثم اضغط «اعكس الأسهم». ثم جرّب «غامرة فقط»: عكس الأسهم يعطي عنصراً بسهمين، فليس دالة.
+
+<FunctionArrows client:visible showInverse={true} />
+
+<Example title="المثال 12.11">
+
+$f : \mathbb{R} \to \mathbb{R}$، $f(x) = x^3 + 1$ تقابل. لإيجاد $f^{-1}$: اكتب $y = x^3 + 1$، فـ $x = \sqrt[3]{y - 1}$. إذن $f^{-1}(y) = \sqrt[3]{y - 1}$. تحقق: $f(f^{-1}(y)) = (y - 1) + 1 = y$.
+
+</Example>
+
+<Pitfall title="رمز مضلل">
+
+$f^{-1}(x)$ ليست $\frac{1}{f(x)}$. الأس $-1$ هنا يعني «العكس بالتركيب»، لا المقلوب.
+
+</Pitfall>
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="أسئلة سريعة قبل التمارين">
+
+<QuickCheck client:visible questions={q12_5} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="12.5" count={10} core={[1, 3, 5, 7, 9]} />
+
+<BookPages section="12.5" kind="exercises" />
+
+### تمرين إضافي بحل كامل
+
+<Exercise num="1">
+
+$f : \mathbb{R} - \{2\} \to \mathbb{R} - \{1\}$، $f(x) = \frac{x}{x - 2}$ تقابل. أوجد $f^{-1}$.
+
+<Reveal>
+
+$y = \frac{x}{x - 2}$، فـ $y(x - 2) = x$، أي $xy - x = 2y$، أي $x = \frac{2y}{y - 1}$. إذن $f^{-1}(y) = \frac{2y}{y - 1}$، وهي معرّفة على $\mathbb{R} - \{1\}$ كما ينبغي.
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="12.5" />
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- $f^{-1}$ تعكس الأسهم.
+- $f^{-1}$ دالة $\iff$ $f$ تقابل.
+- لإيجادها: حلّ $y = f(x)$ لـ $x$.
+
+</Takeaways>
+
+في القسم التالي: صورة مجموعة وصورتها العكسية.
+
+</Stage>

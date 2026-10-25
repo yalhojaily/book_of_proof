@@ -261,7 +261,7 @@ export const parts: Part[] = [
         en: 'Relations',
         page: 201,
         blurb: 'خصائص العلاقات، علاقات التكافؤ وفصولها، والأعداد الصحيحة بمقياس n.',
-        available: false,
+        available: true,
         sections: [
           s('11.1', 'العلاقات', 'Relations', 201),
           s('11.2', 'خصائص العلاقات', 'Properties of Relations', 205),
@@ -278,7 +278,7 @@ export const parts: Part[] = [
         en: 'Functions',
         page: 223,
         blurb: 'الدوال المتباينة والغامرة، التركيب، الدوال العكسية، الصورة والصورة العكسية.',
-        available: false,
+        available: true,
         sections: [
           s('12.1', 'الدوال', 'Functions', 223),
           s('12.2', 'الدوال المتباينة والغامرة', 'Injective and Surjective Functions', 228),
@@ -295,7 +295,7 @@ export const parts: Part[] = [
         en: 'Proofs in Calculus',
         page: 244,
         blurb: 'متباينة المثلث، تعريف النهاية بـ $\\varepsilon$ و$\\delta$، الاتصال، المتتاليات والمتسلسلات.',
-        available: false,
+        available: true,
         sections: [
           s('13.1', 'متباينة المثلث', 'The Triangle Inequality', 245),
           s('13.2', 'تعريف النهاية', 'Definition of a Limit', 246),
@@ -314,7 +314,7 @@ export const parts: Part[] = [
         en: 'Cardinality of Sets',
         page: 269,
         blurb: 'متى تتساوى مجموعتان في الحجم؟ القابل للعدّ وغير القابل، ونظرية كانتور–برنشتاين.',
-        available: false,
+        available: true,
         sections: [
           s('14.1', 'مجموعات متساوية في العدد الأصلي', 'Sets with Equal Cardinalities', 269),
           s('14.2', 'المجموعات القابلة وغير القابلة للعدّ', 'Countable and Uncountable Sets', 275),

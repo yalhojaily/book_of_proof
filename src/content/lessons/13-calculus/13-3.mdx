@@ -1,0 +1,111 @@
+---
+chapter: calculus
+section: "13.3"
+summary: 'لبرهان أن النهاية غير موجودة ننفي التعريف: لكل $L$ يوجد $\varepsilon > 0$ بحيث لا يصلح أي δ. غالباً بالتناقض.'
+goals:
+  - نفي تعريف النهاية نفياً صحيحاً
+  - برهان عدم وجود نهاية بالتناقض
+terms:
+  - { ar: نهاية غير موجودة, en: limit does not exist }
+---
+import EpsilonDelta from '@/components/widgets/EpsilonDelta.tsx';
+import QuickCheck from '@/components/widgets/QuickCheck.tsx';
+import ExerciseTracker from '@/components/widgets/ExerciseTracker.tsx';
+import { q13_3 } from '@/data/proofs-ch13';
+
+<Stage n={1} id="warmup" title="تمهيد" sub="فكرة القسم قبل أي تعريف">
+
+<Intuition>
+
+في لعبة ε و δ، النهاية غير موجودة إذا استطاع الخصم أن يختار ε صعباً لدرجة أنك تخسر مهما اخترت δ. في الدالة القافزة يكفي أن يختار ε أصغر من نصف القفزة.
+
+</Intuition>
+
+</Stage>
+
+<Stage n={2} id="reading" title="اقرأ من الكتاب" sub="صفحات الكتاب الأصلية لهذا القسم، ومعها دليل يوجّه قراءتك">
+
+<ReadingGuide pages="249–251" minutes={20}>
+
+- **النفي (ص 249):** كيف يُنفى التعريف بقوانين الفصل 2.
+- **المثال 13.3 (ص 249–250):** دالة قافزة، بالتناقض.
+- **المثال 13.4 (ص 250):** $\sin(1/x)$ عند 0.
+- **المثال 13.5 (ص 250–251):** $x \sin(1/x)$: هنا النهاية موجودة. التذبذب يُخمد.
+
+</ReadingGuide>
+
+<BookPages section="13.3" kind="reading" />
+
+</Stage>
+
+<Stage n={3} id="explain" title="الشرح والتجربة" sub="المفاهيم نفسها بالعربية، مع أداة تفاعلية">
+
+### النفي
+
+$\lim_{x \to c} f(x) = L$ عبارة على الصورة $\forall \varepsilon\, \exists \delta\, \forall x$. نفيها:
+
+$$
+\exists \varepsilon > 0,\ \forall \delta > 0,\ \exists x:\ 0 < |x - c| < \delta \text{ and } |f(x) - L| \ge \varepsilon.
+$$
+
+والنهاية **غير موجودة** إذا صح هذا النفي **لكل** $L$.
+
+<EpsilonDelta client:visible only={[3, 4, 2]} />
+
+جرّب في الدالة القافزة: صغّر ε إلى أقل من 0.5، ثم صغّر δ ما شئت. تبقى نقاط من أحد الجانبين خارج الشريط.
+
+<Note title="الطريقة المعتادة: التناقض">
+
+افترض أن $\lim_{x \to c} f(x) = L$ لعدد ما $L$. اختر ε مناسباً (نصف القفزة مثلاً). التعريف يعطي δ. اعثر على نقطتين في $(c - \delta, c + \delta)$ قيمتاهما متباعدتان بأكثر من $2\varepsilon$. لكن كلتيهما ضمن ε من L، فالمسافة بينهما أقل من $2\varepsilon$ بمتباينة المثلث. تناقض.
+
+</Note>
+
+</Stage>
+
+<Stage n={4} id="check" title="تحقّق من فهمك" sub="سؤال سريع قبل التمارين">
+
+<QuickCheck client:visible questions={q13_3} />
+
+</Stage>
+
+<Stage n={5} id="exercises" title="تمارين الكتاب" sub="هنا يحدث التعلّم الحقيقي: حلّ بالورقة والقلم">
+
+<ExerciseTracker client:visible section="13.3" count={6} core={[1, 3, 5]} />
+
+<BookPages section="13.3" kind="exercises" />
+
+### تمرين إضافي بحل كامل
+
+<Exercise num="1">
+
+برهن أن $\lim_{x \to 0} \frac{|x|}{x}$ غير موجودة. (هذا التمرين 2، بفكرته.)
+
+<Reveal>
+
+$\frac{|x|}{x} = 1$ إذا كان $x > 0$، و$-1$ إذا كان $x < 0$. افترض أن النهاية $L$. خذ $\varepsilon = 1$. يوجد δ بحيث $0 < |x| < \delta$ يعطي $|f(x) - L| < 1$. خذ $x = \frac{\delta}{2}$ و$x = -\frac{\delta}{2}$: إذن $|1 - L| < 1$ و$|-1 - L| < 1$. بمتباينة المثلث $2 = |1 - (-1)| \le |1 - L| + |L + 1| < 2$. تناقض.
+
+</Reveal>
+
+</Exercise>
+
+</Stage>
+
+<Stage n={6} id="solutions" title="الحلول" sub="حلول الكتاب للتمارين الفردية. افتحها بعد المحاولة فقط">
+
+<BookSolutions section="13.3" />
+
+</Stage>
+
+<Stage n={7} id="summary" title="الخلاصة">
+
+<Takeaways>
+
+- النفي: يوجد ε، لكل δ، يوجد x يفشل.
+- عدم الوجود: النفي صحيح لكل L.
+- الطريقة: تناقض، ونقطتان قريبتان من c قيمتاهما متباعدتان.
+
+</Takeaways>
+
+في القسم التالي: برهان قوانين النهايات التي استعملتها دائماً.
+
+</Stage>
